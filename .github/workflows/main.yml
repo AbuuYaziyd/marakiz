@@ -1,0 +1,66 @@
+name: 🚀 Upload website to CPanel
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  FTP-Deploy-Action:
+    name: FTP-Deploy-Action
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      # Target 1
+      - name: Deploy to Directory 1
+        uses: SamKirkland/FTP-Deploy-Action@4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /maahadsunna.rf.gd//htdocs/
+
+      # Target 2
+      - name: Deploy to Directory 2
+        uses: SamKirkland/FTP-Deploy-Action@4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /ibnulqayyim.rf.gd/htdocs/dir2/
+
+      # Target 3
+      - name: Deploy to Directory 3
+        uses: SamKirkland/FTP-Deploy-Action@4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /ikhlas.rf.gd/htdocs/dir3/
+
+      # Target 4
+      # - name: Deploy to Directory 4
+      #   uses: SamKirkland/FTP-Deploy-Action@4.3.5
+      #   with:
+      #     server: ${{ secrets.FTP_SERVER }}
+      #     username: ${{ secrets.FTP_USERNAME }}
+      #     password: ${{ secrets.FTP_PASSWORD }}
+      #     server-dir: /ikhlas.rf.gd/htdocs/dir4/
+
+      # Target 5
+      # - name: Deploy to Directory 5
+      #   uses: SamKirkland/FTP-Deploy-Action@4.3.5
+      #   with:
+      #     server: ${{ secrets.FTP_SERVER }}
+      #     username: ${{ secrets.FTP_USERNAME }}
+      #     password: ${{ secrets.FTP_PASSWORD }}
+      #     server-dir: /ikhlas.rf.gd/htdocs/dir5/
