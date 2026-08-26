@@ -22,7 +22,7 @@ jobs:
 
       # Target 1
       - name: Deploy to Directory 1
-        uses: SamKirkland/FTP-Deploy-Action@4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
@@ -31,7 +31,7 @@ jobs:
 
       # Target 2
       - name: Deploy to Directory 2
-        uses: SamKirkland/FTP-Deploy-Action@4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
@@ -40,7 +40,7 @@ jobs:
 
       # Target 3
       - name: Deploy to Directory 3
-        uses: SamKirkland/FTP-Deploy-Action@4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
@@ -49,7 +49,7 @@ jobs:
 
       # Target 4
       # - name: Deploy to Directory 4
-      #   uses: SamKirkland/FTP-Deploy-Action@4.3.5
+      #   uses: SamKirkland/FTP-Deploy-Action@4.3.3
       #   with:
       #     server: ${{ secrets.FTP_SERVER }}
       #     username: ${{ secrets.FTP_USERNAME }}
@@ -58,7 +58,7 @@ jobs:
 
       # Target 5
       # - name: Deploy to Directory 5
-      #   uses: SamKirkland/FTP-Deploy-Action@4.3.5
+      #   uses: SamKirkland/FTP-Deploy-Action@4.3.3
       #   with:
       #     server: ${{ secrets.FTP_SERVER }}
       #     username: ${{ secrets.FTP_USERNAME }}
