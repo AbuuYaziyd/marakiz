@@ -18,7 +18,7 @@
             </div>
         </div>
     </div>
-    <div class="col-4">
+    <div class="col-md-4">
         <div class="card">
             <div class="card-header">
                 <h3><b><?= lang('app.fullname') ?></b></h3>
@@ -39,7 +39,7 @@
             </div>
         </div>
     </div>
-    <div class="col-4">
+    <div class="col-md-4">
         <div class="card">
             <div class="card-header">
                 <h3><b><?= lang('app.phone') ?></b></h3>
@@ -60,7 +60,7 @@
             </div>
         </div>
     </div>
-    <div class="col-4">
+    <div class="col-md-4">
         <div class="card">
             <div class="card-header">
                 <h3><b><?= lang('app.location') ?></b></h3>
@@ -81,7 +81,7 @@
             </div>
         </div>
     </div>
-    <div class="col-4">
+    <div class="col-md-4">
         <div class="card">
             <div class="card-header">
                 <h3><b><?= lang('app.posta') ?></b></h3>
@@ -102,7 +102,7 @@
             </div>
         </div>
     </div>
-    <div class="col-4">
+    <div class="col-md-4">
         <div class="card">
             <div class="card-header">
                 <h3>
@@ -132,7 +132,7 @@
             </div>
         </div>
     </div>
-    <div class="col-4">
+    <div class="col-md-4">
         <div class="card">
             <div class="card-header">
                 <h3>
@@ -162,7 +162,7 @@
             </div>
         </div>
     </div>
-    <div class="col-4">
+    <div class="col-md-4">
         <div class="card">
             <div class="card-header">
                 <h3>
@@ -203,7 +203,7 @@
         </div>
     </div>
     <?php if (session('fn') == 'admin') : ?>
-        <div class="col-4">
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
                     <h3><b><?= lang('app.colours') ?></b></h3>
