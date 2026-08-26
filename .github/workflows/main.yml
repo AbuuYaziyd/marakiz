@@ -36,7 +36,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /ibnulqayyim.rf.gd/htdocs/dir2/
+          server-dir: /ibnulqayyim.rf.gd/htdocs/
 
       # Target 3
       - name: Deploy to Directory 3
@@ -45,16 +45,16 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /ikhlas.rf.gd/htdocs/dir3/
+          server-dir: /ikhlas.rf.gd/htdocs/
 
       # Target 4
-      # - name: Deploy to Directory 4
-      #   uses: SamKirkland/FTP-Deploy-Action@4.3.3
-      #   with:
-      #     server: ${{ secrets.FTP_SERVER }}
-      #     username: ${{ secrets.FTP_USERNAME }}
-      #     password: ${{ secrets.FTP_PASSWORD }}
-      #     server-dir: /ikhlas.rf.gd/htdocs/dir4/
+      - name: Deploy to Directory 4
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /markazomar.rf.gd/htdocs/
 
       # Target 5
       # - name: Deploy to Directory 5
@@ -63,4 +63,4 @@ jobs:
       #     server: ${{ secrets.FTP_SERVER }}
       #     username: ${{ secrets.FTP_USERNAME }}
       #     password: ${{ secrets.FTP_PASSWORD }}
-      #     server-dir: /ikhlas.rf.gd/htdocs/dir5/
+      #     server-dir: /ikhlas.rf.gd/htdocs/
