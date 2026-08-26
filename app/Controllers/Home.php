@@ -58,7 +58,7 @@ class Home extends BaseController
         // dd($usr->studentID(), $usr->teacherID());
         $hijri = $hjr->GeToHijr(date('d'), date('m'), date('Y'));
         $reg = sprintf('%02s', $set->where('name', 'register')->first()['value']);
-        // dd($hijri, $reg);
+        dd($hijri, $reg);
 
         $users = $usr->where('role', 'student')->findAll();
         $teacher = $usr->where('fn', 'teacher')->findAll();
