@@ -39,22 +39,22 @@ jobs:
       #     server-dir: /ibnulqayyim.rf.gd/htdocs/
 
       # Target 3
-      # - name: Deploy to Directory 3
-      #   uses: SamKirkland/FTP-Deploy-Action@4.3.3
-      #   with:
-      #     server: ${{ secrets.FTP_SERVER }}
-      #     username: ${{ secrets.FTP_USERNAME }}
-      #     password: ${{ secrets.FTP_PASSWORD }}
-      #     server-dir: /ikhlas.rf.gd/htdocs/
-
-      # Target 4
-      - name: Deploy to Directory 4
+      - name: Deploy to Directory 3
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /markazomar.rf.gd/htdocs/
+          server-dir: /ikhlas.rf.gd/htdocs/
+
+      # Target 4
+      # - name: Deploy to Directory 4
+      #   uses: SamKirkland/FTP-Deploy-Action@4.3.3
+      #   with:
+      #     server: ${{ secrets.FTP_SERVER }}
+      #     username: ${{ secrets.FTP_USERNAME }}
+      #     password: ${{ secrets.FTP_PASSWORD }}
+      #     server-dir: /markazomar.rf.gd/htdocs/
 
       # Target 5
       # - name: Deploy to Directory 5
