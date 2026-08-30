@@ -8,22 +8,6 @@
                 <a href="<?= base_url('result/user/' . $stu['id'] . '/' . $class['id']) ?>" class="btn btn-lg btn-block btn-outline-info"><b><?= lang('app.thisYearMarks') ?></b></a>
             </div>
         </div>
-    <?php elseif ($res[0]['course_status'] != 'gpa') : ?>
-        <div class="row">
-            <div class="col-12">
-                <a href="<?= base_url('result/user/' . $stu['id'] . '/' . $class['id']) ?>" class="btn btn-lg btn-block btn-outline-info"><b><?= lang('app.thisYearMarks') ?></b></a>
-            </div>
-        </div>
-    <?php else : ?>
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header text-center">
-                        <h2><b><?= lang('app.notFound') ?></b></h2>
-                    </div>
-                </div>
-            </div>
-        </div>
     <?php endif ?>
 <?php endif ?>
 
