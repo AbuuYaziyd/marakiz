@@ -1,30 +1,30 @@
 <?= $this->extend('layouts/app') ?>
 <?= $this->section('content') ?>
 
-<?php if (count($gp) > 0) : ?>
+<?php if ($res) : ?>
     <?php if ($res[0]['course_status'] != 'gpa') : ?>
         <div class="row">
             <div class="col-12 mb-2">
                 <a href="<?= base_url('result/user/' . $stu['id'] . '/' . $class['id']) ?>" class="btn btn-lg btn-block btn-outline-info"><b><?= lang('app.thisYearMarks') ?></b></a>
             </div>
         </div>
-    <?php endif ?>
-<?php elseif ($res[0]['course_status'] != 'gpa') : ?>
-    <div class="row">
-        <div class="col-12">
-            <a href="<?= base_url('result/user/' . $stu['id'] . '/' . $class['id']) ?>" class="btn btn-lg btn-block btn-outline-info"><b><?= lang('app.thisYearMarks') ?></b></a>
+    <?php elseif ($res[0]['course_status'] != 'gpa') : ?>
+        <div class="row">
+            <div class="col-12">
+                <a href="<?= base_url('result/user/' . $stu['id'] . '/' . $class['id']) ?>" class="btn btn-lg btn-block btn-outline-info"><b><?= lang('app.thisYearMarks') ?></b></a>
+            </div>
         </div>
-    </div>
-<?php else : ?>
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header text-center">
-                    <h2><b><?= lang('app.notFound') ?></b></h2>
+    <?php else : ?>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h2><b><?= lang('app.notFound') ?></b></h2>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    <?php endif ?>
 <?php endif ?>
 
 <div class="row">
@@ -48,7 +48,7 @@
                         <?php foreach ($sch->course($sc['id']) as $key => $cl) : ?>
                             <?php if ($sch->checkResults($stu['id'], $cl['id'])) : ?>
                                 <a href="<?= base_url('result/user/' . $stu['id'] . '/' . $cl['id']) ?>" class="btn btn-primary btn-block round" target="_blank">
-                                    <i class="ft ft-eye"></i> | 
+                                    <i class="ft ft-eye"></i> |
                                     <?php if (session('lang') != 'ar') : ?>
                                         <?= $cl['name'] ?>
                                     <?php else : ?>

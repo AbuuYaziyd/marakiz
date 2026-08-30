@@ -491,14 +491,14 @@ class ResultController extends BaseController
     public function student($id)
     {
         $user = new User();
-        $cl = new Course();
-        $gp = new Gpa();
+        $crs = new Course();
+        $gpa = new Gpa();
         $res = new Result();
         $sub = new Subject();
         $sch = new School();
 
         $stu = $user->find($id);
-        $class = $cl->find($stu['level']);
+        $class = $crs->find($stu['level']);
 
         $data['title'] = lang('app.results');
         $data['stu'] = $stu;
@@ -506,9 +506,9 @@ class ResultController extends BaseController
         $data['sch'] = $sch;
         $data['school'] = $sch->findAll();
         $data['sub'] = $sub->where('course_id', $stu['level'])->findAll();
-        $data['gp'] = $gp->where('student_id', $id)->orderBy('course_id', 'asc')->select('course_id')->distinct()->findAll();
+        $data['gp'] = $gpa->where('student_id', $id)->orderBy('course_id', 'asc')->select('course_id')->distinct()->findAll();
         $data['res'] = $res->where(['student_id' => $id, 'course_id' => $stu['level']])->findAll();
-        $data['p'] = $gp;
+        $data['p'] = $gpa;
         // dd($data);
 
         return view('result/student', $data);
