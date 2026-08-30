@@ -2,7 +2,7 @@
 return array(
 // Days Long Name -----------
 	'lo.day.6' => 'السبت',
-	'lo.day.7' => 'الأحد',
+	'lo.day.0' => 'الأحد',
 	'lo.day.1' => 'الأثنين',
 	'lo.day.2' => 'الثلاثاء',
 	'lo.day.3' => 'الأربعاء',
@@ -10,7 +10,7 @@ return array(
 	'lo.day.5' => 'الجمعة',
 // Days Short Name -----------
 	'sh.day.6' => 'سبت',
-	'sh.day.7' => 'احد',
+	'sh.day.0' => 'احد',
 	'sh.day.1' => 'اثنين',
 	'sh.day.2' => 'ثلاثاء',
 	'sh.day.3' => 'إربعاء',

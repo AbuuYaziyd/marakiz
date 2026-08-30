@@ -16,7 +16,7 @@
             <?php if ($std) : ?>
                 <div class="card-content collapse show">
                     <div class="card-body card-dashboard">
-                        <table class="table table-striped table-bordered dataex-res-constructor">
+                        <table class="table table-striped table-bordered dtTable">
                             <thead>
                                 <tr>
                                     <th><?= lang('app.username') ?></th>
@@ -35,14 +35,14 @@
                                     <?php $grad = $khr->khirrij($us['id']) ?>
                                     <tr>
                                         <td>
-                                            <a href="<?= base_url('khirrij/show/' . $us['id']) ?>" class="btn btn-sm btn-<?= $grad['status'] == 'waiting' ? 'outline-' : '' ?>primary round">
+                                            <a href="<?= base_url('khirrij/show/' . $grad['id']) ?>" class="btn btn-sm btn-<?= $grad['status'] == 'waiting' ? 'outline-' : '' ?>primary round">
                                                 <?= $grad['certificate_no'] ?>
                                                 <a>
                                         </td>
                                         <td><?= $us['name_ar'] ?> <?= $us['mname_ar'] ?> <?= $us['lname_ar'] ?></td>
                                         <td><?= $us['name'] ?> <?= $us['mname'] ?> <?= $us['lname'] ?></td>
-                                        <td><?= $khr->grade(round($grad['gpa']))['name'] ?></td>
-                                        <td><?= $khr->grade(round($grad['gpa']))['name_ar'] ?></td>
+                                        <td><?= $khr->grade(round($grad['gpa'], 2))['name'] ?? 0 ?></td>
+                                        <td><?= $khr->grade(round($grad['gpa'], 2))['name_ar'] ?? 0 ?></td>
                                         <td><?= $khr->city($us['city_id'])['name_ar'] ?></td>
                                         <td><?= $khr->city($us['city_id'])['name'] ?></td>
                                         <td><?= $hjr->strToHijri($us['dob'], "d F Y", 'ar') ?>هـ</td>
@@ -57,7 +57,6 @@
         </div>
     </div>
 </div>
-<?= $this->include('layouts/table') ?>
 <script>
     $(function() {
         // bind change event to select
@@ -99,3 +98,4 @@
     });
 </script>
 <?= $this->endsection() ?>
+<?= $this->include('layouts/table') ?>

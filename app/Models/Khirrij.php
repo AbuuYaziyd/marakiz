@@ -21,6 +21,7 @@ class Khirrij extends Model
         'certificate',
         'certificate_no',
         'status',
+        'gpa',
         'info',
         'school_id',
     ];

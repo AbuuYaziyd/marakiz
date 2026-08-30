@@ -1,46 +1,222 @@
-<div class="col-12">
-    <div class="card">
-        <div class="card-content">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="table-responsive">
-                            <table class="table mb-0">
-                                <thead>
-                                    <tr>
-                                        <th><?= lang('app.malaf') ?></th>
-                                        <th><?= lang('app.fullName') ?></th>
-                                        <th><?= lang('app.sex') ?></th>
-                                        <th><?= lang('app.dob') ?></th>
-                                        <th><?= lang('app.level') ?></th>
-                                        <?php if (session('role') == 'admin') : ?>
-                                            <th><?= lang('app.passchange') ?></th>
-                                        <?php endif ?>
-                                    </tr>
-                                </thead>
+<?php
+
+use App\Models\Country;
+use App\Models\Setting;
+use App\Models\User;
+
+$usr = new User();
+$dob = new DateTime(date('Y-m-d', strtotime($stu['dob'])));
+$now = new DateTime('today');
+$nat = new Country();
+$set = new Setting();
+
+$set_name = $set->where('name', 'name')->first();
+$eml_sub = $set_name['value'] . ' | ' . $set_name['value_ar'];
+
+$age = $dob->diff($now)->y;
+$nationality = $nat->where('code', $stu['nationality'])->first()['country_en'];
+
+if (session('lang') != 'ar') {
+    $name = $stu['name'] . ' ' . $stu['mname'] . ' ' . $stu['lname'];
+} else {
+    $name = $stu['name_ar'] . ' ' . $stu['mname_ar'] . ' ' . $stu['lname_ar'];
+}
+
+$ujumbe = htmlspecialchars('
+السلام عليكم ورحمة الله وبركاته%0A%0A
+مرحبا: ' . $stu['name_ar'] . ' '  . $stu['mname_ar'] . ' '  . $stu['lname_ar'] . '، في موقعنا. 
+%0A
+
+اسم المستخدم: ' . $stu['username'] . ' %0A
+البريد الإلكتروني: ' . $stu['email'] . ' %0A
+كلمة المرور: ' . strtoupper($stu['lname']) . ' %0A%0A
+
+الرابط: ' . env('app.baseURL') . ' %0A%0A
+بارك الله فيكم!
+%0A%0A
+______________________________________%0A%0A
+Assalaamu Alaikum warahmatullahi Wabarakaatuh! %0A%0A
+
+Karibu Ndugu: ' . $stu['name'] . ' '  . $stu['mname'] . ' '  . $stu['lname'] . ', Katika website yetu. %0A%0A
+Namba ya Usajili: ' . $stu['username'] . ' %0A
+Email: ' . $stu['email'] . ' %0A
+Nenosiri: ' . strtoupper($stu['lname']) . '%0A%0A
+Wavuti: ' . env('app.baseURL') . '
+%0A%0A
+Baarakallahu Fiykum!');
+?>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card shadow">
+            <div class="card-header">
+                <h2>
+                    <b><a href="<?= base_url('user/profile/' . $stu['id']) ?>"><?= $stu['username'] ?></a></b>
+                    <a href="<?= base_url('logout') ?>" class="btn btn-danger btn-sm round float-right" id="logout"><i class="ft-power"></i> <?= lang('app.logout') ?></a>
+                </h2>
+            </div>
+            <div class="card-content">
+                <div class="content d-flex flex-wrap">
+                    <div class="col-lg-4 text-center pb-3">
+                        <img src="<?= base_url('app-assets/images/avatar/av' . ($stu['sex'] != 'M' ? 'f' : '') . '.png') ?>" class="rounded-circle">
+                        <h3 class="modal-title">
+                            <b><?= $name ?></b> | <i data-toggle="tooltip" data-placement="bottom" title="" data-original-title="<?= $nationality ?>" class="flag-icon flag-icon-<?= strtolower($stu['nationality']) ?>"></i>
+                        </h3>
+                        <p class="m-0"><?= $stu['email'] ?></p>
+                        <p class="m-0"><?= $stu['phone'] ?></p>
+                        <?php if (session('role') == 'admin') : ?>
+                            <ul class="list-inline list-inline-pipe">
+                                <?php if ($stu['phone'] != null) : ?>
+                                    <li>
+                                        <a href="https://wa.me/<?= str_replace(' ', '', $stu['phone']) ?>?text=<?= $ujumbe ?>" class="btn btn-success btn-sm round" target="_blank">
+                                            <i class="la la-whatsapp"></i>
+                                        </a>
+                                    </li>
+                                <?php endif ?>
+                                <?php if ($stu['email'] != null) : ?>
+                                    <li>
+                                        <a href="mailto:<?= $stu['email'] ?>?subject=<?= $eml_sub ?>&body=<?= $ujumbe ?>." class="btn btn-warning btn-sm round" target="_blank">
+                                            <i class="icon-envelope"></i>
+                                        </a>
+                                    </li>
+                                <?php endif ?>
+                            </ul>
+                        <?php endif ?>
+                    </div>
+                    <div class="col-lg-8">
+                        <?php if ($stu['role'] != 'mafsul') : ?>
+                            <table class="table table-striped text-center">
                                 <tbody>
                                     <tr>
-                                        <td><a href="<?= base_url('user/profile/' . $stu['id']) ?>" class="btn btn-outline-info round btn-sm"><?= $stu['malaf'] ?></a></td>
-                                        <td><?= $stu['name_ar'] ?? $stu['name'] . ' ' . $stu['lname'] ?></td>
-                                        <td><?= $stu['sex'] != 'M' ? lang('app.female') : lang('app.male') ?></td>
-                                        <?php if ($stu['dob'] != null) : ?>
-                                            <td><?= date('d-m-Y', strtotime($stu['dob'])) ?></td>
-                                        <?php else : ?>
-                                            <td>-</td>
-                                        <?php endif ?>
-                                        <td><span class="btn btn-sm btn-outline-teal round"><?= lang('app.graduate') ?></span></td>
-                                        <?php if (session('role') == 'admin') : ?>
-                                            <td>
+                                        <td><?= lang('app.course') ?>:
+                                            <b>
+                                                <?php if (session('lang') != 'ar') : ?>
+                                                    <?= $school['name'] ?>
+                                                <?php else : ?>
+                                                    <?= $school['name_ar'] ?>
+                                                <?php endif ?>
+                                            </b>
+                                        </td>
+                                        <td><?= lang('app.age') ?>: <b><?= $age ?></b></td>
+                                    </tr>
+                                    <tr>
+                                        <td><?= lang('app.class') ?>:
+                                            <b><?= lang('app.graduate') ?></b>
+                                        </td>
+                                        <td><?= lang('app.sex') ?>: <b><?= lang('app.' . $stu['sex']) ?? 'N/A' ?></b></td>
+                                    </tr>
+                                    <tr>
+                                        <td><?= lang('app.username') ?>: <b><?= $stu['username'] ?></b></td>
+                                        <td><?= lang('app.dob') ?>: <b><?= date('d-m-Y', strtotime($stu['dob'])) ?></b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <?php if (session('role') == 'admin' || session('id') != $stu['id']) : ?>
                                                 <a href="<?= base_url('user/forgot-password/' . $stu['id']) ?>" class="btn btn-danger round btn-sm sure"><?= lang('app.passchange') ?></a>
-                                            </td>
-                                        <?php endif ?>
+                                            <?php else : ?>
+                                                <a href="<?= base_url('change/password') ?>" target="_blank" class="btn btn-outline-warning round btn-sm <?= session('id') != $stu['id'] ? 'disabled' : '' ?>"><?= lang('app.resetpassword') ?></a>
+                                            <?php endif ?>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-outline-teal btn-sm round dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <?php if (session('lang') == 'ar') : ?>
+                                                        <i class="flag-icon flag-icon-sa"></i> العربية
+                                                    <?php elseif (session('lang') == 'sw') : ?>
+                                                        <i class="flag-icon flag-icon-tz"></i> Kiswahili
+                                                    <?php endif ?>
+                                                </button>
+                                                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 42px, 0px);">
+                                                    <a class="dropdown-item" href="<?= base_url('locale/sw') ?>" data-language="sw">
+                                                        <i class="flag-icon flag-icon-tz"></i> Kiswahili
+                                                    </a>
+                                                    <a class="dropdown-item" href="<?= base_url('locale/ar') ?>" data-language="ar">
+                                                        <i class="flag-icon flag-icon-sa"></i> العربية
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
+                        <?php else : ?>
+                            <table class="table table-striped text-center">
+                                <tbody>
+                                    <tr>
+                                        <td><?= lang('app.status') ?>: <b><?= lang('app.mafsul') ?></b></td>
+                                        <td><?= lang('app.reason') ?>: <b><?= lang('app.' . $stu['info']) ?></b></td>
+                                    </tr>
+                                    <?php if (session('role') == 'admin') : ?>
+                                        <tr>
+                                            <td colspan="2">
+                                                <a class="btn btn-lg btn-block btn-primary back" href="<?= base_url('student/back/' . $stu['id']) ?>"><?= lang('app.paid') ?></a>
+                                            </td>
+                                        </tr>
+                                    <?php endif ?>
+                                </tbody>
+                            </table>
+                        <?php endif ?>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    $('#reset').on('click', function(e) {
+        e.preventDefault();
+        url = $(this).attr('href');
+        Swal.fire({
+            title: '<?= lang('app.reset') ?>',
+            text: '<?= lang('app.passchangeof') ?><?= $name ?>',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '<?= lang('app.yes') ?>',
+            cancelButtonText: '<?= lang('app.no') ?>',
+        }).then(function(result) {
+            if (result.value) {
+                window.location.href = url;
+            }
+        })
+    });
+</script>
+<script>
+    $('#logout').on('click', function(e) {
+        e.preventDefault();
+        url = $(this).attr('href');
+        Swal.fire({
+            title: '<?= lang('app.sureLogout') ?>',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '<?= lang('app.yes') ?>',
+            cancelButtonText: '<?= lang('app.no') ?>',
+        }).then(function(result) {
+            if (result.value) {
+                window.location.href = url;
+            }
+        })
+    });
+</script>
+<script>
+    $('.back').on('click', function(e) {
+        e.preventDefault();
+        url = $(this).attr('href');
+        Swal.fire({
+            title: '<?= lang('app.sure') ?>',
+            text: '<?= lang('app.backToClass') ?>',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '<?= lang('app.yes') ?>!',
+            cancelButtonText: '<?= lang('app.no') ?>!',
+        }).then(function(result) {
+            if (result.value) {
+                window.location.href = url;
+            }
+        })
+    });
+</script>

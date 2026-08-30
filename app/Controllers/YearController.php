@@ -11,18 +11,13 @@ class YearController extends BaseController
 {
     public function index()
     {
-        // dd($_SESSION['role']);
         $year = new Year();
 
         $data['title'] = lang('app.acYear');
         $data['year'] = $year->findAll();
         $data['current'] = $year->where('current!=', null)->first();
 
-        if (session('role') != 'user') {
-            return view('year/index', $data);
-        } else {
-            return redirect()->to(base_url('user'));
-        }
+        return view('year/index', $data);
     }
 
     public function change($id)
@@ -47,17 +42,13 @@ class YearController extends BaseController
     public function show($id)
     {
         helper('form');
-        // dd($_SESSION['role']);
+        
         $year = new Year();
 
         $data['title'] = lang('app.acYear');
         $data['year'] = $year->find($id);
 
-        if (session('role') != 'user') {
-            return view('year/edit', $data);
-        } else {
-            return redirect()->to(base_url('user'));
-        }
+        return view('year/show', $data);
     }
 
     public function add()
@@ -67,26 +58,23 @@ class YearController extends BaseController
         $hjr = new Hijri;
 
         $data['title'] = lang('app.acYear');
-        $data['year'] = $hjr->strToHijri(date('Y-m-d'), "Y", session('lang'));
+        $data['year'] = date('Y');
+        $data['hijri'] = $hjr->strToHijri(date('Y-m-d'), "Y", session('lang'));
         // dd($data);
 
-        if (session('role') != 'user') {
-            return view('year/add', $data);
-        } else {
-            return redirect()->to(base_url('user'));
-        }
+        return view('year/add', $data);
     }
 
     public function create()
     {
-        // dd($this->request->getVar('name'));
+        // dd($this->request->getVar(''));
         helper('form');
 
         $act = new ActivityLog();
 
         $input = $this->validate(
             [   //Rules
-                'name' => 'required|min_length[3]|max_length[50]|is_unique[years.name]',
+                'name' => 'required|min_length[3]|max_length[50]',
             ],
             [   // Errors
                 'name' =>
@@ -94,7 +82,6 @@ class YearController extends BaseController
                     'required' => lang('error.required'),
                     'min_length' => lang('error.min_length'),
                     'max_length' => lang('error.max_length'),
-                    'is_unique' => lang('error.is_unique'),
                 ],
             ]
         );
@@ -126,24 +113,22 @@ class YearController extends BaseController
         }
     }
 
-    public function edit($id)
+    public function update()
     {
+        // dd($this->request->getVar());
+
         $year = new Year();
         $act = new ActivityLog();
 
-        $data = [
-            'name' => $this->request->getVar('name'),
-        ];
+        $id = $this->request->getVar('id');
+        $data = ['name' => $this->request->getVar('name')];
+        // dd($id, $data);
 
-        $ok = $year->update($id, $data);
+        $year->update($id, $data);
 
         $act->addActivity(session('id'), 'Update Academic Year\' Data', 'Academic Year Data wa Updated Successfully!');
 
-        if ($ok) {
-            return redirect()->to('year')->with('type', 'success')->with('text', lang('app.successfully'))->with('title', lang('app.done'));
-        }else {
-            return redirect()->to('year')->with('type', 'error')->with('text', lang('app.unsuccessfully'))->with('title', lang('app.sorry'));
-        }
+        return redirect()->to('year')->with('type', 'success')->with('text', lang('app.successfully'))->with('title', lang('app.done'));
     }
 
     public function delete($id)
@@ -151,14 +136,10 @@ class YearController extends BaseController
         $year = new Year();
         $act = new ActivityLog();
 
-       $ok = $year->delete($id);
+        $year->delete($id);
 
         $act->addActivity(session('id'), 'Delete Academic Year', 'Academic Year wa Deleted Successfully!');
 
-       if ($ok) {
-           return redirect()->to('year')->with('type', 'success')->with('text', lang('app.successfully'))->with('title', lang('app.done'));
-       }else {
-            return redirect()->to('year')->with('type', 'error')->with('text', lang('app.unsuccessfully'))->with('title', lang('app.sorry'));
-       }
+        return redirect()->to('year')->with('type', 'success')->with('text', lang('app.successfully'))->with('title', lang('app.done'));
     }
 }

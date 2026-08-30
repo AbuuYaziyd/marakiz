@@ -26,7 +26,7 @@ class ResultController extends BaseController
         $sch = new School();
 
         $year = $yr->where('current', 1)->first()['id'];
-        $all_years = $gpa->select('year_id')->distinct()->findAll();
+        $all_years = $gpa->select('year_id')->distinct()->orderBy('year_id', 'desc')->findAll(4);
         $final = $res->where('year_id', $year)->first();
         $course = $res->where('year_id', $year)->first();
         // dd($final, $course);

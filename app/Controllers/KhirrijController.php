@@ -8,6 +8,7 @@ use App\Models\Academy;
 use App\Models\Course;
 use App\Models\Gpa;
 use App\Models\Khirrij;
+use App\Models\School;
 use App\Models\Subject;
 use App\Models\User;
 use App\Models\Year;
@@ -58,30 +59,24 @@ class KhirrijController extends BaseController
     */
     public function show($id)
     {
-        // dd($id);
         $usr = new User();
-        $cl = new Course();
+        $crs = new Course();
         $sub = new Subject();
+        $khr = new Khirrij();
         $gpa = new Gpa();
+        $sch = new School();
 
-        $user = $usr->find($id);
-        $class = $cl->find($user['level']);
+        $khirrij = $khr->find($id);
+        $user = $usr->find($khirrij['student_id']);
+        // dd($user, $id, $khirrij);
 
         $data['title'] = lang('app.graduate');
         $data['stu'] = $user;
-        $data['class'] = $class;
-        $data['c'] = $cl;
+        $data['school'] = $sch->find($khirrij['school_id']);
+        $data['c'] = $crs;
         $data['s'] = $sub;
         $data['gpa'] = $gpa->where('student_id', $id)->findAll();
-        // $data['allClass'] = $cl->where('school_id', $class['school_id'])->findAll();
-        // dd($data);
-
-        // $kh = new Khirrij();
-
-        // $data['title'] = lang('app.graduates');
-        // $data['std'] = $kh->where('student_id!=', null)->findAll();
-        // $data['k'] = $kh;
-        // dd($data);
+        // dd($data, $id);
 
         return view('khirrij/show', $data);
     }

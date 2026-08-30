@@ -19,8 +19,8 @@
                         <?php endif ?>
                         <fieldset class="form-group">
                             <select class="custom-select" name="name">
-                                <?php for ($i = $year - 1; $i < $year + 2; $i++) : ?>
-                                    <option value="<?= $i ?>" <?= $year == $i ? 'selected' : '' ?>><?= $i ?></option>
+                                <?php for ($i = -1; $i < 4; $i++) : ?>
+                                    <option value="<?= $i ?>" <?= $i == 1 ? 'selected' : '' ?>><?= $hijri + $i ?> - <?= $year + $i ?></option>
                                 <?php endfor ?>
                             </select>
                         </fieldset>

@@ -30,7 +30,7 @@
                                     <td class="text-truncate"><?= $key + 1 ?></td>
                                     <td class="text-truncate"><?= $dt['name'] ?></td>
                                     <?php if (session('role')=='admin') : ?>
-                                    <td><a href="<?= base_url('year/edit/' . $dt['id']) ?>" class="btn btn-sm btn-outline-warning round"><?= lang('app.edit') ?></a> </td>
+                                    <td><a href="<?= base_url('year/show/' . $dt['id']) ?>" class="btn btn-sm btn-outline-warning round"><?= lang('app.edit') ?></a> </td>
                                     <?php endif ?>
                                 </tr>
                             <?php endforeach ?>
