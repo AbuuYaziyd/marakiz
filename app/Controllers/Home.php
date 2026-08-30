@@ -2,13 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\Admin;
-use App\Models\Gpa;
-use App\Models\Khirrij;
-use App\Models\Result;
 use App\Models\Setting;
-use App\Models\Subject;
-use App\Models\User;
 use App\Models\Website;
 
 class Home extends BaseController
