@@ -130,7 +130,7 @@ if (session('lang') != 'ar') {
                 </h4>
             </div>
             <div class="logo-box">
-                <img alt="logo" src="<?= base_url($logo['link'] ?? 'app-assets/images/logo/logo.png') ?>" height="90px">
+                <img alt="logo" src="<?= base_url($logo['link']) ?>" height="90px">
             </div>
             <div class="contact-info" dir="ltr">
                 <h4 style="color: <?= $colour['value'] ?>;"><?= $markaz['value'] ?><br>

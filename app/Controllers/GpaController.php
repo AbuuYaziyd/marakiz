@@ -106,6 +106,13 @@ class GpaController extends BaseController
         $set = new Setting();
 
         $data['title'] = lang('app.academicProgress');
+        $data['mudir'] = $set->where('name', 'mudir')->first();
+        $data['taalim'] = $set->where('name', 'taalim')->first();
+        $data['colour'] = $set->where('name', 'colour')->first();
+        $data['markaz'] = $set->where('name', 'name')->first();
+        $data['logo'] = $set->where('name', 'logo')->first();
+        $data['location'] = $set->where('name', 'location')->first();
+        $data['postabox'] = $set->where('name', 'postabox')->first();
         $data['gpa'] = $gpa;
         $data['mudir'] = $set->where('name', 'mudir')->first();
         $data['taalim'] = $set->where('name', 'taalim')->first();
