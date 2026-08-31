@@ -262,12 +262,12 @@ $alama = 0; ?>
                 <div>
                     <?php if (session('lang') != 'ar') : ?>
                         <p><?= $taalim['extra'] ?></p>
-                        <img src="<?= base_url($taalim['link'] ?? 'app-assets/images/signature.png') ?>" height="35px" alt="sign" />
+                        <img src="<?= base_url($taalim['link'] ?? 'app-assets/images/signature.png') ?>" height="50px" alt="sign" />
                         <div class="signature-line"></div>
                         <p><?= $taalim['value'] ?><br><?= date('d-m-Y') ?></p>
                     <?php else : ?>
                         <p><?= $taalim['extra_ar'] ?></p>
-                        <img src="<?= base_url($taalim['link'] ?? 'app-assets/images/signature.png') ?>" height="35px" alt="sign" />
+                        <img src="<?= base_url($taalim['link'] ?? 'app-assets/images/signature.png') ?>" height="50px" alt="sign" />
                         <div class="signature-line"></div>
                         <p><?= $taalim['value_ar'] ?><br><?= date('d-m-Y') ?></p>
                     <?php endif ?>
