@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\City;
 use App\Models\Khirrij;
 use App\Models\School;
+use App\Models\Setting;
 use App\Models\User;
 
 class CertificateController extends BaseController
@@ -13,8 +14,11 @@ class CertificateController extends BaseController
     public function index()
     {
         helper('form');
+
+        $set = new Setting();
         
         $data['title'] = lang('app.certificate');
+        $data['logo'] = $set->where('name', 'logo')->first();
         // dd($data);
 
         return view('certificate/index', $data);
