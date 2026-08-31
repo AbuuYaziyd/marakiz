@@ -340,6 +340,7 @@ return [
     'mafsul' => 'Dismissed',
     'mafsuls' => 'Dismissed Students',
     'find' => 'Search',
+    'search' => 'Search',
     'khutwa' => 'Study Plan',
     'timetable' => 'Timetable / Schedule',
     'siku0' => 'Sunday',

@@ -340,6 +340,7 @@ return [
     'mafsul' => 'Mafsul',
     'mafsuls' => 'Waliosimamishwa',
     'find' => 'Tafuta',
+    'search' => 'Tafuta',
     'khutwa' => 'Khutwa',
     'timetable' => 'Ratiba ya Masomo',
     'siku0' => 'Jumapili',
