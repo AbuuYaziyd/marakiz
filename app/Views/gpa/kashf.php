@@ -1,16 +1,9 @@
 <?php
-
-use App\Models\Setting;
-
-$set = new Setting();
-
-$markaz = $set->where('name', 'name')->first();
-$colour = $set->where('name', 'colour')->first();
-$location = $set->where('name', 'location')->first();
-$logo = $set->where('name', 'logo')->first();
-$muadala = 0;
-$masomo = 0;
-$alama = 0;
+if (session('lang') != 'ar') {
+    $name = $student['name'] . ' ' . $student['mname'] . ' ' . $student['lname'];
+} else {
+    $name = $student['name_ar'] . ' ' . $student['mname_ar'] . ' ' . $student['lname_ar'];
+}
 ?>
 <!DOCTYPE html>
 <html class="loading" lang="<?= session('lang') ?>" data-textdirection="<?= session('lang') != 'ar' ? 'ltr' : 'rtl' ?>">
@@ -20,7 +13,7 @@ $alama = 0;
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="description" content="<?= session('lang') != 'ar' ? $markaz['value'] : $markaz['value_ar'] ?> | <?= session('lang') != 'ar' ? $location['value'] : $location['value_ar'] ?>">
-    <meta name="keywords" content="<?= lang('app.appName') ?> | <?= session('lang') != 'ar' ? $location['value'] : $location['value_ar'] ?>">
+    <meta name="keywords" content="<?= session('lang') != 'ar' ? $markaz['value'] : $markaz['value_ar'] ?> | <?= session('lang') != 'ar' ? $location['value'] : $location['value_ar'] ?>">
     <meta name="author" content="Abou Yaziyd">
     <link rel="manifest" href="./manifest.json" />
     <meta name="theme-color" content="<?= $colour['value'] ?>">
@@ -42,7 +35,7 @@ $alama = 0;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 10px;
-            border-bottom: 3px solid #806240;
+            border-bottom: 3px solid <?= $colour['value'] ?>;
             /* Dark Green Border */
             padding-bottom: 10px;
         }
@@ -58,16 +51,16 @@ $alama = 0;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            color: #806240;
+            color: <?= $colour['value'] ?>;
         }
 
         .student-info {
             margin-bottom: 5px;
-            background-color: #f9efe5;
+            background-color: <?= $colour['link'] ?>;
             /* Light Green Tint */
             padding: 15px;
-            border-right: 5px solid #806240;
-            border-left: 5px solid #806240;
+            border-right: 5px solid <?= $colour['value'] ?>;
+            border-left: 5px solid <?= $colour['value'] ?>;
             border-radius: 4px;
         }
 
@@ -88,7 +81,7 @@ $alama = 0;
 
         /* Dark Green Header Styling */
         th {
-            background-color: #806240;
+            background-color: <?= $colour['value'] ?>;
             color: white;
             font-weight: bold;
         }
@@ -131,21 +124,19 @@ $alama = 0;
     <div id="printArea" style="direction: <?= service('request')->getLocale() != 'ar' ? 'ltr' : 'rtl' ?>; width: 100%;">
         <div class="header-container">
             <div class="institution-details">
-                <h3 style="color: #806240;">مركز ابن القيم
-                    <br>
-                    <span>ص. ب. 0000,</span>
-                    <span>كغوما - تنزانيا</span>
-                </h3>
+                <h4 style="color: <?= $colour['value'] ?>;"><?= $markaz['value_ar'] ?><br>
+                    <span><?= $postabox['value_ar'] ?></span>
+                    <span><?= $location['value_ar'] ?></span>
+                </h4>
             </div>
             <div class="logo-box">
-                <img alt="apple-touch-icon" src="<?= base_url('app-assets/images/logo/logo.png') ?>" height="90px">
+                <img alt="logo" src="<?= base_url($logo['link'] ?? 'app-assets/images/logo/logo.png') ?>" height="90px">
             </div>
             <div class="contact-info" dir="ltr">
-                <h3 style="color: #806240;">Markaz Ibn Qayyim
-                    <br>
-                    <span>Po. Box 0000,</span>
-                    <span>Kigoma - Tanzania</span>
-                </h3>
+                <h4 style="color: <?= $colour['value'] ?>;"><?= $markaz['value'] ?><br>
+                    <span><?= $postabox['value'] ?></span>
+                    <span><?= $location['value'] ?></span>
+                </h4>
             </div>
         </div>
         <div class="student-info" style="text-align: center;">
@@ -155,8 +146,8 @@ $alama = 0;
                 <?php else : ?>
                     <?= $student['name_ar'] ?> <?= $student['mname_ar'] ?> <?= $student['lname_ar'] ?>
                 <?php endif ?> |
-                <span style="color: #806240; text-align: right">
-                    كشف الدرجات:
+                <span style="color: <?= $colour['value'] ?>; text-align: right">
+                    <?= lang('app.academicProgress') ?>:
                     <?php if (session('lang') != 'ar') : ?>
                         <?= $class['name'] ?>
                     <?php else : ?>
@@ -169,10 +160,17 @@ $alama = 0;
         <table>
             <thead>
                 <tr>
-                    <th>المقرر</th>
-                    <th>النتائج</th>
-                    <th>الدرجة</th>
-                    <th>التقدير</th>
+                    <?php if (session('lang') != 'ar') : ?>
+                        <th><?= lang('app.taqdir') ?></th>
+                        <th><?= lang('app.grade') ?></th>
+                        <th><?= lang('app.result') ?></th>
+                        <th><?= lang('app.subject') ?></th>
+                    <?php else : ?>
+                        <th><?= lang('app.subject') ?></th>
+                        <th><?= lang('app.result') ?></th>
+                        <th><?= lang('app.grade') ?></th>
+                        <th><?= lang('app.taqdir') ?></th>
+                    <?php endif ?>
                 </tr>
             </thead>
             <tbody>
@@ -180,16 +178,17 @@ $alama = 0;
                     <?php $mark = $rs['course'] + $rs['final'] ?>
                     <?php $grade = $gpa->grade($mark) ?>
                     <tr>
-                        <td>
-                            <?php if (session('lang') != 'ar') : ?>
-                                <?= $gpa->subject($rs['subject_id'])['name'] ?>
-                            <?php else : ?>
-                                <?= $gpa->subject($rs['subject_id'])['name_ar'] ?>
-                            <?php endif ?>
-                        </td>
-                        <td><?= $mark ?></td>
-                        <td><?= $grade['ramz'] ?></td>
-                        <td><?= $grade['name'] ?></td>
+                        <?php if (session('lang') != 'ar') : ?>
+                            <td><?= $grade['name'] ?></td>
+                            <td><?= $grade['ramz'] ?></td>
+                            <td><?= $mark ?></td>
+                            <td><?= $gpa->subject($rs['subject_id'])['name'] ?></td>
+                        <?php else : ?>
+                            <td><?= $gpa->subject($rs['subject_id'])['name_ar'] ?></td>
+                            <td><?= $mark ?></td>
+                            <td><?= $grade['ramz_ar'] ?></td>
+                            <td><?= $grade['name_ar'] ?></td>
+                        <?php endif ?>
                     </tr>
                 <?php endforeach ?>
             </tbody>
@@ -199,12 +198,12 @@ $alama = 0;
             <table>
                 <thead>
                     <tr>
-                        <th>مقررات</th>
-                        <th>جملة النتائج</th>
+                        <th><?= lang('app.subjects') ?></th>
+                        <th><?= lang('app.allMarks') ?></th>
                         <th><?= lang('app.hisposition') ?></th>
                         <th><?= lang('app.studentCount') ?></th>
-                        <th>المعدل</th>
-                        <th>التقدير العام</th>
+                        <th><?= lang('app.muadala') ?></th>
+                        <th><?= lang('app.taqdir') ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -218,17 +217,28 @@ $alama = 0;
                         <?php endif ?>
                         <td><b><?= $gpas['number_of_students'] ?? $c->stuCount($class['id']) ?></b></td>
                         <td><b><?= round($gpas['gpa']) ?></b></td>
-                        <td><b><?= $gpa->grade(round($gpas['gpa']))['name'] ?></td>
+                        <?php if (session('lang') != 'ar') : ?>
+                            <td><b><?= $gpa->grade(round($gpas['gpa']))['name'] ?></td>
+                        <?php else : ?>
+                            <td><b><?= $gpa->grade(round($gpas['gpa']))['name_ar'] ?></td>
+                        <?php endif ?>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div class="footer">
             <div>
-                <p><?= $mudir['extra'] ?></p>
-                <img src="<?= base_url($mudir['link']) ?>" height="50px" alt="sign" />
-                <div class="signature-line"></div>
-                <p><?= $mudir['value'] ?><br><?= date('d/m/Y') ?></p>
+                <?php if (session('lang') != 'ar') : ?>
+                    <p><?= $mudir['extra'] ?></p>
+                    <img src="<?= base_url($mudir['link'] ?? 'app-assets/images/signature.png') ?>" height="50px" alt="sign" />
+                    <div class="signature-line"></div>
+                    <p><?= $mudir['value'] ?><br><?= date('d-m-Y') ?></p>
+                <?php else : ?>
+                    <p><?= $mudir['extra_ar'] ?></p>
+                    <img src="<?= base_url($mudir['link'] ?? 'app-assets/images/signature.png') ?>" height="50px" alt="sign" />
+                    <div class="signature-line"></div>
+                    <p><?= $mudir['value_ar'] ?><br><?= date('d-m-Y') ?></p>
+                <?php endif ?>
             </div>
             <div>
                 <a href="<?= base_url('gpa/search/' . $gpas['link']) ?>">
@@ -237,10 +247,17 @@ $alama = 0;
 
             </div>
             <div>
-                <p><?= $taalim['extra'] ?></p>
-                <img src="<?= base_url($taalim['link']) ?>" height="50px" alt="sign" />
-                <div class="signature-line"></div>
-                <p><?= $taalim['value'] ?><br><?= date('d/m/Y') ?></p>
+                <?php if (session('lang') != 'ar') : ?>
+                    <p><?= $taalim['extra'] ?></p>
+                    <img src="<?= base_url($taalim['link'] ?? 'app-assets/images/signature.png') ?>" height="35px" alt="sign" />
+                    <div class="signature-line"></div>
+                    <p><?= $taalim['value'] ?><br><?= date('d-m-Y') ?></p>
+                <?php else : ?>
+                    <p><?= $taalim['extra_ar'] ?></p>
+                    <img src="<?= base_url($taalim['link'] ?? 'app-assets/images/signature.png') ?>" height="35px" alt="sign" />
+                    <div class="signature-line"></div>
+                    <p><?= $taalim['value_ar'] ?><br><?= date('d-m-Y') ?></p>
+                <?php endif ?>
             </div>
         </div>
     </div>

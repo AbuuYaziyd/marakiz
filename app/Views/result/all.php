@@ -6,11 +6,12 @@
             <div class="card-header bg-hexagons border-top-3 border-top-primary" style="justify-content: center; display:flex">
                 <div class="card-body pt-0">
                     <h4>
-                        <span class="h1"><b><?= lang('app.appName') ?></b></span><br>
                         <?php if (session('lang') != 'ar') : ?>
+                            <span class="h1"><b><?= $markaz['value'] ?></b></span><br>
                             <?= lang('app.school') ?>: <b><?= $school['name'] ?></b><br>
                             <?= lang('app.course') ?>: <b><?= $course['name'] ?></b><br>
                         <?php else : ?>
+                            <span class="h1"><b><?= $markaz['value_ar'] ?></b></span><br>
                             <?= lang('app.school') ?>: <b><?= $school['name_ar'] ?></b><br>
                             <?= lang('app.course') ?>: <b><?= $course['name_ar'] ?></b><br>
                         <?php endif ?>

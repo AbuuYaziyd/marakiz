@@ -9,6 +9,7 @@ use App\Models\Gpa;
 use App\Models\Grade;
 use App\Models\Result;
 use App\Models\School;
+use App\Models\Setting;
 use App\Models\Subject;
 use App\Models\User;
 use App\Models\Year;
@@ -471,12 +472,20 @@ class ResultController extends BaseController
         $sch = new School();
         $crs = new Course();
         $yr = new Year();
+        $set = new Setting();
 
         $course = $crs->find($id);
-        // dd($course);
-
         $cors_name = session('lang') != 'ar' ? $course['name'] : $course['name_ar'];
+        // dd($course, $cors_name);
+
         $data['title'] = lang('app.results') . ' - ' . $cors_name;
+        $data['mudir'] = $set->where('name', 'mudir')->first();
+        $data['taalim'] = $set->where('name', 'taalim')->first();
+        $data['colour'] = $set->where('name', 'colour')->first();
+        $data['markaz'] = $set->where('name', 'name')->first();
+        $data['logo'] = $set->where('name', 'logo')->first();
+        $data['location'] = $set->where('name', 'location')->first();
+        $data['postabox'] = $set->where('name', 'postabox')->first();
         $data['gpa'] = $gpa;
         $data['course'] = $course;
         $data['year'] = $yr->find($year_id);
@@ -600,7 +609,7 @@ class ResultController extends BaseController
         return redirect()->back()->with('type', 'success')->with('text', lang('app.successfully'))->with('title', lang('app.done'));
     }
 
-    public function user($usr, $cls, $yer)
+    public function user($usr, $cls)
     {
         helper('form');
 
@@ -613,16 +622,16 @@ class ResultController extends BaseController
         $yr = new Year();
 
         $class = $cl->find($cls);
-        $year = $yr->find($yer);
+        // $year = $yr->find();
 
         $data['res'] =  $res->where(['course_id' => $cls, 'student_id' => $usr])->findAll();
         $data['user'] = $user->find($usr);
-        $data['year'] = $year;
+        // $data['year'] = $year;
         $data['class'] = $class;
         $data['gpa'] = $gpa->where(['student_id' => $usr, 'course_id' => $cls])->first();
         $data['grade'] = $grade->findAll();
         // $data['sub'] = $sub->where('course_id', $cls)->findAll();
-        $data['sub'] = $res->select('subject_id')->where(['course_id' => $cls, 'student_id' => $usr, 'year_id' => $year['id']])->findAll();
+        $data['sub'] = $res->select('subject_id')->where(['course_id' => $cls, 'student_id' => $usr])->findAll();
         $data['c'] = $cl;
         $data['r'] = $res;
         $data['g'] = $gpa;

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use App\Models\Setting;
 
@@ -137,7 +137,7 @@ if (session('lang') != 'ar') {
                 </h4>
             </div>
             <div class="logo-box">
-                <img alt="apple-touch-icon" src="<?= base_url('app-assets/images/logo/logo.png') ?>" height="60px">
+                <img alt="apple-touch-icon" src="<?= base_url($logo['link']) ?>" height="60px">
             </div>
             <div class="contact-info" dir="ltr">
                 <h4 style="color: <?= $colour['value'] ?>;"><?= $markaz['value'] ?><br>
@@ -182,7 +182,7 @@ if (session('lang') != 'ar') {
             </thead>
             <tbody>
                 <?php foreach ($results as $key => $rs) : ?>
-                    <?php $mark = $rs['course'] + $rs['final'] ?>
+                    <?php $mark = $rs[$exam] ?>
                     <?php $grade = $gpa->grade($mark * 2) ?>
                     <tr>
                         <?php if (session('lang') != 'ar') : ?>
@@ -209,7 +209,7 @@ if (session('lang') != 'ar') {
                         <th><?= lang('app.allMarks') ?></th>
                         <th><?= lang('app.hisposition') ?></th>
                         <th><?= lang('app.studentCount') ?></th>
-                        <th><?= lang('app.muadala') ?></th>
+                        <th><?= lang('app.gpa') ?></th>
                         <th><?= lang('app.taqdir') ?></th>
                     </tr>
                 </thead>
@@ -219,11 +219,12 @@ if (session('lang') != 'ar') {
                         <td><b><?= round($marks->$exam) ?></b></td>
                         <?php if ($stu_gpa != null) : ?>
                             <td><b><?= $stu_gpa[$exam . '_position'] ?></b></td>
+                            <td><b><?= $stu_gpa['number_of_students'] ?></b></td>
                         <?php else : ?>
                             <td><b style="color: #c62828;"><?= lang('app.soon') ?></b></td>
+                            <td><b style="color: #c62828;"><?= lang('app.soon') ?></b></td>
                         <?php endif ?>
-                        <td><b><?= $students ?></b></td>
-                        <td><b><?= round($muadala->$exam) ?></b></td>
+                        <td><b><?= round(($muadala->$exam), 2) ?></b></td>
                         <?php if (session('lang') != 'ar') : ?>
                             <td><b><?= $gpa->grade(round($muadala->$exam) * 2)['name'] ?> </b></td>
                         <?php else : ?>
@@ -236,15 +237,15 @@ if (session('lang') != 'ar') {
         <div class="footer">
             <div>
                 <?php if (session('lang') != 'ar') : ?>
-                    <p><?= $mudir['extra_ar'] ?></p>
-                    <img src="<?= base_url($mudir['link']) ?>" height="50px" alt="sign" />
-                    <div class="signature-line"></div>
-                    <p><?= $mudir['value_ar'] ?><br><?= date('d-m-Y') ?></p>
-                <?php else : ?>
                     <p><?= $mudir['extra'] ?></p>
-                    <img src="<?= base_url($mudir['link']) ?>" height="50px" alt="sign" />
+                    <img src="<?= base_url($mudir['link'] ?? 'app-assets/images/signature.png') ?>" height="50px" alt="sign" />
                     <div class="signature-line"></div>
                     <p><?= $mudir['value'] ?><br><?= date('d-m-Y') ?></p>
+                <?php else : ?>
+                    <p><?= $mudir['extra_ar'] ?></p>
+                    <img src="<?= base_url($mudir['link'] ?? 'app-assets/images/signature.png') ?>" height="50px" alt="sign" />
+                    <div class="signature-line"></div>
+                    <p><?= $mudir['value_ar'] ?><br><?= date('d-m-Y') ?></p>
                 <?php endif ?>
             </div>
             <div>
@@ -255,15 +256,15 @@ if (session('lang') != 'ar') {
             </div>
             <div>
                 <?php if (session('lang') != 'ar') : ?>
-                    <p><?= $taalim['extra_ar'] ?></p>
-                    <img src="<?= base_url($taalim['link']) ?>" height="35px" alt="sign" />
-                    <div class="signature-line"></div>
-                    <p><?= $taalim['value_ar'] ?><br><?= date('d-m-Y') ?></p>
-                <?php else : ?>
                     <p><?= $taalim['extra'] ?></p>
-                    <img src="<?= base_url($taalim['link']) ?>" height="35px" alt="sign" />
+                    <img src="<?= base_url($taalim['link'] ?? 'app-assets/images/signature.png') ?>" height="35px" alt="sign" />
                     <div class="signature-line"></div>
                     <p><?= $taalim['value'] ?><br><?= date('d-m-Y') ?></p>
+                <?php else : ?>
+                    <p><?= $taalim['extra_ar'] ?></p>
+                    <img src="<?= base_url($taalim['link'] ?? 'app-assets/images/signature.png') ?>" height="35px" alt="sign" />
+                    <div class="signature-line"></div>
+                    <p><?= $taalim['value_ar'] ?><br><?= date('d-m-Y') ?></p>
                 <?php endif ?>
             </div>
         </div>

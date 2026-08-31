@@ -42,12 +42,20 @@ class GpaController extends BaseController
 
     public function kashf($id, $fasl)
     {
-        // dd($fasl, $id);
         $gpa = new Gpa();
         $set = new Setting();
+        $usr = new User();
 
         $data['title'] = lang('app.academicProgress');
+        $data['mudir'] = $set->where('name', 'mudir')->first();
+        $data['taalim'] = $set->where('name', 'taalim')->first();
+        $data['colour'] = $set->where('name', 'colour')->first();
+        $data['markaz'] = $set->where('name', 'name')->first();
+        $data['logo'] = $set->where('name', 'logo')->first();
+        $data['location'] = $set->where('name', 'location')->first();
+        $data['postabox'] = $set->where('name', 'postabox')->first();
         $data['gpa'] = $gpa;
+        $data['student'] = $usr->find($id);
         $data['mudir'] = $set->where('name', 'mudir')->first();
         $data['taalim'] = $set->where('name', 'taalim')->first();
         $data['gpas'] =  $gpa->where(['student_id' => $id, 'course_id' => $fasl])->first();
@@ -76,16 +84,17 @@ class GpaController extends BaseController
         $data['student'] = $usr->find($id);
         $data['mudir'] = $set->where('name', 'mudir')->first();
         $data['taalim'] = $set->where('name', 'taalim')->first();
+        $data['logo'] = $set->where('name', 'logo')->first();
         $data['colour'] = $set->where('name', 'colour')->first();
         $data['markaz'] = $set->where('name', 'name')->first();
         $data['location'] = $set->where('name', 'location')->first();
         $data['postabox'] = $set->where('name', 'postabox')->first();
         $data['subjects'] = $sub->where('course_id', $fasl)->findAll();
         $data['students'] = $usr->where('level', $fasl)->countAllResults();
-        $data['results'] =  $res->where(['student_id' => $id, 'course_id' => $fasl, 'year_id' => $year_id])->findAll();
-        $data['marks'] =  $res->where(['student_id' => $id, 'course_id' => $fasl, 'year_id' => $year_id])->selectSum($exam)->get()->getRow();
-        $data['muadala'] =  $res->where(['student_id' => $id, 'course_id' => $fasl, 'year_id' => $year_id])->selectAvg($exam)->get()->getRow();
-        $data['stu_gpa'] =  $gpa->where(['student_id' => $id, 'course_id' => $fasl, 'year_id' => $year_id])->first();
+        $data['results'] =  $res->where(['student_id' => $id, 'course_id' => $fasl])->findAll();
+        $data['marks'] =  $res->where(['student_id' => $id, 'course_id' => $fasl])->selectSum($exam)->get()->getRow();
+        $data['muadala'] =  $res->where(['student_id' => $id, 'course_id' => $fasl])->selectAvg($exam)->get()->getRow();
+        $data['stu_gpa'] =  $gpa->where(['student_id' => $id, 'course_id' => $fasl])->first();
         // dd($data);
 
         return view('gpa/report', $data);

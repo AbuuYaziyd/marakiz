@@ -302,7 +302,7 @@ $routes->group('result', function ($routes) {
     $routes->get('view/(:segment)/(:num)/(:num)', 'ResultController::view/$1/$2/$3', ['filter' => 'teacher']);
     $routes->get('all/(:num)/(:num)', 'ResultController::all/$1/$2', ['filter' => 'teacher']);
     $routes->get('student/(:num)', 'ResultController::student/$1', ['filter' => 'auth']);
-    $routes->get('user/(:num)/(:num)/(:num)', 'ResultController::user/$1/$2/$3', ['filter' => 'auth']);
+    $routes->get('user/(:num)/(:num)', 'ResultController::user/$1/$2', ['filter' => 'auth']);
     $routes->post('change', 'ResultController::change', ['filter' => 'auth']);
     $routes->post('change-final', 'ResultController::changeFinal', ['filter' => 'auth']);
     $routes->get('teacher/(:num)', 'ResultController::teacher/$1', ['filter' => 'teacher']);
