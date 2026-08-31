@@ -99,7 +99,11 @@ Baarakallahu Fiykum!');
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="<?= base_url('change/password') ?>" target="_blank" class="btn btn-outline-warning round btn-sm sure"><?= lang('app.passchange') ?></a>
+                                        <?php if (session('role') != 'admin' || session('id') != $user['id']) : ?>
+                                            <a href="<?= base_url('reset/' . $user['id']) ?>" class="btn btn-danger btn-sm round" id="reset"><?= lang('app.resetpassword') ?></a>
+                                        <?php else : ?>
+                                            <a href="<?= base_url('change/password') ?>" target="_blank" class="btn btn-outline-warning round btn-sm sure"><?= lang('app.passchange') ?></a>
+                                        <?php endif ?>
                                     </td>
                                     <td>
                                         <div class="btn-group">
@@ -121,12 +125,6 @@ Baarakallahu Fiykum!');
                                         </div>
                                     </td>
                                 </tr>
-                                <?php if (session('role') == 'admin') : ?>
-                                    <tr>
-                                        <td><a href="<?= base_url('reset/' . $user['id']) ?>" class="btn btn-danger btn-sm round" id="reset"><?= lang('app.resetpassword') ?></a></b></td>
-                                        <!-- <td><a href="<?= base_url('reset/' . $user['id']) ?>" class="btn btn-danger btn-sm round" id="reset"><?= lang('app.resetpassword') ?></a></b></td> -->
-                                    </tr>
-                                <?php endif ?>
                             </tbody>
                         </table>
                     </div>
