@@ -126,4 +126,10 @@ class User extends Model
 
         return $username;
     }
+
+    function city($id)
+    {
+        $ct = new City();
+        return $ct->find($id);
+    }
 }

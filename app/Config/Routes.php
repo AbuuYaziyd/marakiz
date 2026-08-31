@@ -328,3 +328,17 @@ $routes->group('gpa', function ($routes) {
     $routes->get('search/(:any)', 'GpaController::search/$1', ['filter' => 'auth']);
     $routes->get('fasl/(:num)/(:num)', 'GpaController::fasl/$1/$2', ['filter' => 'admin']);
 });
+
+/*
+ * --------------------------------------------------------------------
+ * Routes Certificate Routings
+ * --------------------------------------------------------------------
+ */
+$routes->group('certificate', function ($routes) {
+    $routes->get('/', 'CertificateController::index');
+    $routes->post('verification', 'CertificateController::verification');
+    $routes->get('check/(:num)', 'CertificateController::check/$1');
+    $routes->get('show/(:num)', 'CertificateController::show/$1');
+    $routes->get('edit/(:num)', 'CertificateController::edit/$1');
+    $routes->post('data/(:num)', 'CertificateController::data/$1');
+});
