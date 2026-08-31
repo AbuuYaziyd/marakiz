@@ -7,7 +7,6 @@ if (session('lang') != 'ar') {
 ?>
 <?= $this->extend('layouts/app') ?>
 <?= $this->section('content') ?>
-<?php if ($res) : ?>
     <div class="row">
         <div class="col-12">
             <ul class="nav nav-pills nav-fill nav-topline justify-content-center">
@@ -28,7 +27,6 @@ if (session('lang') != 'ar') {
             </div>
         </div>
     </div>
-<?php endif ?>
 
 <script>
     $('#changeCourse').on('click', function(e) {

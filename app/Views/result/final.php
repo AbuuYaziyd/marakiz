@@ -34,7 +34,7 @@
                             <?php foreach ($sub as $key => $dt) : ?>
                                 <?php $mark = $r->mark($class['id'], $user['id'], $dt['subject_id']) ?>
                                 <?php $subject = $g->subject($dt['subject_id']) ?>
-                                <?php $sum = $mark['final']*2 ?>
+                                <?php $sum = $mark['final'] * 2 ?>
                                 <tr>
                                     <td style="width: 1%;"><?= $key + 1 ?></td>
                                     <td style="width: 15%;">
@@ -51,23 +51,67 @@
                                             <td style="width: 15%;">*</td>
                                         <?php elseif ($mark['final_status'] != null) : ?>
                                             <td style="width: 1%;"><?= $mark['final'] ?? 0 ?></td>
-                                            <td style="width: 1%;"><span class="<?= ($sum < 60 ? 'danger' : '') ?>"><?= $r->grade($sum)['ramz'] ?></span></td>
-                                            <td style="width: 15%;"><span class="<?= ($sum < 60 ? 'danger' : '') ?>"><?= $r->grade($sum)['name'] ?></span></td>
+                                            <td style="width: 1%;">
+                                                <span class="<?= ($sum < 60 ? 'danger' : '') ?>">
+                                                    <?php if (session('lang') != 'ar') : ?>
+                                                        <?= $r->grade($sum)['ramz'] ?>
+                                                    <?php else : ?>
+                                                        <?= $r->grade($sum)['ramz_ar'] ?>
+                                                    <?php endif ?>
+                                                </span>
+                                            </td>
+                                            <td style="width: 15%;">
+                                                <span class="<?= ($sum < 60 ? 'danger' : '') ?>">
+                                                    <?php if (session('lang') != 'ar') : ?>
+                                                        <?= $r->grade($sum)['name'] ?>
+                                                    <?php else : ?>
+                                                        <?= $r->grade($sum)['name_ar'] ?>
+                                                    <?php endif ?>
+                                                </span>
+                                            </td>
                                         <?php endif ?>
                                     <?php else : ?>
                                         <?php if ($mark['final_status'] == 'gpa') : ?>
                                             <td style="width: 1%;"><?= $mark['final'] ?></td>
-                                            <td style="width: 1%;"><span class="<?= ($sum < 60 ? 'danger' : '') ?>"><?= $r->grade($sum)['ramz'] ?></span></td>
-                                            <td style="width: 15%;"><span class="<?= ($sum < 60 ? 'danger' : '') ?>"><?= $r->grade($sum)['name'] ?></span></td>
+                                            <td style="width: 1%;">
+                                                <span class="<?= ($sum < 60 ? 'danger' : '') ?>">
+                                                    <?php if (session('lang') != 'ar') : ?>
+                                                        <?= $r->grade($sum)['ramz'] ?>
+                                                    <?php else : ?>
+                                                        <?= $r->grade($sum)['ramz_ar'] ?>
+                                                    <?php endif ?>
+                                                </span>
+                                            </td>
+                                            <td style="width: 15%;">
+                                                <span class="<?= ($sum < 60 ? 'danger' : '') ?>">
+                                                    <?php if (session('lang') != 'ar') : ?>
+                                                        <?= $r->grade($sum)['name'] ?>
+                                                    <?php else : ?>
+                                                        <?= $r->grade($sum)['name_ar'] ?>
+                                                    <?php endif ?>
+                                                </span>
+                                            </td>
                                         <?php elseif ($mark['final_status'] == 'marked' || $mark['final_status'] == 'edit_final') : ?>
                                             <td style="width: 1%;">
                                                 <a href="<?= base_url('result/final/' . $mark['id']) ?>" class="btn btn-secondary btn-sm round"><?= $mark['final'] ?></a>
                                             </td>
                                             <td style="width: 1%;">
-                                                <span class="<?= ($sum < 60 ? 'danger' : '') ?>"><?= $r->grade($sum)['ramz'] ?></span>
+                                                <span class="<?= ($sum < 60 ? 'danger' : '') ?>">
+                                                    <?php if (session('lang') != 'ar') : ?>
+                                                        <?= $r->grade($sum)['ramz'] ?>
+                                                    <?php else : ?>
+                                                        <?= $r->grade($sum)['ramz_ar'] ?>
+                                                    <?php endif ?>
+                                                </span>
                                             </td>
                                             <td style="width: 15%;">
-                                                <span class="<?= ($sum < 60 ? 'danger' : '') ?>"><?= $r->grade($sum)['name'] ?></span>
+                                                <span class="<?= ($sum < 60 ? 'danger' : '') ?>">
+                                                    <?php if (session('lang') != 'ar') : ?>
+                                                        <?= $r->grade($sum)['name'] ?>
+                                                    <?php else : ?>
+                                                        <?= $r->grade($sum)['name_ar'] ?>
+                                                    <?php endif ?>
+                                                </span>
                                             </td>
                                         <?php else : ?>
                                             <td style="width: 1%;">*</td>
@@ -81,7 +125,7 @@
                             <?php endforeach ?>
                         </tbody>
                     </table><br>
-                    <?php if ($mark['final_status'] != null && $msr != null) : ?>
+                    <?php if ($mark['final_status'] != null && $gpa != null) : ?>
                         <table class="table table-striped table-bordered" style="text-align: center;">
                             <?php $masar = round((($total / (($key + 1) * 50)) * 50), 2) ?>
                             <thead>
@@ -93,25 +137,25 @@
                             </thead>
                             <thead>
                                 <th><?= lang('app.fasliy') ?></th>
-                                <td><?= $msr['subjects'] ?></td>
-                                <td><?= intval($msr['final_marks']) ?></td>
-                                <td><?= $msr['final_gpa'] ?></td>
+                                <td><?= $gpa['subjects'] ?></td>
+                                <td><?= intval($gpa['final_marks']) ?></td>
+                                <td><?= $gpa['final_gpa'] ?></td>
                                 <?php if (session('lang') != 'ar') : ?>
-                                    <td><span style="color:<?= $r->masar(intval($msr['final_gpa']))['colour'] ?>"><b><?= $r->masar(intval($msr['final_gpa']))['name'] ?></b></span></td>
+                                    <td><span style="color:<?= $r->masar(intval($gpa['final_gpa'] * 2))['colour'] ?>"><b><?= $r->masar(intval($gpa['final_gpa'] * 2))['name'] ?></b></span></td>
                                 <?php else : ?>
-                                    <td><span style="color:<?= $r->masar(intval($msr['final_gpa']))['colour'] ?>"><b><?= $r->masar(intval($msr['final_gpa']))['name_ar'] ?></b></span></td>
+                                    <td><span style="color:<?= $r->masar(intval($gpa['final_gpa'] * 2))['colour'] ?>"><b><?= $r->masar(intval($gpa['final_gpa'] * 2))['name_ar'] ?></b></span></td>
                                 <?php endif ?>
                             </thead>
                             <thead>
                                 <th><?= lang('app.tarakum') ?></th>
-                                <?php if ($msr['final_gpa'] != null) : ?>
-                                    <td><b><?= $msr['subjects'] ?></b></td>
-                                    <td><b><?= intval($msr['marks']) ?></b></td>
-                                    <td><b><?= $msr['final_gpa'] ?></b></td>
+                                <?php if ($gpa['final_gpa'] != null) : ?>
+                                    <td><b><?= $gpa['subjects'] ?></b></td>
+                                    <td><b><?= intval($gpa['marks']) ?></b></td>
+                                    <td><b><?= $gpa['final_gpa'] ?></b></td>
                                     <?php if (session('lang') != 'ar') : ?>
-                                        <td><span style="color:<?= $r->masar(intval($msr['final_gpa']))['colour'] ?>"><b><?= $r->masar(intval($msr['final_gpa']))['name'] ?></b></span></td>
+                                        <td><span style="color:<?= $r->masar(intval($gpa['final_gpa'] * 2))['colour'] ?>"><b><?= $r->masar(intval($gpa['final_gpa'] * 2))['name'] ?></b></span></td>
                                     <?php else : ?>
-                                        <td><span style="color:<?= $r->masar(intval($msr['final_gpa']))['colour'] ?>"><b><?= $r->masar(intval($msr['final_gpa']))['name_ar'] ?></b></span></td>
+                                        <td><span style="color:<?= $r->masar(intval($gpa['final_gpa'] * 2))['colour'] ?>"><b><?= $r->masar(intval($gpa['final_gpa'] * 2))['name_ar'] ?></b></span></td>
                                     <?php endif ?>
                                 <?php else : ?>
                                     <td><b><?= lang('app.soon') ?></b></td>

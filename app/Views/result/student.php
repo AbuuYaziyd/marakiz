@@ -30,8 +30,9 @@
                 <div class="card-content collapse">
                     <div class="card-body text-center">
                         <?php foreach ($sch->course($sc['id']) as $key => $cl) : ?>
-                            <?php if ($sch->checkResults($stu['id'], $cl['id'])) : ?>
-                                <a href="<?= base_url('result/user/' . $stu['id'] . '/' . $cl['id']) ?>" class="btn btn-primary btn-block round" target="_blank">
+                            <?php $check = $sch->checkResults($stu['id'], $cl['id']) ?>
+                            <?php if ($check) : ?>
+                                <a href="<?= base_url('result/user/' . $stu['id'] . '/' . $cl['id'] . '/' . $check['school_id']) ?>" class="btn btn-primary btn-block round" target="_blank">
                                     <i class="ft ft-eye"></i> |
                                     <?php if (session('lang') != 'ar') : ?>
                                         <?= $cl['name'] ?>

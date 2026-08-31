@@ -77,7 +77,7 @@ class School extends Model
     function checkResults($id, $course_id)
     {
         $gpa = new Gpa();
-        $check = $gpa->where(['course_id' => $course_id, 'student_id' => $id])->findAll();
+        $check = $gpa->where(['course_id' => $course_id, 'student_id' => $id])->first();
         // dd($check);
 
         return $check;

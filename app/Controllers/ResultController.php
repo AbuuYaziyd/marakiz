@@ -162,14 +162,14 @@ class ResultController extends BaseController
         $data['subject'] = $sub->find($s);
         $data['year'] = $year->find($y);
         // dd($data);
-        
+
         // dd($check[$exam . '_status']);
         if ($check[$exam . '_status'] == null) {
             dd('show');
             return redirect()->back()->with('type', 'error')->with('text', lang('app.studentNotFound'))->with('title', lang('app.sorry'));
-        // } elseif ($check['course_status'] == 'gpa') {
-        //     // dd('mark');
-        //     return redirect()->to('result/course/show/' . $c . '/' . $y);
+            // } elseif ($check['course_status'] == 'gpa') {
+            //     // dd('mark');
+            //     return redirect()->to('result/course/show/' . $c . '/' . $y);
         } elseif ($check[$exam . '_status'] != 'done') {
             // dd('add');
             return view('result/marks', $data);
@@ -249,7 +249,7 @@ class ResultController extends BaseController
         }
         // dd($data);
 
-        $act->addActivity(session('id'), 'Add Marks to DB', ($key + 1) . 'Student ' . $exam .' marks were registered Saved Successfully!');
+        $act->addActivity(session('id'), 'Add Marks to DB', ($key + 1) . 'Student ' . $exam . ' marks were registered Saved Successfully!');
 
         return redirect()->to('result/' . $exam . '/marks/' . $subject_id)->with('type', 'success')->with('text', lang('app.successfully'))->with('title', lang('app.done'));
     }
@@ -323,7 +323,6 @@ class ResultController extends BaseController
                 }
 
                 $act->addActivity(session('id'), 'GPA Calculation', 'GPA for ' . $exam . ' semester was Calculated and Saved Successfully!');
-
             }
             return redirect()->to('result/' . $exam . '/position/' . $id);
         } else {
@@ -387,7 +386,7 @@ class ResultController extends BaseController
         }
         // dd($dt);
 
-        $act->addActivity(session('id'), 'Position Calculation', 'Position for '. $exam . ' semester results was Assigned and Saved Successfully!');
+        $act->addActivity(session('id'), 'Position Calculation', 'Position for ' . $exam . ' semester results was Assigned and Saved Successfully!');
 
         if ($exam == 'final') {
             $p = $gpa->where(['school_id' => $school_id, 'course_id' => $id, 'year_id' => $year_id, 'position' => null])->orderBy('marks', 'desc')->findAll();
@@ -476,7 +475,7 @@ class ResultController extends BaseController
         $course = $crs->find($id);
         // dd($course);
 
-        $cors_name = session('lang') != 'ar' ? $course['name'] : $course['name_ar']; 
+        $cors_name = session('lang') != 'ar' ? $course['name'] : $course['name_ar'];
         $data['title'] = lang('app.results') . ' - ' . $cors_name;
         $data['gpa'] = $gpa;
         $data['course'] = $course;
@@ -601,7 +600,7 @@ class ResultController extends BaseController
         return redirect()->back()->with('type', 'success')->with('text', lang('app.successfully'))->with('title', lang('app.done'));
     }
 
-    public function user($usr, $cls)
+    public function user($usr, $cls, $yer)
     {
         helper('form');
 
@@ -614,13 +613,13 @@ class ResultController extends BaseController
         $yr = new Year();
 
         $class = $cl->find($cls);
-        $year = $yr->where('current', 1)->first();
+        $year = $yr->find($yer);
 
-        $data['res'] =  $res->where(['course_id' => $cls, 'student_id' => $usr, 'year_id' => $year['id']])->findAll();
+        $data['res'] =  $res->where(['course_id' => $cls, 'student_id' => $usr])->findAll();
         $data['user'] = $user->find($usr);
         $data['year'] = $year;
         $data['class'] = $class;
-        $data['gpa'] = $gpa->where(['student_id' => $usr, 'course_id' => $cls, 'year_id' => $year['id']])->first();
+        $data['gpa'] = $gpa->where(['student_id' => $usr, 'course_id' => $cls])->first();
         $data['grade'] = $grade->findAll();
         // $data['sub'] = $sub->where('course_id', $cls)->findAll();
         $data['sub'] = $res->select('subject_id')->where(['course_id' => $cls, 'student_id' => $usr, 'year_id' => $year['id']])->findAll();

@@ -32,7 +32,7 @@
                             <?php foreach ($sub as $key => $dt) : ?>
                                 <?php $mark = $r->mark($class['id'], $user['id'], $dt['subject_id']) ?>
                                 <?php $subject = $g->subject($dt['subject_id']) ?>
-                                <?php $sum = ($mark['course'] + $mark['final']) / 2 ?>
+                                <?php $sum = ($mark['course'] + $mark['final']) ?>
                                 <tr>
                                     <td style="width: 1%;"><?= $key + 1 ?></td>
                                     <td style="width: 15%;">
@@ -47,8 +47,24 @@
                                             <td style="width: 1%;"><?= $mark['course'] ?></td>
                                             <td style="width: 1%;"><?= $mark['final'] ?></td>
                                             <td style="width: 1%;"><?= $sum ?></td>
-                                            <td style="width: 1%;"><span class="<?= (($sum) < 60 ? 'danger' : '') ?>"><?= $r->grade($sum)['ramz'] ?></span></td>
-                                            <td style="width: 15%;"><span class="<?= ($sum < 60 ? 'danger' : '') ?>"><?= $r->grade($sum)['name'] ?></span></td>
+                                            <td style="width: 1%;">
+                                                <span class="<?= (($sum) < 60 ? 'danger' : '') ?>">
+                                                    <?php if (session('lang') != 'ar') : ?>
+                                                        <?= $r->grade($sum)['ramz'] ?>
+                                                    <?php else : ?>
+                                                        <?= $r->grade($sum)['ramz_ar'] ?>
+                                                    <?php endif ?>
+                                                </span>
+                                            </td>
+                                            <td style="width: 15%;">
+                                                <span class="<?= ($sum < 60 ? 'danger' : '') ?>">
+                                                    <?php if (session('lang') != 'ar') : ?>
+                                                        <?= $r->grade($sum)['name'] ?>
+                                                    <?php else : ?>
+                                                        <?= $r->grade($sum)['name_ar'] ?>
+                                                    <?php endif ?>
+                                                </span>
+                                            </td>
                                         <?php elseif ($mark['course_status'] != 'add') : ?>
                                             <td style="width: 1%;"><?= $mark['course'] ?></td>
                                             <td style="width: 1%;">*</td>
@@ -67,8 +83,24 @@
                                             <td style="width: 1%;"><?= $mark['course'] ?></td>
                                             <td style="width: 1%;"><?= $mark['final'] ?></td>
                                             <td style="width: 1%;"><?= $sum ?></td>
-                                            <td style="width: 1%;"><span class="<?= ($sum < 60 ? 'danger' : '') ?>"><?= $r->grade($sum)['ramz'] ?></span></td>
-                                            <td style="width: 15%;"><span class="<?= ($sum < 60 ? 'danger' : '') ?>"><?= $r->grade($sum)['name'] ?></span></td>
+                                            <td style="width: 1%;">
+                                                <span class="<?= ($sum < 60 ? 'danger' : '') ?>">
+                                                    <?php if (session('lang') != 'ar') : ?>
+                                                        <?= $r->grade($sum)['ramz'] ?>
+                                                    <?php else : ?>
+                                                        <?= $r->grade($sum)['ramz_ar'] ?>
+                                                    <?php endif ?>
+                                                </span>
+                                            </td>
+                                            <td style="width: 15%;">
+                                                <span class="<?= ($sum < 60 ? 'danger' : '') ?>">
+                                                    <?php if (session('lang') != 'ar') : ?>
+                                                        <?= $r->grade($sum)['name'] ?>
+                                                    <?php else : ?>
+                                                        <?= $r->grade($sum)['name_ar'] ?>
+                                                    <?php endif ?>
+                                                </span>
+                                            </td>
                                         <?php elseif ($mark['final_status'] != 'add') : ?>
                                             <td style="width: 1%;"><?= $mark['course'] ?></td>
                                             <td style="width: 1%;">*</td>
@@ -89,7 +121,7 @@
                             <?php endforeach ?>
                         </tbody>
                     </table><br>
-                    <?php if ($mark['final_status'] != null && $msr != null) : ?>
+                    <?php if ($mark['final_status'] != null && $gpa != null) : ?>
                         <table class="table table-striped table-bordered" style="text-align: center;">
                             <thead>
                                 <th><?= lang('app.position') ?></th>
@@ -100,22 +132,30 @@
                             </thead>
                             <thead>
                                 <th><?= lang('app.fasliy') ?></th>
-                                <td><?= $msr['subjects'] ?></td>
-                                <td><?= intval($msr['marks']) ?></td>
-                                <td><?= $msr['gpa'] ?></td>
+                                <td><?= $gpa['subjects'] ?></td>
+                                <td><?= intval($gpa['marks']) ?></td>
+                                <td><?= $gpa['gpa'] ?></td>
                                 <?php if (session('lang') != 'ar') : ?>
-                                    <td><span style="color:<?= $r->masar(intval($msr['gpa']))['colour'] ?>"><b><?= $r->masar(intval($msr['gpa']))['name'] ?></b></span></td>
+                                    <td><span style="color:<?= $r->masar(intval($gpa['gpa']))['colour'] ?>"><b><?= $r->masar(intval($gpa['gpa']))['name'] ?></b></span></td>
                                 <?php else : ?>
-                                    <td><span style="color:<?= $r->masar(intval($msr['gpa']))['colour'] ?>"><b><?= $r->masar(intval($msr['gpa']))['name_ar'] ?></b></span></td>
+                                    <td><span style="color:<?= $r->masar(intval($gpa['gpa']))['colour'] ?>"><b><?= $r->masar(intval($gpa['gpa']))['name_ar'] ?></b></span></td>
                                 <?php endif ?>
                             </thead>
                             <thead>
                                 <th><?= lang('app.tarakum') ?></th>
-                                <?php if ($msr['gpa'] != null) : ?>
-                                    <td><b><?= $msr['subjects'] ?></b></td>
-                                    <td><b><?= intval($msr['marks']) ?></b></td>
-                                    <td><b><?= $msr['gpa'] ?></b></td>
-                                    <td><span style="color:<?= $r->masar(intval($msr['gpa']))['colour'] ?>"><b><?= $r->masar(intval($msr['gpa']))['name'] ?></b></span></td>
+                                <?php if ($gpa['gpa'] != null) : ?>
+                                    <td><b><?= $gpa['subjects'] ?></b></td>
+                                    <td><b><?= intval($gpa['marks']) ?></b></td>
+                                    <td><b><?= $gpa['gpa'] ?></b></td>
+                                    <td>
+                                        <span style="color:<?= $r->masar(intval($gpa['gpa']))['colour'] ?>">
+                                            <?php if (session('lang') != 'ar') : ?>
+                                                <b><?= $r->masar(intval($gpa['gpa']))['name'] ?></b>
+                                            <?php else : ?>
+                                                <b><?= $r->masar(intval($gpa['gpa']))['name_ar'] ?></b>
+                                            <?php endif ?>
+                                        </span>
+                                    </td>
                                 <?php else : ?>
                                     <td><b><?= lang('app.soon') ?></b></td>
                                     <td><b><?= lang('app.soon') ?></b></td>

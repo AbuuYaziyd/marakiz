@@ -135,8 +135,9 @@ class Result extends Model
         $yr = new Year();
         
         $year_id = $yr->where('current', 1)->first()['id'];
-        $m = $mark->where(['course_id' => $c, 'subject_id' => $s, 'student_id' => $std, 'year_id' => $year_id])->first();
+        $m = $mark->where(['course_id' => $c, 'subject_id' => $s, 'student_id' => $std])->first();
         // dd($m);
+
         return $m;
     }
 
