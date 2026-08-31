@@ -1,18 +1,31 @@
+<?php
+
+use App\Models\Setting;
+
+$set = new Setting();
+
+$markaz = $set->where('name', 'name')->first();
+$colour = $set->where('name', 'colour')->first();
+$location = $set->where('name', 'location')->first();
+$logo = $set->where('name', 'logo')->first();
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html class="loading" lang="<?= session('lang') ?>" data-textdirection="<?= session('lang') != 'ar' ? 'ltr' : 'rtl' ?>">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description" content="<?= lang('app.appName') . ' | ' . lang('location') ?>">
-    <meta name="keywords" content="<?= lang('app.appName') . ' | ' . lang('location') ?>">
+    <meta name="description" content="<?= session('lang') != 'ar' ? $markaz['value'] : $markaz['value_ar'] ?> | <?= session('lang') != 'ar' ? $location['value'] : $location['value_ar'] ?>">
+    <meta name="keywords" content="<?= session('lang') != 'ar' ? $markaz['value'] : $markaz['value_ar'] ?> | <?= session('lang') != 'ar' ? $location['value'] : $location['value_ar'] ?>">
     <meta name="author" content="Abou Yaziyd">
-    <link rel="manifest" href="./manifest.json" />
-    <meta name="theme-color" content="#3367D6">
-    <title><?= lang('app.appName') ?> | <?= $title ?></title>
-    <link rel="apple-touch-icon" href="<?= base_url('app-assets/images/logo/logo.svg') ?>">
-    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('app-assets/images/logo/logo.svg') ?>">
+    <link rel="manifest" href="<?= base_url('manifest') ?>" />
+    <meta name="theme-color" content="<?= $colour['value'] ?>">
+    <title><?= $title ?> | <?= session('lang') != 'ar' ? $markaz['value'] : $markaz['value_ar'] ?></title>
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;400;500;700;800;900&display=swap" rel="stylesheet"> -->
+    <link rel="apple-touch-icon" href="<?= base_url($logo['link']) ?>">
+    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url($logo['link']) ?>">
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Google Fonts - Inter -->
@@ -86,7 +99,7 @@
     <div class="main-content">
         <div class="id-card-container">
             <div class="flex justify-center mb-4">
-                <img src="<?= base_url('app-assets/images/logo/logo.png') ?>" height="70px" alt="<?= lang('app.appName') ?>" class="h-12 w-auto object-contain">
+                <!-- <img src="<?= base_url($logo['link']) ?>" height="70px" alt="<?= lang('app.appName') ?>" class="h-12 w-auto object-contain"> -->
             </div>
             <h1 class="h3 fw-bold text-dark mb-4"><?= $title ?></h1>
 
@@ -101,7 +114,14 @@
 
             <!-- Removed text-start class to allow centering from parent -->
             <div class="mb-4">
-                <p class="mb-1"><span class="fw-semibold"><?= lang('app.course') ?>:</span> <b><?= $course['name'] ?></b></p>
+                <p class="mb-1">
+                    <span class="fw-semibold"><?= lang('app.course') ?>:</span>
+                    <?php if (session('lang') != 'ar') : ?>
+                        <b><?= $course['name'] ?></b>
+                    <?php else : ?>
+                        <b><?= $course['name_ar'] ?></b>
+                    <?php endif ?>
+                </p>
                 <?php $date = $user['created_at'] ?>
                 <p class="mb-1"><span class="fw-semibold"><?= lang('app.registration') ?>:</span> <?= date('Y', strtotime($date)) ?> - <?= date('Y', strtotime($date . '+3 years')) ?></p>
             </div>
@@ -110,7 +130,7 @@
                 <a href="<?= base_url('student/page/' . $user['id']) ?>" target="_blank"><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=<?= base_url('student/page/' . $user['id']) ?>" alt="QR Code" class="qr-code"></a>
             </div>
 
-            <p class="text-muted small mt-3"><?= lang('app.appName') ?> | <?= lang('app.ourLocation') ?></p>
+            <p class="text-muted small mt-3"><?= session('lang') != 'ar' ? $markaz['value'] : $markaz['value_ar'] ?> | <?= session('lang') != 'ar' ? $location['value'] : $location['value_ar'] ?></p>
         </div>
     </div>
 
