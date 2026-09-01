@@ -7,7 +7,12 @@ $set = new Setting();
 $markaz = $set->where('name', 'name')->first();
 $colour = $set->where('name', 'colour')->first();
 $location = $set->where('name', 'location')->first();
-$logo = $set->where('name', 'logo')->first();
+$lg = $set->where('name', 'logo')->first()['link'];
+if (file_exists($lg)) {
+    $logo = $lg;
+} else {
+    $logo = 'app-assets/images/logo/logo.png';
+}
 ?>
 <!DOCTYPE html>
 <html class="loading" lang="<?= session('lang') ?>" data-textdirection="<?= session('lang') != 'ar' ? 'ltr' : 'rtl' ?>">
@@ -23,8 +28,8 @@ $logo = $set->where('name', 'logo')->first();
     <meta name="theme-color" content="<?= $colour['value'] ?>">
     <title><?= $title ?> | <?= session('lang') != 'ar' ? $markaz['value'] : $markaz['value_ar'] ?></title>
     <!-- <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;400;500;700;800;900&display=swap" rel="stylesheet"> -->
-    <link rel="apple-touch-icon" href="<?= base_url($logo['link']) ?>">
-    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url($logo['link']) ?>">
+    <link rel="apple-touch-icon" href="<?= base_url($logo) ?>">
+    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url($logo) ?>">
     <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -99,7 +104,7 @@ $logo = $set->where('name', 'logo')->first();
     <div class="main-content">
         <div class="id-card-container">
             <div class="flex justify-center mb-4">
-                <!-- <img src="<?= base_url($logo['link']) ?>" height="70px" alt="logo" class="h-12 w-auto object-contain"> -->
+                <!-- <img src="<?= base_url($logo) ?>" height="70px" alt="logo" class="h-12 w-auto object-contain"> -->
             </div>
             <h1 class="h3 fw-bold text-dark mb-4"><?= $title ?></h1>
 

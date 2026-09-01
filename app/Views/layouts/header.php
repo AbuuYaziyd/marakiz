@@ -5,7 +5,12 @@ use App\Models\Setting;
 $set = new Setting();
 
 $markaz = $set->where('name', 'name')->first();
-$logo = $set->where('name', 'logo')->first();
+$lg = $set->where('name', 'logo')->first()['link'];
+if (file_exists($lg)) {
+    $logo = $lg;
+} else {
+    $logo = 'app-assets/images/logo/logo.png';
+}
 ?>
 <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-dark navbar-shadow navbar-brand-center">
     <div class="navbar-wrapper">
@@ -15,7 +20,7 @@ $logo = $set->where('name', 'logo')->first();
                 </li>
                 <li class="nav-item">
                     <a class="navbar-brand" href="<?= session('isLoggedIn') == true ? base_url('user') : base_url() ?>">
-                        <img class="brand-logo" alt="logo" src="<?= base_url($logo['link']) ?> ">
+                        <img class="brand-logo" alt="logo" src="<?= base_url($logo) ?> ">
                         <h3 class="brand-text"><?= session('lang') != 'ar' ? $markaz['value'] : $markaz['value_ar'] ?></h3>
                     </a>
                 </li>

@@ -4,6 +4,11 @@ if (session('lang') != 'ar') {
 } else {
     $name = $student['name_ar'] . ' ' . $student['mname_ar'] . ' ' . $student['lname_ar'];
 }
+if (file_exists($logo['link'])) {
+    $logo = $logo['link'];
+} else {
+    $logo = 'app-assets/images/logo/logo.png';
+}
 ?>
 <!DOCTYPE html>
 <html class="loading" lang="<?= session('lang') ?>" data-textdirection="<?= session('lang') != 'ar' ? 'ltr' : 'rtl' ?>">
@@ -19,8 +24,8 @@ if (session('lang') != 'ar') {
     <meta name="theme-color" content="<?= $colour['value'] ?>">
     <title><?= $title ?> | <?= session('lang') != 'ar' ? $markaz['value'] : $markaz['value_ar'] ?></title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;400;500;700;800;900&display=swap" rel="stylesheet">
-    <link rel="apple-touch-icon" href="<?= base_url($logo['link']) ?>">
-    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url($logo['link']) ?>">
+    <link rel="apple-touch-icon" href="<?= base_url($logo) ?>">
+    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url($logo) ?>">
     <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
     <style>
         body {
@@ -130,7 +135,7 @@ if (session('lang') != 'ar') {
                 </h4>
             </div>
             <div class="logo-box">
-                <img alt="logo" src="<?= base_url($logo['link']) ?>" height="90px">
+                <img alt="logo" src="<?= base_url($logo) ?>" height="90px">
             </div>
             <div class="contact-info" dir="ltr">
                 <h4 style="color: <?= $colour['value'] ?>;"><?= $markaz['value'] ?><br>
