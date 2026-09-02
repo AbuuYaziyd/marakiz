@@ -2,9 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Libraries\Hijri;
 use App\Models\Setting;
-use App\Models\User;
 use App\Models\Website;
 
 class Home extends BaseController
@@ -46,26 +44,6 @@ class Home extends BaseController
 
     function test()
     {
-        $usr = new User();
-        $hjr = new Hijri();
-        $set = new Setting();
-
-        $reg = sprintf('%02s', $set->where('name', 'register')->first()['value']);
-        $hijri = $hjr->GeToHijr(date('d'), date('m'), date('Y'));
-        $stu = $usr->where('role', 'student')->findAll();
-        // dd($stu, $hijri, $reg);
-
-        foreach ($stu as $key => $st) {
-            $username = substr($hijri['year'], 2) . sprintf('%02s', $hijri['month']) . $reg . sprintf('%04s', ($key + 1));
-            $data = [
-                'username' => $username,
-                'email' => $username . '@gmail.com'
-            ];
-
-            // $usr->update($st['id'], $data);
-        }
-        // dd($username, $data);
-
         dd('test');
     }
 
