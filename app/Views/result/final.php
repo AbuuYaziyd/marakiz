@@ -1,3 +1,10 @@
+<?php
+if (session('lang') != 'ar') {
+    $name = $user['name'] . ' ' . $user['mname'] . ' ' . $user['lname'];
+} else {
+    $name = $user['name_ar'] . ' ' . $user['mname_ar'] . ' ' . $user['lname_ar'];
+}
+?>
 <div class="tab-pane" id="fasl2" aria-labelledby="base-fasl2">
     <div class="col-12">
         <div class="card">
@@ -91,9 +98,9 @@
                                                     <?php endif ?>
                                                 </span>
                                             </td>
-                                        <?php elseif ($mark['final_status'] == 'marked' || $mark['final_status'] == 'edit_final') : ?>
+                                        <?php elseif ($mark['final_status'] == 'marked' || $mark['final_status'] == 'edit') : ?>
                                             <td style="width: 1%;">
-                                                <a href="<?= base_url('result/final/' . $mark['id']) ?>" class="btn btn-secondary btn-sm round"><?= $mark['final'] ?></a>
+                                                <a href="<?= base_url('result/final/edit/' . $mark['id']) ?>" class="btn btn-secondary btn-sm round"><?= $mark['final'] ?></a>
                                             </td>
                                             <td style="width: 1%;">
                                                 <span class="<?= ($sum < 60 ? 'danger' : '') ?>">
@@ -188,15 +195,19 @@
                 <div class="card-footer border-top-blue-grey border-top-lighten-5">
                     <?php if (session('role') == 'admin' && $gpa['final_gpa'] != null) : ?>
                         <?php if ($res[0]['final_status'] == 'gpa' && $res[0]['final_status'] != 'marked' && $res[0]['final_status'] != null && $res[0]['final_status'] != 'edit') : ?>
-                            <?= form_open('result/change-final', ['id' => 'change_final']) ?>
+                            <?= form_open('gpa/edit', ['id' => 'change_final']) ?>
                             <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
+                            <input type="hidden" name="exam" value="final">
                             <input type="hidden" name="course_id" value="<?= $gpa['course_id'] ?>">
+                            <input type="hidden" name="year_id" value="<?= $gpa['year_id'] ?>">
                             <button type="submit" class="btn btn-block btn-lg btn-danger" id="changeFinal"><?= lang('app.edit') ?></button>
                             </form>
                         <?php else : ?>
-                            <?= form_open('print/edit-final', ['id' => 'gpa_form_final']) ?>
+                            <?= form_open('gpa/gpa', ['id' => 'gpa_form_final']) ?>
                             <input type="hidden" name="gpa_id" value="<?= $gpa['id'] ?>">
+                            <input type="hidden" name="exam" value="course">
                             <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
+                            <input type="hidden" name="year_id" value="<?= $gpa['year_id'] ?>">
                             <input type="hidden" name="course_id" value="<?= $gpa['course_id'] ?>">
                             <button type="submit" class="btn btn-block btn-lg btn-purple" id="gpaFinal"><?= lang('app.muadalaHuu') ?></button>
                             </form>
@@ -207,3 +218,42 @@
         </div>
     </div>
 </div>
+
+<script>
+    $('#changeFinal').on('click', function(e) {
+        e.preventDefault();
+        Swal.fire({
+            title: '<?= lang('app.edit') ?>',
+            text: "<?= lang('app.editResults') ?>: <?= $name ?>",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '<?= lang('app.yes') ?>',
+            cancelButtonText: '<?= lang('app.no') ?>',
+        }).then(function(result) {
+            if (result.value) {
+                document.getElementById("change_final").submit()
+            }
+        })
+    });
+</script>
+<script>
+    $('#gpaFinal').on('click', function(e) {
+        e.preventDefault();
+        Swal.fire({
+            title: '<?= lang('app.muadalaHuu') ?>',
+            text: "<?= lang('app.positionReg') ?>",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '<?= lang('app.yes') ?>',
+            cancelButtonText: '<?= lang('app.no') ?>',
+        }).then(function(result) {
+            if (result.value) {
+                document.getElementById("gpa_form_final").submit()
+            }
+        })
+    });
+</script>

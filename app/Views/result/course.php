@@ -1,3 +1,10 @@
+<?php
+if (session('lang') != 'ar') {
+    $name = $user['name'] . ' ' . $user['mname'] . ' ' . $user['lname'];
+} else {
+    $name = $user['name_ar'] . ' ' . $user['mname_ar'] . ' ' . $user['lname_ar'];
+}
+?>
 <div role="tabpanel" class="tab-pane active" id="fasl1" aria-expanded="true" aria-labelledby="base-fasl1">
     <div class="col-12">
         <div class="card">
@@ -174,3 +181,42 @@
         </div>
     </div>
 </div>
+
+<script>
+    $('#changeCourse').on('click', function(e) {
+        e.preventDefault();
+        Swal.fire({
+            title: '<?= lang('app.edit') ?>',
+            text: "<?= lang('app.editResults') ?>: <?= $name ?>",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '<?= lang('app.yes') ?>',
+            cancelButtonText: '<?= lang('app.no') ?>',
+        }).then(function(result) {
+            if (result.value) {
+                document.getElementById("change_course").submit()
+            }
+        })
+    });
+</script>
+<script>
+    $('#gpaCourse').on('click', function(e) {
+        e.preventDefault();
+        Swal.fire({
+            title: '<?= lang('app.muadalaHuu') ?>',
+            text: "<?= lang('app.assignPositions') ?>",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '<?= lang('app.yes') ?>',
+            cancelButtonText: '<?= lang('app.no') ?>',
+        }).then(function(result) {
+            if (result.value) {
+                document.getElementById("gpa_form_course").submit()
+            }
+        })
+    });
+</script>
