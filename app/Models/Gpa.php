@@ -129,7 +129,7 @@ class Gpa extends Model
         $data['course'] = $course;
         $data['final'] = $final;
         $data['sum'] = $final + $course;
-        dd($data);
+        // dd($data);
 
         return $data;
     }

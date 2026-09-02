@@ -1,3 +1,9 @@
+<?php if (file_exists($logo['link'])) {
+$logo = $logo['link'];
+} else {
+$logo = 'app-assets/images/logo/logo.png';
+}
+?>
 <?= $this->extend('layouts/auth') ?>
 
 <?= $this->section('content') ?>
@@ -10,7 +16,7 @@
                     <div class="card-header border-0">
                         <div class="card-title text-center">
                             <div>
-                                <a href="<?= base_url() ?>"><img src="<?= base_url($logo['link'] ?? 'app-assets/images/logo/logo.png') ?>" alt="logo" height="180px"></a>
+                                <a href="<?= base_url() ?>"><img src="<?= base_url($logo) ?>" alt="logo" height="180px"></a>
                             </div>
                         </div>
                         <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2"><span><?= session('lang') != 'ar' ? $markaz['value'] : $markaz['value_ar'] ?></span>
