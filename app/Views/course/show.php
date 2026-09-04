@@ -5,7 +5,7 @@
         <a href="<?= base_url('course/settings/' . $course['id']) ?>" class="btn btn-teal pull-right btn-lg btn-block <?= count($students) > 0 ? '' : 'disabled' ?>"><?= lang('app.advancedSettings') ?></a>
     </div>
     <div class="col-md-4 mb-2">
-        <a href="<?= base_url('course/attendance/M/' . $course['id']) ?>" class="btn btn-danger pull-right btn-lg btn-block att"><?= lang('app.attendance') ?></a>
+        <a href="<?= base_url('attendance/data/' . $course['id']) ?>" class="btn btn-danger pull-right btn-lg btn-block"><?= lang('app.attendance') ?></a>
     </div>
     <div class="col-md-4 mb-2">
         <a href="<?= base_url('course/students/' . $course['id']) ?>" class="btn btn-purple pull-right btn-lg btn-block"><?= lang('app.allStudents') ?></a>
@@ -196,28 +196,5 @@
         </div>
     </div>
 </div>
-<script>
-    $('.att').on('click', function(e) {
-        e.preventDefault();
-        urlM = '<?= base_url('course/attendance/M/' . $course['id']) ?>';
-        urlF = '<?= base_url('course/attendance/F/' . $course['id']) ?>';
-        Swal.fire({
-            title: '<?= lang('app.attendances') ?>',
-            // text: '<?= lang('app.afterDeleteItsGone') ?>',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: '<?= lang('app.males') ?>',
-            cancelButtonText: '<?= lang('app.females') ?>',
-        }).then(function(result) {
-            if (result.value) {
-                window.location.href = urlM;
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-                window.location.href = urlF;
-            }
-        })
-    });
-</script>
 <?= $this->endSection() ?>
 <?= $this->include('layouts/table') ?>

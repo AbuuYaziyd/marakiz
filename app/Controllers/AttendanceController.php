@@ -153,6 +153,58 @@ class AttendanceController extends BaseController
         return view('attendance/student', $data);
     }
 
+    public function course($sex, $id)
+    {
+        helper('form');
+
+        $cls = new Course();
+        $sch = new School();
+        $yr = new Year();
+        $usr = new User();
+        $att = new Attendance();
+
+        $class = $cls->find($id);
+
+        $data['title'] = lang('app.advancedSettings');
+        $data['class'] = $class;
+        $data['usr'] = $usr;
+        $data['sch'] = $sch->find($class['school_id']);
+        $data['yr'] = $yr->where('current', 1)->first();
+        $data['std'] = $usr->where(['level' => $id, 'fn' => 'student', 'sex' => $sex])->findAll();
+        $data['query'] = $att->where(['date' => date('Y-m-d'), 'course_id' => $id, 'sex' => $sex])->findAll();
+        // dd($data);
+
+        return view('attendance/course', $data);
+    }
+
+    public function data($id)
+    {
+        $cls = new Course();
+        $sch = new School();
+        $yr = new Year();
+        $usr = new User();
+        $att = new Attendance();
+
+        $class = $cls->find($id);
+        $year = $yr->where('current', 1)->first();
+        if (session('lang') != 'ar') {
+            $order = 'name';
+        } else {
+            $order = 'name_ar';
+        }
+        
+
+        $data['title'] = lang('app.attendaces');
+        $data['class'] = $class;
+        $data['att'] = $att;
+        $data['school'] = $sch->find($class['school_id']);
+        $data['year'] = $year;
+        $data['students'] = $usr->where(['level' => $id, 'fn' => 'student'])->orderBy($order, 'asc')->findAll();
+        // dd($data);
+
+        return view('attendance/data', $data);     
+    }
+
     function appeal($id)
     {
         helper('form');

@@ -204,7 +204,6 @@ $routes->group('school', function ($routes) {
 $routes->group('course', function ($routes) {
     $routes->get('show/(:num)', 'CourseController::show/$1', ['filter' => 'admin']);
     $routes->post('update', 'CourseController::update', ['filter' => 'admin']);
-    $routes->get('attendance/(:segment)/(:num)', 'CourseController::attendance/$1/$2', ['filter' => 'admin']);
     $routes->get('settings/(:num)', 'CourseController::settings/$1', ['filter' => 'admin']);
     $routes->get('students/(:num)', 'CourseController::students/$1', ['filter' => 'admin']);
     $routes->get('add/(:num)', 'CourseController::add/$1', ['filter' => 'admin']);
@@ -247,6 +246,8 @@ $routes->group('attendance', function ($routes) {
     $routes->post('update', 'AttendanceController::update', ['filter' => 'auth']);
     $routes->get('student/(:num)', 'AttendanceController::student/$1', ['filter' => 'auth']);
     $routes->post('date', 'AttendanceController::date', ['filter' => 'auth']);
+    $routes->get('data/(:num)', 'AttendanceController::data/$1', ['filter' => 'auth']);
+    $routes->get('course/(:segment)/(:num)', 'AttendanceController::course/$1/$2', ['filter' => 'admin']);
     $routes->get('appeal/(:num)', 'AttendanceController::appeal/$1', ['filter' => 'auth']);
     $routes->post('submit-appeal', 'AttendanceController::submitAppeal', ['filter' => 'auth']);
     $routes->get('reply/(:num)', 'AttendanceController::reply/$1', ['filter' => 'auth']);

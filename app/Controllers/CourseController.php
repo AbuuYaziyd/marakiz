@@ -60,30 +60,6 @@ class CourseController extends BaseController
         return redirect()->to('course/show/' . $id)->with('type', 'success')->with('text', lang('app.successfully'))->with('title', lang('app.done'));
     }
 
-    public function attendance($sex, $id)
-    {
-        helper('form');
-
-        $cls = new Course();
-        $sch = new School();
-        $yr = new Year();
-        $usr = new User();
-        $att = new Attendance();
-
-        $class = $cls->find($id);
-
-        $data['title'] = lang('app.advancedSettings');
-        $data['class'] = $class;
-        $data['usr'] = $usr;
-        $data['sch'] = $sch->find($class['school_id']);
-        $data['yr'] = $yr->where('current', 1)->first();
-        $data['std'] = $usr->where(['level' => $id, 'fn' => 'student', 'sex' => $sex])->findAll();
-        $data['query'] = $att->where(['date' => date('Y-m-d'), 'course_id' => $id, 'sex' => $sex])->findAll();
-        // dd($data);
-
-        return view('course/attendance', $data);
-    }
-
     public function settings($id)
     {
         $cls = new Course();

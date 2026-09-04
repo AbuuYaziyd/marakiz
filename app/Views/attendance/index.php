@@ -22,8 +22,8 @@
                         <script>
                             $('#att<?= $cr['id'] ?>').on('click', function(e) {
                                 e.preventDefault();
-                                urlM = '<?= base_url('course/attendance/M/' . $cr['id']) ?>';
-                                urlF = '<?= base_url('course/attendance/F/' . $cr['id']) ?>';
+                                urlM = '<?= base_url('attendance/course/M/' . $cr['id']) ?>';
+                                urlF = '<?= base_url('attendance/course/F/' . $cr['id']) ?>';
                                 Swal.fire({
                                     title: '<?= lang('app.attendances') ?>',
                                     // text: '<?= lang('app.afterDeleteItsGone') ?>',
