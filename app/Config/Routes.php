@@ -249,7 +249,7 @@ $routes->group('attendance', function ($routes) {
     $routes->get('data/(:num)/(:num)', 'AttendanceController::data/$1/$2', ['filter' => 'auth']);
     $routes->get('course/(:segment)/(:num)', 'AttendanceController::course/$1/$2', ['filter' => 'admin']);
     $routes->get('appeal/(:num)', 'AttendanceController::appeal/$1', ['filter' => 'auth']);
-    $routes->post('submit-appeal', 'AttendanceController::submitAppeal', ['filter' => 'auth']);
+    $routes->post('appeal', 'AttendanceController::submitAppeal', ['filter' => 'auth']);
     $routes->get('reply/(:num)', 'AttendanceController::reply/$1', ['filter' => 'auth']);
     $routes->get('dismiss/(:num)', 'AttendanceController::dismiss/$1', ['filter' => 'auth']);
     $routes->get('delete/(:num)', 'AttendanceController::delete/$1', ['filter' => 'auth']);

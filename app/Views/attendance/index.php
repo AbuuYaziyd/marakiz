@@ -68,7 +68,6 @@
                             <tbody>
                                 <?php foreach ($attendance as $key => $dt) : ?>
                                     <?php $stu = $att->stu($dt['student_id']) ?>
-                                    <?php $attendance = $att->attendance($dt['student_id']) ?>
                                     <tr>
                                         <td>
 
@@ -82,10 +81,11 @@
                                             <?php endif ?>
                                         </td>
                                         <td>
-                                            <div class="btn-group">
-                                                <span class="btn btn-sm btn-warning round"><?= lang('app.ruksa') ?> - <?= count($attendance['ruksa']) ?></span>
-                                                <span class="btn btn-sm btn-danger round"><?= lang('app.absent') ?> - <?= count($attendance['absent']) ?></span>
-                                            </div>
+                                            <?php if ($dt['status'] != 2) : ?>
+                                                <span class="btn btn-sm btn-warning round"><?= lang('app.ruksa') ?></span>
+                                            <?php else : ?>
+                                                <span class="btn btn-sm btn-danger round"><?= lang('app.absent') ?></span>
+                                            <?php endif ?>
                                         </td>
                                     </tr>
                                 <?php endforeach ?>

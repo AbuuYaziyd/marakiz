@@ -21,8 +21,8 @@
                     </form>
                 </div>
                 <hr>
-                    <?php if ($day != null) : ?>
-                <?php foreach ($day as $dy) : ?>
+                <?php if ($day != null) : ?>
+                    <?php foreach ($day as $dy) : ?>
                         <div class="punch-det">
                             <span class="text-center">
                                 <h6><?= lang('app.subject') ?>: <b>fgfdhhjg</b></h6>
@@ -55,17 +55,17 @@
                             </table>
                             <h6></h6>
                         </div>
-                <?php endforeach ?>
-                    <?php elseif (date('D', strtotime($date)) == 'Sat' || date('D', strtotime($date)) == 'Sun') : ?>
-                        <div class="punch-det">
-                            <h6><b><?= lang('app.weekend') ?></b></h6>
-                            <p><?= lang('app.nothingFound') ?></p>
-                        </div>
-                    <?php else : ?>
-                        <div class="punch-det">
-                            <h6><b><?= lang('app.nothingFound') ?></b></h6>
-                            <p><?= lang('app.nothingFound') ?></p>
-                        </div>
+                    <?php endforeach ?>
+                <?php elseif (date('D', strtotime($date)) == 'Sat' || date('D', strtotime($date)) == 'Sun') : ?>
+                    <div class="punch-det">
+                        <h6><b><?= lang('app.weekend') ?></b></h6>
+                        <p><?= lang('app.nothingFound') ?></p>
+                    </div>
+                <?php else : ?>
+                    <div class="punch-det">
+                        <h6><b><?= lang('app.nothingFound') ?></b></h6>
+                        <p><?= lang('app.nothingFound') ?></p>
+                    </div>
                 <?php endif ?>
                 <hr>
                 <div class="punch-det">
@@ -139,7 +139,7 @@
                                         </td>
                                         <td>
                                             <?php if ($dt['file'] != null) : ?>
-                                                <a href="<?= base_url($dt['file']) ?>" target="_blank" class="btn btn-sm btn-<?= $dt['reply'] != 1 ? 'outline-' : '' ?>success round">
+                                                <a href="<?= base_url('attendance/appeal/' . $dt['id']) ?>" class="btn btn-sm btn-success round">
                                                     <?= $dt['reason'] ?>
                                                 </a>
                                             <?php else : ?>
@@ -150,19 +150,13 @@
                                         </td>
                                         <td>
                                             <?php if ($dt['file'] != null) : ?>
-                                                <?php if ($dt['reply'] != 1) : ?>
-                                                    <?php if (session('role') != 'admin') : ?>
-                                                        <span class="btn btn-sm btn-outline-warning round">
-                                                            <?= lang('app.processing') ?>
-                                                        </span>
-                                                    <?php else : ?>
-                                                        <span class="btn btn-sm btn-danger round">
-                                                            <?= lang('app.notVerified') ?>
-                                                        </span>
-                                                    <?php endif ?>
+                                                <?php if ($dt['reply'] == null) : ?>
+                                                    <span class="btn btn-sm btn-outline-warning round">
+                                                        <?= lang('app.processing') ?>
+                                                    </span>
                                                 <?php else : ?>
-                                                    <span class="btn btn-sm btn-success round">
-                                                        <?= lang('app.approved') ?>
+                                                    <span class="btn btn-sm btn-danger round">
+                                                        <?= lang('app.notVerified') ?>
                                                     </span>
                                                 <?php endif ?>
                                             <?php else : ?>

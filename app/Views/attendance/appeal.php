@@ -23,7 +23,7 @@
                     </h3>
                     <hr>
                     <?php $validation = \Config\Services::validation() ?>
-                    <?= form_open_multipart('attendance/submit-appeal') ?>
+                    <?= form_open_multipart('attendance/appeal') ?>
                     <div class="col-12">
                         <label for=""><?= lang('app.addReason') ?> <span class="danger">*</span></label>
                         <?php if ($validation->getError('reason')) : ?>

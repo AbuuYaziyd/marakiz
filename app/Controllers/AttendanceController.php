@@ -10,7 +10,6 @@ use App\Models\School;
 use App\Models\Setting;
 use App\Models\User;
 use App\Models\Year;
-use DateTime;
 
 class AttendanceController extends BaseController
 {
@@ -19,10 +18,9 @@ class AttendanceController extends BaseController
         $att = new Attendance();
         $sch = new School();
         $crs = new Course();
-        $oneMonthAgo = new DateTime('-1 month');
 
         $data['title'] = lang('app.attendances');
-        $data['attendance'] = $att->select(['student_id', 'id'])->distinct()->where(['status!=' => 1, 'reply' => null])->orderBy('created_at', 'asc')->findAll();
+        $data['attendance'] = $att->where(['status!=' => 1, 'reply' => null])->orderBy('created_at', 'desc')->findAll();
         $data['school'] = $sch->findAll();
         $data['att'] = $att;
         $data['c'] = $crs;
@@ -292,7 +290,7 @@ class AttendanceController extends BaseController
                 ],
                 'file' =>
                 [
-                    'required' => lang('error.uploaded'),
+                    'uploaded' => lang('error.uploaded'),
                 ],
             ]
         );
@@ -328,6 +326,7 @@ class AttendanceController extends BaseController
             $dataFILE = [
                 'file' => 'public/attendance/' . $name,
                 'reason' => $this->request->getVar('reason'),
+                'reply' => null,
             ];
             // dd($dataFILE);
 
