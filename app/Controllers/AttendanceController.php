@@ -15,10 +15,14 @@ class AttendanceController extends BaseController
     public function index()
     {
         $att = new Attendance();
+        $sch = new School();
+        $crs = new Course();
 
         $data['title'] = lang('app.attendances');
-        $data['attendance'] = $att->where(['status' => 0, 'reason!=' => null, 'file!=' => null])->findAll();
+        $data['attendance'] = $att->select(['student_id', 'id'])->distinct()->where(['status!=' => 1])->orderBy('created_at', 'asc')->findAll();
+        $data['school'] = $sch->findAll();
         $data['att'] = $att;
+        $data['c'] = $crs;
         // dd($data);
 
         return view('attendance/index', $data);
