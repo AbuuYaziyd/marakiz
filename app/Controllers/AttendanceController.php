@@ -7,6 +7,7 @@ use App\Models\ActivityLog;
 use App\Models\Attendance;
 use App\Models\Course;
 use App\Models\School;
+use App\Models\Setting;
 use App\Models\User;
 use App\Models\Year;
 
@@ -35,6 +36,7 @@ class AttendanceController extends BaseController
         $year = new Year();
         $crs = new Course();
         $act = new ActivityLog();
+        $att = new Attendance();
 
         $year = $year->where('current!=', null)->first();
         $course = $crs->find($this->request->getVar('course_id'));
@@ -46,29 +48,31 @@ class AttendanceController extends BaseController
         if ($count != null) {
             for ($i = 0; $i < $count; $i++) {
 
-                $att = new Attendance();
-
                 $status = 'status' . $i;
+                // dd($status);
 
-                $data = [
-                    'student_id'    => $this->request->getVar('student_id')[$i],
-                    'sex'           => $this->request->getVar('sex')[$i],
-                    'status'        => $this->request->getVar($status),
-                    'year_id'       => $year['id'],
-                    'date'          => date('Y-m-d'),
-                    'school_id'     => $course['school_id'],
-                    'teacher_id'    => session('id'),
-                    'course_id'     => $course['id'],
-                ];
-                // dd($data);
+                if ($this->request->getVar($status) != 1) {
+                    $data = [
+                        'student_id'    => $this->request->getVar('student_id')[$i],
+                        'sex'           => $this->request->getVar('sex')[$i],
+                        'status'        => $this->request->getVar($status),
+                        'year_id'       => $year['id'],
+                        'date'          => date('Y-m-d'),
+                        'school_id'     => $course['school_id'],
+                        'teacher_id'    => session('id'),
+                        'course_id'     => $course['id'],
+                    ];
+                    // dd($data);
 
-                $att->save($data);
+                    $att->save($data);
+                }
             }
+            // dd($data);
         }
 
         $act->addActivity(session('id'), 'Class Attendance wa Taken', 'Class ' . $course['name'] . ' Attendance was Taken Successfully!');
         
-        return redirect()->to('course/show/' . $course['id'])->with('type', 'success')->with('text', lang('app.successfully'))->with('title', lang('app.done'));
+        return redirect()->back()->with('type', 'success')->with('text', lang('app.successfully'))->with('title', lang('app.done'));
     }
 
     public function update()
@@ -76,6 +80,8 @@ class AttendanceController extends BaseController
         // dd($this->request->getVar());
 
         $att = new Attendance();
+        $yer = new Year();
+        $crs = new Course();
 
         $count = count($this->request->getVar('id'));
         // dd($count);
@@ -96,10 +102,36 @@ class AttendanceController extends BaseController
             $att->update($id, $data);
         }
 
-        $course_id = $att->find($id)['course_id'];
-        // dd($course_id);
+        $year = $yer->where('current!=', null)->first();
+        $course = $crs->find($this->request->getVar('course_id'));
+        $count_new = count($this->request->getVar('student_id'));
+        // dd($count_new, $year, $course);
 
-        return redirect()->to('course/show/' . $course_id)->with('type', 'success')->with('text', lang('app.successfully'))->with('title', lang('app.done'));
+        if ($count != null) {
+            for ($i = 0; $i < $count; $i++) {
+
+                $status = 'status' . $i;
+                // dd($status);
+
+                if ($this->request->getVar($status) != 1) {
+                    $data = [
+                        'student_id'    => $this->request->getVar('student_id')[$i],
+                        'sex'           => $this->request->getVar('sex')[$i],
+                        'status'        => $this->request->getVar($status),
+                        'year_id'       => $year['id'],
+                        'date'          => date('Y-m-d'),
+                        'school_id'     => $course['school_id'],
+                        'teacher_id'    => session('id'),
+                        'course_id'     => $course['id'],
+                    ];
+                    // dd($data);
+
+                    $att->save($data);
+                }
+            }
+        }
+
+        return redirect()->back()->with('type', 'success')->with('text', lang('app.successfully'))->with('title', lang('app.done'));
     }
 
     function student($id)
@@ -167,7 +199,7 @@ class AttendanceController extends BaseController
 
         $data['title'] = lang('app.advancedSettings');
         $data['class'] = $class;
-        $data['usr'] = $usr;
+        $data['att'] = $att;
         $data['sch'] = $sch->find($class['school_id']);
         $data['yr'] = $yr->where('current', 1)->first();
         $data['std'] = $usr->where(['level' => $id, 'fn' => 'student', 'sex' => $sex])->findAll();
@@ -177,13 +209,14 @@ class AttendanceController extends BaseController
         return view('attendance/course', $data);
     }
 
-    public function data($id)
+    public function data($id, $month)
     {
         $cls = new Course();
         $sch = new School();
         $yr = new Year();
         $usr = new User();
         $att = new Attendance();
+        $set = new Setting();
 
         $class = $cls->find($id);
         $year = $yr->where('current', 1)->first();
@@ -192,13 +225,14 @@ class AttendanceController extends BaseController
         } else {
             $order = 'name_ar';
         }
-        
 
-        $data['title'] = lang('app.attendaces');
+        $data['title'] = lang('app.attendances');
         $data['class'] = $class;
         $data['att'] = $att;
+        $data['month'] = $month;
         $data['school'] = $sch->find($class['school_id']);
         $data['year'] = $year;
+        $data['weekend'] = $set->where('name', 'weekend')->first();
         $data['students'] = $usr->where(['level' => $id, 'fn' => 'student'])->orderBy($order, 'asc')->findAll();
         // dd($data);
 

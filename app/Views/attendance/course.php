@@ -22,30 +22,60 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($query as $key => $dt) : ?>
-                                    <?php $user = $usr->find($dt['student_id']) ?>
+                                <?php foreach ($std as $key => $dt) : ?>
+                                    <?php $attend = $att->status(date('Y-m-d'), $dt['id'], $dt['level']) ?>
+                                    <?php if ($attend) : ?>
                                         <tr id="stu<?= $key ?>">
-                                            <input type="hidden" name="id[]" value="<?= $dt['id'] ?>">
-                                            <td><a href=" <?= base_url('student/page/' . $user['id']) ?>"><?= $user['username'] ?></a></td>
+                                            <input type="hidden" name="id[]" value="<?= $attend['id'] ?>">
+                                            <td><a href=" <?= base_url('student/page/' . $dt['id']) ?>"><?= $dt['username'] ?></a></td>
                                             <td>
-                                                <?= $user['name'] ?>
-                                                <?= $user['mname'] ?>
-                                                <?= $user['lname'] ?>
-                                                <br>
-                                                <?= $user['name_ar'] ?>
-                                                <?= $user['mname_ar'] ?>
-                                                <?= $user['lname_ar'] ?>
+                                                <?php if (session('lang') != 'ar') : ?>
+                                                    <?= $dt['name'] ?>
+                                                    <?= $dt['mname'] ?>
+                                                    <?= $dt['lname'] ?>
+                                                <?php else : ?>
+                                                    <?= $dt['name_ar'] ?>
+                                                    <?= $dt['mname_ar'] ?>
+                                                    <?= $dt['lname_ar'] ?>
+                                                <?php endif ?>
                                             </td>
                                             <td style="width: 1%;">
-                                                <input type="radio" name="status<?= $key ?>" value="1" onclick="$('#stu<?= $key ?>').removeClass();" <?= $dt['status'] == 1 ? 'checked' : '' ?>>
+                                                <input type="radio" name="status<?= $key ?>" value="1" onclick="$('#stu<?= $key ?>').removeClass();">
                                             </td>
                                             <td style="width: 1%;">
-                                                <input type="radio" name="status<?= $key ?>" value="2" onclick="$('#stu<?= $key ?>').removeClass().addClass('bg-warning bg-lighten-3');" <?= $dt['status'] == 2 ? 'checked' : '' ?>>
+                                                <input type="radio" name="status<?= $key ?>" value="2" onclick="$('#stu<?= $key ?>').removeClass().addClass('bg-warning bg-lighten-3');" <?= $attend['status'] == 2 ? 'checked' : '' ?>>
                                             </td>
                                             <td style="width: 1%;">
-                                                <input type="radio" name="status<?= $key ?>" value="0" onclick="$('#stu<?= $key ?>').removeClass().addClass('bg-danger bg-lighten-3');" <?= $dt['status'] == 0 ? 'checked' : '' ?>>
+                                                <input type="radio" name="status<?= $key ?>" value="0" onclick="$('#stu<?= $key ?>').removeClass().addClass('bg-danger bg-lighten-3');" <?= $attend['status'] == 0 ? 'checked' : '' ?>>
                                             </td>
                                         </tr>
+                                    <?php else : ?>
+                                        <tr id="stu<?= $key ?>">
+                                            <input type="hidden" name="student_id[]" value="<?= $dt['id'] ?>">
+                                            <input type="hidden" name="sex[]" value="<?= $dt['sex'] ?>">
+                                            <td><a href=" <?= base_url('student/page/' . $dt['id']) ?>"><?= $dt['username'] ?></a></td>
+                                            <td>
+                                                <?php if (session('lang') != 'ar') : ?>
+                                                    <?= $dt['name'] ?>
+                                                    <?= $dt['mname'] ?>
+                                                    <?= $dt['lname'] ?>
+                                                <?php else : ?>
+                                                    <?= $dt['name_ar'] ?>
+                                                    <?= $dt['mname_ar'] ?>
+                                                    <?= $dt['lname_ar'] ?>
+                                                <?php endif ?>
+                                            </td>
+                                            <td style="width: 1%;">
+                                                <input type="radio" name="status<?= $key ?>" value="1" onclick="$('#stu<?= $key ?>').removeClass();" checked>
+                                            </td>
+                                            <td style="width: 1%;">
+                                                <input type="radio" name="status<?= $key ?>" value="2" onclick="$('#stu<?= $key ?>').removeClass().addClass('bg-warning bg-lighten-3');">
+                                            </td>
+                                            <td style="width: 1%;">
+                                                <input type="radio" name="status<?= $key ?>" value="0" onclick="$('#stu<?= $key ?>').removeClass().addClass('bg-danger bg-lighten-3');">
+                                            </td>
+                                        </tr>
+                                    <?php endif ?>
                                 <?php endforeach ?>
                             </tbody>
                         </table>
@@ -75,29 +105,29 @@
                             </thead>
                             <tbody>
                                 <?php foreach ($std as $key => $dt) : ?>
-                                        <tr id="stu<?= $key ?>">
-                                            <input type="hidden" name="student_id[]" value="<?= $dt['id'] ?>">
-                                            <input type="hidden" name="sex[]" value="<?= $dt['sex'] ?>">
-                                            <td><a href=" <?= base_url('student/page/' . $dt['id']) ?>"><?= $dt['username'] ?></a></td>
-                                            <td>
-                                                <?= $dt['name'] ?>
-                                                <?= $dt['mname'] ?>
-                                                <?= $dt['lname'] ?>
-                                                <br>
-                                                <?= $dt['name_ar'] ?>
-                                                <?= $dt['mname_ar'] ?>
-                                                <?= $dt['lname_ar'] ?>
-                                            </td>
-                                            <td style="width: 1%;">
-                                                <input type="radio" name="status<?= $key ?>" value="1" onclick="$('#stu<?= $key ?>').removeClass();" checked>
-                                            </td>
-                                            <td style="width: 1%;">
-                                                <input type="radio" name="status<?= $key ?>" value="2" onclick="$('#stu<?= $key ?>').removeClass().addClass('bg-warning bg-lighten-3');">
-                                            </td>
-                                            <td style="width: 1%;">
-                                                <input type="radio" name="status<?= $key ?>" value="0" onclick="$('#stu<?= $key ?>').removeClass().addClass('bg-danger bg-lighten-3');">
-                                            </td>
-                                        </tr>
+                                    <tr id="stu<?= $key ?>">
+                                        <input type="hidden" name="student_id[]" value="<?= $dt['id'] ?>">
+                                        <input type="hidden" name="sex[]" value="<?= $dt['sex'] ?>">
+                                        <td><a href=" <?= base_url('student/page/' . $dt['id']) ?>"><?= $dt['username'] ?></a></td>
+                                        <td>
+                                            <?= $dt['name'] ?>
+                                            <?= $dt['mname'] ?>
+                                            <?= $dt['lname'] ?>
+                                            <br>
+                                            <?= $dt['name_ar'] ?>
+                                            <?= $dt['mname_ar'] ?>
+                                            <?= $dt['lname_ar'] ?>
+                                        </td>
+                                        <td style="width: 1%;">
+                                            <input type="radio" name="status<?= $key ?>" value="1" onclick="$('#stu<?= $key ?>').removeClass();" checked>
+                                        </td>
+                                        <td style="width: 1%;">
+                                            <input type="radio" name="status<?= $key ?>" value="2" onclick="$('#stu<?= $key ?>').removeClass().addClass('bg-warning bg-lighten-3');">
+                                        </td>
+                                        <td style="width: 1%;">
+                                            <input type="radio" name="status<?= $key ?>" value="0" onclick="$('#stu<?= $key ?>').removeClass().addClass('bg-danger bg-lighten-3');">
+                                        </td>
+                                    </tr>
                                 <?php endforeach ?>
                             </tbody>
                         </table>

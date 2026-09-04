@@ -12,44 +12,17 @@
                     <table class="table table-striped custom-table table-nowrap mb-0">
                         <thead>
                             <tr>
-                                <th>Employee</th>
-                                <th>1</th>
-                                <th>2</th>
-                                <th>3</th>
-                                <th>4</th>
-                                <th>5</th>
-                                <th>6</th>
-                                <th>7</th>
-                                <th>8</th>
-                                <th>9</th>
-                                <th>10</th>
-                                <th>11</th>
-                                <th>12</th>
-                                <th>13</th>
-                                <th>14</th>
-                                <th>15</th>
-                                <th>16</th>
-                                <th>17</th>
-                                <th>18</th>
-                                <th>19</th>
-                                <th>20</th>
-                                <th>22</th>
-                                <th>23</th>
-                                <th>24</th>
-                                <th>25</th>
-                                <th>26</th>
-                                <th>27</th>
-                                <th>28</th>
-                                <th>29</th>
-                                <th>30</th>
-                                <th>31</th>
+                                <th><?= lang('app.fullname') ?></th>
+                                <?php for ($j = 1; $j <= date('t'); $j++) : ?>
+                                    <th><?= $j ?></th>
+                                <?php endfor ?>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($students as $key => $st) : ?>
                                 <tr>
                                     <td>
-                                        <a href="#" class="btn btn-sm round btn-outline-black">
+                                        <a href="<?= base_url('student/page/' . $st['id']) ?>" class="btn btn-sm round btn-outline-black">
                                             <?= $st['username'] ?>
                                         </a>
                                         <?php if (session('lang') != 'ar') : ?>
@@ -62,36 +35,28 @@
                                             <?= $st['lname_ar'] ?>
                                         <?php endif ?>
                                     </td>
-                                    <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info"><i class="ft-x-square danger font-large-1"></i></a></td>
-                                    <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info"><i class="ft-check-square success font-large-1"></i></a></td>
-                                    <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info"><i class="ft-alert-circle dark font-large-1"></i></a></td>
-                                    <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info"><i class="ft-alert-triangle dark font-large-1"></i></a></td>
-                                    <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info"><i class="ft-external-link warning font-large-1"></i></a></td>
-                                    <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info"><i class="ft-check-square success font-large-1"></i></a></td>
-                                    <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info"><i class="ft-check-square success font-large-1"></i></a></td>
-                                    <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info"><i class="ft-check-square success font-large-1"></i></a></td>
-                                    <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info"><i class="ft-check-square success font-large-1"></i></a></td>
-                                    <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info"><i class="ft-check-square success font-large-1"></i></a></td>
-                                    <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info"><i class="ft-check-square success font-large-1"></i></a></td>
-                                    <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info"><i class="ft-check-square success font-large-1"></i></a></td>
-                                    <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info"><i class="ft-check-square success font-large-1"></i></a></td>
-                                    <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info"><i class="ft-check-square success font-large-1"></i></a></td>
-                                    <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info"><i class="ft-check-square success font-large-1"></i></a></td>
-                                    <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info"><i class="ft-check-square success font-large-1"></i></a></td>
-                                    <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info"><i class="ft-check-square success font-large-1"></i></a></td>
-                                    <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info"><i class="ft-check-square success font-large-1"></i></a></td>
-                                    <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info"><i class="ft-check-square success font-large-1"></i></a></td>
-                                    <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info"><i class="ft-check-square success font-large-1"></i></a></td>
-                                    <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info"><i class="ft-check-square success font-large-1"></i></a></td>
-                                    <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info"><i class="ft-check-square success font-large-1"></i></a></td>
-                                    <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info"><i class="ft-check-square success font-large-1"></i></a></td>
-                                    <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info"><i class="ft-check-square success font-large-1"></i></a></td>
-                                    <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info"><i class="ft-check-square success font-large-1"></i></a></td>
-                                    <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info"><i class="ft-check-square success font-large-1"></i></a></td>
-                                    <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info"><i class="ft-check-square success font-large-1"></i></a></td>
-                                    <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info"><i class="ft-check-square success font-large-1"></i></a></td>
-                                    <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info"><i class="ft-check-square success font-large-1"></i></a></td>
-                                    <td><a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info"><i class="ft-check-square success font-large-1"></i></a></td>
+                                    <?php for ($i = 1; $i <= date('t'); $i++) : ?>
+                                        <?php $attend = $att->status((date('Y-m-d', strtotime('-' . ($i - date('d')) . ' day'))), $st['id'], $st['level']) ?>
+                                        <td>
+                                            <?php if (date('D', strtotime($i . '-' . $month . '-' . date('Y'))) == $weekend['value'] || date('D', strtotime($i . '-' . $month . '-' . date('Y'))) == $weekend['value_ar']) : ?>
+                                                <span class="weekend"><i class="ft-info purple font-large-1"></i></span>
+                                            <?php elseif ($i > date('d')) : ?>
+                                                <i class="ft-sun danger spinner font-large-1"></i>
+                                            <?php else : ?>
+                                                <?php if ($attend) : ?>
+                                                    <?php if ($attend['status'] == 0) : ?>
+                                                        <a href="<?= base_url('attendance/appeal/' . $attend['id']) ?>" class="absent"><i class="ft-x-square danger font-large-1"></i></a>
+                                                    <?php elseif ($attend['status'] == 2) : ?>
+                                                        <a href="<?= base_url('attendance/appeal/' . $attend['id']) ?>" class="ruksa"><i class="ft-external-link warning font-large-1"></i></a>
+                                                    <?php endif ?>
+                                                <?php elseif ($i < date('d')) : ?>
+                                                    <a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info<?= $i ?>"><i class="ft-check-square success font-large-1"></i></a>
+                                                <?php else : ?>
+                                                    <i class="ft-check-square success font-large-1"></i>
+                                                <?php endif ?>
+                                            <?php endif ?>
+                                        </td>
+                                    <?php endfor ?>
                                 </tr>
                             <?php endforeach ?>
                         </tbody>
@@ -101,5 +66,49 @@
         </div>
     </div>
 </div>
+<script>
+    $('.weekend').on('click', function(e) {
+        e.preventDefault();
+        Swal.fire({
+            title: "<?= lang('app.weekend') ?>",
+            icon: "info",
+            showConfirmButton: false,
+            timer: 3000,
+        });
+    });
+</script>
+<script>
+    $('.ruksa').on('click', function(e) {
+        e.preventDefault();
+        url = $(this).attr('href');
+        Swal.fire({
+            title: '<?= lang('app.ruksa') ?>',
+            icon: 'info',
+            showCancelButton: false,
+            confirmButtonText: '<?= lang('app.edit') ?>',
+        }).then(function(result) {
+            if (result.value) {
+                window.location.href = url;
+            }
+        })
+    });
+</script>
+<script>
+    $('.absent').on('click', function(e) {
+        e.preventDefault();
+        url = $(this).attr('href');
+        Swal.fire({
+            title: '<?= lang('app.absent') ?>',
+            icon: 'info',
+            showCancelButton: false,
+            confirmButtonColor: '#d33',
+            confirmButtonText: '<?= lang('app.edit') ?>',
+        }).then(function(result) {
+            if (result.value) {
+                window.location.href = url;
+            }
+        })
+    });
+</script>
 <?= $this->endSection() ?>
 <?= $this->include('layouts/table') ?>

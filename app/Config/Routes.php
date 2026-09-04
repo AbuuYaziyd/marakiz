@@ -246,7 +246,7 @@ $routes->group('attendance', function ($routes) {
     $routes->post('update', 'AttendanceController::update', ['filter' => 'auth']);
     $routes->get('student/(:num)', 'AttendanceController::student/$1', ['filter' => 'auth']);
     $routes->post('date', 'AttendanceController::date', ['filter' => 'auth']);
-    $routes->get('data/(:num)', 'AttendanceController::data/$1', ['filter' => 'auth']);
+    $routes->get('data/(:num)/(:num)', 'AttendanceController::data/$1/$2', ['filter' => 'auth']);
     $routes->get('course/(:segment)/(:num)', 'AttendanceController::course/$1/$2', ['filter' => 'admin']);
     $routes->get('appeal/(:num)', 'AttendanceController::appeal/$1', ['filter' => 'auth']);
     $routes->post('submit-appeal', 'AttendanceController::submitAppeal', ['filter' => 'auth']);

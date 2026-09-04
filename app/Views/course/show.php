@@ -5,7 +5,7 @@
         <a href="<?= base_url('course/settings/' . $course['id']) ?>" class="btn btn-teal pull-right btn-lg btn-block <?= count($students) > 0 ? '' : 'disabled' ?>"><?= lang('app.advancedSettings') ?></a>
     </div>
     <div class="col-md-4 mb-2">
-        <a href="<?= base_url('attendance/data/' . $course['id']) ?>" class="btn btn-danger pull-right btn-lg btn-block"><?= lang('app.attendance') ?></a>
+        <a href="<?= base_url('attendance/data/' . $course['id'] . '/' . date('m')) ?>" class="btn btn-danger pull-right btn-lg btn-block"><?= lang('app.attendance') ?></a>
     </div>
     <div class="col-md-4 mb-2">
         <a href="<?= base_url('course/students/' . $course['id']) ?>" class="btn btn-purple pull-right btn-lg btn-block"><?= lang('app.allStudents') ?></a>

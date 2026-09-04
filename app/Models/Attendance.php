@@ -58,7 +58,10 @@ class Attendance extends Model
         $year = new Year();
         $yr = $year->where('current!=', null)->first()['id'];
 
-        return $at->where(['class_id' => $class, 'student_id' => $stu, 'date' => $date, 'year_id' => $yr])->first();
+        $data = $at->where(['course_id' => $class, 'student_id' => $stu, 'date' => $date, 'year_id' => $yr])->first();
+        // dd($data);
+
+        return $data;
     }
 
     function stu($id)
@@ -98,5 +101,16 @@ class Attendance extends Model
         $sub = new Subject();
         
         return $sub->find($id);
+    }
+
+    function attendance($id)
+    {
+        $att = new Attendance();
+
+        $data['ruksa'] = $att->where(['student_id' => $id, 'status' => 2])->findAll();
+        $data['absent'] = $att->where(['student_id' => $id, 'status' => 0])->findAll();
+        // dd($data);
+
+        return $data;
     }
 }
