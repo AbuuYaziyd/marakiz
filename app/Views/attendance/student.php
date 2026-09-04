@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/app') ?>
 <?= $this->section('content') ?>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div class="card punch-status">
             <div class="card-body">
                 <h4>
@@ -73,7 +73,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-8">
         <div class="card att-statistics">
             <div class="card-body">
                 <h3><b><?= lang('app.thisMonthStatistics') ?> - (<?= date('m/Y') ?>)</b></h3>
@@ -83,12 +83,6 @@
                 $thisMonth = $att->thisMonth($user['id'], $date);
                 ?>
                 <div class="stats-list">
-                    <div class="stats-info">
-                        <p><b><?= lang('app.present') ?>: </b> <strong><?= $thisMonth['p'] ?> <small>/ <?= $no_of_days ?> <?= lang('app.days') ?></small></strong></p>
-                        <div class="progress">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: <?= ($thisMonth['p'] / $no_of_days) * 100 ?>%" aria-valuenow="31" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
                     <div class="stats-info">
                         <p><b><?= lang('app.absent') ?>: </b> <strong><?= $thisMonth['a'] ?> <small>/ <?= $no_of_days ?> <?= lang('app.days') ?></small></strong></p>
                         <div class="progress">
@@ -122,7 +116,7 @@
                                     <th><?= lang('app.attendanceTime') ?></th>
                                     <th><?= lang('app.status') ?></th>
                                     <th><?= lang('app.reason') ?></th>
-                                    <th><?= lang('app.choose') ?></th>
+                                    <th><?= lang('app.status') ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -131,7 +125,7 @@
                                         <td><span><?= $key + 1 ?></span></td>
                                         <td>
                                             <span>
-                                                <?php if (service('request')->getLocale() != 'ar') : ?>
+                                                <?php if (session('lang') != 'ar') : ?>
                                                     <p><?= date('d-m-Y H:m', strtotime($dt['created_at'])) ?></p>
                                                 <?php else : ?>
                                                     <p><?= date('H:m d-m-Y', strtotime($dt['created_at'])) ?></p>

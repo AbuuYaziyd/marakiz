@@ -24,7 +24,7 @@
                                             <input type="hidden" name="id" value="<?= $image['id'] ?>">
                                             <input type="file" name="image" id="picha" onchange="readURL(this)" style="display: none;">
                                             <label class="mr-1" for="picha">
-                                                <img src="<?= $image['link'] != null ? base_url($image['link']) : base_url('app-assets/images/no-image.jpg') ?>" alt="carousel" id="img" class="users-avatar-shadow" height="350" width="550">
+                                                <img src="<?= $image['link'] != null ? base_url($image['link']) : base_url('app-assets/images/no-image.jpg') ?>" alt="image" id="img" class="users-avatar-shadow" height="350" width="550">
                                             </label>
                                         </div>
                                     </div>

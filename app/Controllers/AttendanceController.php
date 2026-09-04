@@ -10,6 +10,7 @@ use App\Models\School;
 use App\Models\Setting;
 use App\Models\User;
 use App\Models\Year;
+use DateTime;
 
 class AttendanceController extends BaseController
 {
@@ -18,9 +19,10 @@ class AttendanceController extends BaseController
         $att = new Attendance();
         $sch = new School();
         $crs = new Course();
+        $oneMonthAgo = new DateTime('-1 month');
 
         $data['title'] = lang('app.attendances');
-        $data['attendance'] = $att->select(['student_id', 'id'])->distinct()->where(['status!=' => 1])->orderBy('created_at', 'asc')->findAll();
+        $data['attendance'] = $att->select(['student_id', 'id'])->distinct()->where(['status!=' => 1, 'reply' => null])->orderBy('created_at', 'asc')->findAll();
         $data['school'] = $sch->findAll();
         $data['att'] = $att;
         $data['c'] = $crs;
@@ -336,51 +338,15 @@ class AttendanceController extends BaseController
         }
     }
 
-    function reply($id)
-    {
-        $att = new Attendance();
-        $year = new Year();
-        $usr = new User();
-
-        $yr = $year->where('current!=', null)->first();
-        $app = $att->find($id);
-        $user = $usr->find($app['student_id']);
-
-        $data['title'] = lang('app.attendance');
-        $data['year'] = substr($yr['name'], 0, -3);
-        $data['att'] = $att;
-        $data['day'] = $app;
-        $data['date'] = date('Y-m-d', strtotime($app['date']));
-        $data['user'] = $user;
-        // dd($data);
-
-        return view('attendance/reply', $data);
-    }
-
-    function accept($id)
-    {
-        $att = new Attendance();
-
-        $app = $att->find($id);
-
-        $data = ['reply' => 1];
-
-        $att->update($id, $data);
-
-        return redirect()->to('admin')->with('type', 'success')->with('text', lang('app.successfully'))->with('title', lang('app.done'));
-    }
-
     function dismiss($id)
     {
         $att = new Attendance();
-
-        $app = $att->find($id);
 
         $data = ['reply' => 0];
 
         $att->update($id, $data);
 
-        return redirect()->to('admin')->with('type', 'success')->with('text', lang('app.successfully'))->with('title', lang('app.done'));
+        return redirect()->to('attendance')->with('type', 'success')->with('text', lang('app.successfully'))->with('title', lang('app.done'));
     }
 
     function delete($id)
@@ -394,14 +360,8 @@ class AttendanceController extends BaseController
             unlink($app['file']);
         }
 
-        $data = [
-            'reply' => null,
-            'reason' => null,
-            'file' => null,
-        ];
+        $att->delete($id);
 
-        $att->update($id, $data);
-
-        return redirect()->to('admin')->with('type', 'success')->with('text', lang('app.successfully'))->with('title', lang('app.done'));
+        return redirect()->to('attendance')->with('type', 'success')->with('text', lang('app.successfully'))->with('title', lang('app.done'));
     }
 }

@@ -235,6 +235,7 @@ return [
     'approved' => 'Imethibitishwa',
     'accept' => 'Kubali',
     'dismiss' => 'Ondoa',
+    'dismissed' => 'Imekataliwa',
     'total' => 'Jumla',
     'processing' => 'Ukaguzi Unaendelea',
     'paymentUnderProcess' => 'Malipo yanakaguliwa!',

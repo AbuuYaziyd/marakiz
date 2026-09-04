@@ -235,6 +235,7 @@ return [
     'approved' => 'Approved',
     'accept' => 'Accept',
     'dismiss' => 'Dismiss',
+    'dismissed' => 'Dismissed',
     'total' => 'Total',
     'processing' => 'Processing',
     'paymentUnderProcess' => 'Payment Verification in Process!',

@@ -72,7 +72,7 @@
                                     <tr>
                                         <td>
 
-                                            <a href="<?= base_url('attendance/appeal/' . $dt['id']) ?>" class="btn btn-sm btn-small btn-outline-<?= $stu['sex'] != 'M' ? 'pink' : 'info' ?> round" target="_blank"><?= $stu['username'] ?></a>
+                                            <a href="<?= base_url('attendance/appeal/' . $dt['id']) ?>" class="btn btn-sm btn-small btn-outline-<?= $stu['sex'] != 'M' ? 'pink' : 'info' ?> round"><?= $stu['username'] ?></a>
                                         </td>
                                         <td>
                                             <?php if (session('lang') != 'ar') : ?>
