@@ -1,10 +1,17 @@
 <?= $this->extend('layouts/app') ?>
 <?= $this->section('content') ?>
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
         <div class="card att-statistics">
             <div class="card-body">
-                <h3 class="text-center"><b><?= lang('app.addReason') ?></b></h3>
+                <h3>
+                    <b><?= lang('app.addReason') ?></b> -
+                    <?php if ($day['status'] == 2) : ?>
+                        <span class="badge badge-pill badge-warning"><?= lang('app.ruksa') ?></span>
+                    <?php else : ?>
+                        <span class="badge badge-pill badge-danger"><?= lang('app.absent') ?></span>
+                    <?php endif ?>
+                </h3>
                 <hr>
                 <?php $validation = \Config\Services::validation() ?>
                 <?= form_open_multipart('attendance/submit-appeal') ?>
@@ -24,54 +31,34 @@
                 </div>
                 </form>
             </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card punch-status">
-            <div class="card-body">
-                <h3>
-                    <b>
-                        <?= lang('app.attendance') ?> -
-                        <?php if ($day != null) : ?>
-                            <?php if ($day['status'] == 1) : ?>
-                                <span class="badge badge-pill badge-success"><?= lang('app.present') ?></span>
-                            <?php elseif ($day['status'] == 2) : ?>
-                                <span class="badge badge-pill badge-warning"><?= lang('app.ruksa') ?></span>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-md-6 text-center">
+                        <h6>
+                            <b><?= lang('app.attendanceTime') ?></b> - 
+                            <?php if (service('request')->getLocale() != 'ar') : ?>
+                                <?= date('d-m-Y H:m', strtotime($day['created_at'])) ?>
                             <?php else : ?>
-                                <span class="badge badge-pill badge-danger"><?= lang('app.absent') ?></span>
+                                <?= date('H:m d-m-Y', strtotime($day['created_at'])) ?>
                             <?php endif ?>
-                        <?php elseif (date('D', strtotime($date)) == 'Sat' || date('D', strtotime($date)) == 'Sun') : ?>
-                            <span class="badge badge-pill badge-secondary"><?= lang('app.weekend') ?></span>
-                        <?php else : ?>
-                            <span class="badge badge-pill badge-secondary"><?= lang('app.nothingFound') ?></span>
-                        <?php endif ?>
-                    </b>
-                </h3>
-                <hr>
-                <?php if ($day != null) : ?>
-                    <div class="punch-det">
-                        <h6><b><?= lang('app.attendanceTime') ?></b></h6>
-                        <?php if (service('request')->getLocale() != 'ar') : ?>
-                            <p><?= date('d-m-Y H:m', strtotime($day['created_at'])) ?></p>
-                        <?php else : ?>
-                            <p><?= date('H:m d-m-Y', strtotime($day['created_at'])) ?></p>
-                        <?php endif ?>
+                        </h6>
                     </div>
-                    <div class="punch-det">
-                        <h6><b><?= lang('app.teacher') ?></b></h6>
-                        <p><?= $att->stu($day['teacher_id'])['name_ar'] ?? $att->stu($day['teacher_id'])['lname'] ?></p>
+                    <div class="col-md-6 text-center">
+                        <h6>
+                            <b><?= lang('app.teacher') ?></b> -
+                            <?php $teacher = $att->stu($day['teacher_id']) ?>
+                            <?php if (session('lang') != 'ar') : ?>
+                                <?= $teacher['name'] ?>
+                                <?= $teacher['mname'] ?>
+                                <?= $teacher['lname'] ?>
+                            <?php else : ?>
+                                <?= $teacher['name_ar'] ?>
+                                <?= $teacher['mname_ar'] ?>
+                                <?= $teacher['lname_ar'] ?>
+                            <?php endif ?>
+                        </h6>
                     </div>
-                <?php elseif (date('D', strtotime($date)) == 'Sat' || date('D', strtotime($date)) == 'Sun') : ?>
-                    <div class="punch-det">
-                        <h6><b><?= lang('app.weekend') ?></b></h6>
-                        <p><?= lang('app.nothingFound') ?></p>
-                    </div>
-                <?php else : ?>
-                    <div class="punch-det">
-                        <h6><b><?= lang('app.nothingFound') ?></b></h6>
-                        <p><?= lang('app.nothingFound') ?></p>
-                    </div>
-                <?php endif ?>
+                </div>
             </div>
         </div>
     </div>
