@@ -25,6 +25,7 @@ class WebsiteController extends BaseController
         $data['taalim'] = $set->where('name', 'taalim')->first();
         $data['logo'] = $set->where('name', 'logo')->first();
         $data['colour'] = $set->where('name', 'colour')->first();
+        $data['weekend'] = $set->where('name', 'weekend')->first();
         $data['register'] = $set->where('name', 'register')->first();
         $data['mauqii'] = $set->where('name', 'register')->first();
         // dd($data);

@@ -237,6 +237,35 @@
             </div>
         </div>
     <?php endif ?>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h3><b><?= lang('app.weekends') ?></b></h3>
+            </div>
+            <div class="card-content">
+                <?= form_open('web/setting') ?>
+                <div class="row mx-1">
+                    <div class="col-md-12 mb-2">
+                        <select name="value" class="custom-select mb-2">
+                            <option value="Thu" <?= $weekend['value'] == 'Thu' ? 'selected' : '' ?>><?= lang('app.siku4') ?></option>
+                            <option value="Fri" <?= $weekend['value'] == 'Fri' ? 'selected' : '' ?>><?= lang('app.siku5') ?></option>
+                            <option value="Sat" <?= $weekend['value'] == 'Sat' ? 'selected' : '' ?>><?= lang('app.siku6') ?></option>
+                            <option value="Sun" <?= $weekend['value'] == 'Sun' ? 'selected' : '' ?>><?= lang('app.siku0') ?></option>
+                        </select>
+                        <select name="value_ar" class="custom-select mb-2">
+                            <option value="Thu" <?= $weekend['value_ar'] == 'Thu' ? 'selected' : '' ?>><?= lang('app.siku4') ?></option>
+                            <option value="Fri" <?= $weekend['value_ar'] == 'Fri' ? 'selected' : '' ?>><?= lang('app.siku5') ?></option>
+                            <option value="Sat" <?= $weekend['value_ar'] == 'Sat' ? 'selected' : '' ?>><?= lang('app.siku6') ?></option>
+                            <option value="Sun" <?= $weekend['value_ar'] == 'Sun' ? 'selected' : '' ?>><?= lang('app.siku0') ?></option>
+                        </select>
+                        <input type="hidden" name="id" value="<?= $weekend['id'] ?>">
+                        <button class="btn btn-primary btn-block btn-lg" type="submit"><?= lang('app.submit') ?></button>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="row">
     <div class="col-xl-3 col-lg-6 col-12">

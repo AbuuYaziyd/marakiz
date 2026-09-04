@@ -39,20 +39,18 @@
                                         <?php $attend = $att->status((date('Y-m-d', strtotime('-' . ($i - date('d')) . ' day'))), $st['id'], $st['level']) ?>
                                         <td>
                                             <?php if (date('D', strtotime($i . '-' . $month . '-' . date('Y'))) == $weekend['value'] || date('D', strtotime($i . '-' . $month . '-' . date('Y'))) == $weekend['value_ar']) : ?>
-                                                <span class="weekend"><i class="ft-info purple font-large-1"></i></span>
+                                                <span class="weekend"><i class="ft-info purple font-large-2"></i></span>
                                             <?php elseif ($i > date('d')) : ?>
                                                 <i class="ft-sun danger spinner font-large-1"></i>
                                             <?php else : ?>
                                                 <?php if ($attend) : ?>
                                                     <?php if ($attend['status'] == 0) : ?>
-                                                        <a href="<?= base_url('attendance/appeal/' . $attend['id']) ?>" class="absent"><i class="ft-x-square danger font-large-1"></i></a>
+                                                        <a href="<?= base_url('attendance/appeal/' . $attend['id']) ?>" class="absent"><i class="ft-x-square danger font-large-2"></i></a>
                                                     <?php elseif ($attend['status'] == 2) : ?>
-                                                        <a href="<?= base_url('attendance/appeal/' . $attend['id']) ?>" class="ruksa"><i class="ft-external-link warning font-large-1"></i></a>
+                                                        <a href="<?= base_url('attendance/appeal/' . $attend['id']) ?>" class="ruksa"><i class="ft-external-link warning font-large-2"></i></a>
                                                     <?php endif ?>
-                                                <?php elseif ($i < date('d')) : ?>
-                                                    <a href="javascript:void(0);" data-toggle="modal" data-target="#attendance_info<?= $i ?>"><i class="ft-check-square success font-large-1"></i></a>
                                                 <?php else : ?>
-                                                    <i class="ft-check-square success font-large-1"></i>
+                                                    <i class="ft-check-square success font-large-2"></i>
                                                 <?php endif ?>
                                             <?php endif ?>
                                         </td>

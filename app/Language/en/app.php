@@ -387,6 +387,7 @@ return [
     'absent' => 'Absent',
     'month' => 'Month',
     'weekend' => 'Weekend',
+    'weekends' => 'Weekends',
     'week' => 'Week',
     'months' => 'Months',
     'thisMonthStatistics' => 'This Month\'s Statistics',
