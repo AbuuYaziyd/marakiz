@@ -43,28 +43,28 @@
     <?= $this->renderSection('styles') ?>
     <style>
         [data-menu='vertical-menu-modern'] .navbar-semi-dark .navbar-container .navbar-nav .nav-link {
-            color: <?= $colour['value'] ?>;
+            color: <?= session('colour')['value'] ?>;
         }
 
         [data-menu='vertical-menu-modern'] .navbar-light .navbar-header .navbar-nav .nav-link {
-            color: <?= $colour['value'] ?>;
+            color: <?= session('colour')['value'] ?>;
         }
 
         .navbar-dark {
-            background: <?= $colour['value'] ?>;
+            background: <?= session('colour')['value'] ?>;
         }
 
         .navbar-dark.navbar-horizontal {
-            background: <?= $colour['value'] ?>;
+            background: <?= session('colour')['value'] ?>;
         }
 
         .navbar-dark .nav-search .btn-secondary {
             color: #FFFFFF;
-            background: <?= $colour['value'] ?>;
+            background: <?= session('colour')['value'] ?>;
         }
 
         .navbar-semi-dark .navbar-header {
-            background: <?= $colour['value'] ?>;
+            background: <?= session('colour')['value'] ?>;
         }
     </style>
 </head>
