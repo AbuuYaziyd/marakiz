@@ -18,7 +18,6 @@ class CertificateController extends BaseController
         $set = new Setting();
         
         $data['title'] = lang('app.certificate');
-        $data['logo'] = $set->where('name', 'logo')->first();
         // dd($data);
 
         return view('certificate/index', $data);

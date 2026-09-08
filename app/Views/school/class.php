@@ -1,4 +1,4 @@
-<?= $this->extend('layouts/main') ?>
+<!-- <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
 <?php if ($new) : ?>
     <div class="row">
@@ -115,4 +115,4 @@
         document.getElementById('form').submit();
     }
 </script>
-<?= $this->endSection() ?>
+<?= $this->endSection() ?> -->

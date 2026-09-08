@@ -1,19 +1,3 @@
-<?php
-
-use App\Models\Setting;
-
-$set = new Setting();
-
-$markaz = $set->where('name', 'name')->first();
-$colour = $set->where('name', 'colour')->first();
-$location = $set->where('name', 'location')->first();
-$lg = $set->where('name', 'logo')->first()['link'];
-if (file_exists($lg)) {
-    $logo = $lg;
-} else {
-    $logo = 'app-assets/images/logo/logo.png';
-}
-?>
 <!DOCTYPE html>
 <html class="loading" lang="<?= session('lang') ?>" data-textdirection="<?= session('lang') != 'ar' ? 'ltr' : 'rtl' ?>">
 
@@ -21,15 +5,15 @@ if (file_exists($lg)) {
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description" content="<?= session('lang') != 'ar' ? $markaz['value'] : $markaz['value_ar'] ?> | <?= session('lang') != 'ar' ? $location['value'] : $location['value_ar'] ?>">
-    <meta name="keywords" content="<?= session('lang') != 'ar' ? $markaz['value'] : $markaz['value_ar'] ?> | <?= session('lang') != 'ar' ? $location['value'] : $location['value_ar'] ?>">
+    <meta name="description" content="<?= session('lang') != 'ar' ? session('markaz')['value'] : session('markaz')['value_ar'] ?> | <?= session('lang') != 'ar' ? session('location')['value'] : session('location')['value_ar'] ?>">
+    <meta name="keywords" content="<?= session('lang') != 'ar' ? session('markaz')['value'] : session('markaz')['value_ar'] ?> | <?= session('lang') != 'ar' ? session('location')['value'] : session('location')['value_ar'] ?>">
     <meta name="author" content="Abou Yaziyd">
-    <link rel="manifest" href="./manifest.json" />
-    <meta name="theme-color" content="<?= $colour['value'] ?>">
-    <title><?= $title ?> | <?= session('lang') != 'ar' ? $markaz['value'] : $markaz['value_ar'] ?></title>
+    <link rel="manifest" href="<?= base_url('manifest') ?>" />
+    <meta name="theme-color" content="<?= session('colour')['value'] ?>">
+    <title><?= $title ?> | <?= session('lang') != 'ar' ? session('markaz')['value'] : session('markaz')['value_ar'] ?></title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;400;500;700;800;900&display=swap" rel="stylesheet">
-    <link rel="apple-touch-icon" href="<?= base_url($logo) ?>">
-    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url($logo) ?>">
+    <link rel="apple-touch-icon" href="<?= base_url(session('logo')) ?>">
+    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url(session('logo')) ?>">
     <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
     <style>
         /* --- General Page and Print Styles --- */
@@ -117,7 +101,7 @@ if (file_exists($lg)) {
                                         <div class="header-section">
                                             <div class="school-info">
                                                 <span dir="rtl"><b><?= $name['value'] ?></b></span><br>
-                                                <span dir="rtl"><b><?= $location['value'] ?></b></span><br>
+                                                <span dir="rtl"><b><?= session('location')['value'] ?></b></span><br>
                                                 <span dir="rtl">Jina la Darasa: <b><?= $course['name'] ?></b></span><br>
                                                 <span dir="rtl">Idadi ya Wanafunzi: <b><?= count($class_gpa) ?></b></span><br>
                                             </div>
@@ -128,7 +112,7 @@ if (file_exists($lg)) {
                                         <div class="header-section right">
                                             <div class="school-info">
                                                 <span dir="rtl"><b><?= $name['extra'] ?></b></span><br>
-                                                <span dir="rtl"><b><?= $location['extra'] ?></b></span><br>
+                                                <span dir="rtl"><b><?= session('location')['extra'] ?></b></span><br>
                                                 <span dir="rtl">اسم الفصل: <b><?= $course['name_ar'] ?></b></span><br>
                                                 <span dir="rtl">عدد الطلاب: <b><?= count($class_gpa) ?></b></span><br>
                                             </div>

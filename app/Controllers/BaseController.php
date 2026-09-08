@@ -61,6 +61,7 @@ abstract class BaseController extends Controller
         $markaz = $set->where('name', 'name')->first();
         $colour = $set->where('name', 'colour')->first();
         $location = $set->where('name', 'location')->first();
+        $postabox = $set->where('name', 'postabox')->first();
         $lg = $set->where('name', 'logo')->first()['link'];
 
         if (file_exists($lg)) {
@@ -75,6 +76,7 @@ abstract class BaseController extends Controller
 
         session()->set('markaz', $markaz);
         session()->set('location', $location);
+        session()->set('postabox', $postabox);
         session()->set('colour', $colour);
         session()->set('logo', $logo);
 

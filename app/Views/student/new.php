@@ -9,7 +9,7 @@
                     <div class="card-header border-1">
                         <div class="card-title text-center">
                             <div>
-                                <img src="<?= base_url('app-assets/images/logo/logo.png') ?>" alt="logo" height="180px">
+                                <img src="<?= base_url(session('logo')) ?>" alt="logo" height="180px">
                             </div>
                         </div>
                         <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2"><span><?= lang('app.register') ?></span>

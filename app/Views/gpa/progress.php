@@ -1,14 +1,8 @@
-<?php 
+<?php
 $muadala = 0;
 $masomo = 0;
 $alama = 0;
-
-if (file_exists($logo['link'])) {
-    $logo = $logo['link'];
-} else {
-    $logo = 'app-assets/images/logo/logo.png';
-}
- ?>
+?>
 <!DOCTYPE html>
 <html class="loading" lang="<?= session('lang') ?>" data-textdirection="<?= session('lang') != 'ar' ? 'ltr' : 'rtl' ?>">
 
@@ -16,15 +10,15 @@ if (file_exists($logo['link'])) {
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description" content="<?= session('lang') != 'ar' ? $markaz['value'] : $markaz['value_ar'] ?> | <?= session('lang') != 'ar' ? $location['value'] : $location['value_ar'] ?>">
-    <meta name="keywords" content="<?= session('lang') != 'ar' ? $markaz['value'] : $markaz['value_ar'] ?> | <?= session('lang') != 'ar' ? $location['value'] : $location['value_ar'] ?>">
+    <meta name="description" content="<?= session('lang') != 'ar' ? session('markaz')['value'] : session('markaz')['value_ar'] ?> | <?= session('lang') != 'ar' ? session('location')['value'] : session('location')['value_ar'] ?>">
+    <meta name="keywords" content="<?= session('lang') != 'ar' ? session('markaz')['value'] : session('markaz')['value_ar'] ?> | <?= session('lang') != 'ar' ? session('location')['value'] : session('location')['value_ar'] ?>">
     <meta name="author" content="Abou Yaziyd">
     <link rel="manifest" href="<?= base_url('manifest') ?>" />
-    <meta name="theme-color" content="<?= $colour['value'] ?>">
-    <title><?= $title ?> | <?= session('lang') != 'ar' ? $markaz['value'] : $markaz['value_ar'] ?></title>
+    <meta name="theme-color" content="<?= session('colour')['value'] ?>">
+    <title><?= $title ?> | <?= session('lang') != 'ar' ? session('markaz')['value'] : session('markaz')['value_ar'] ?></title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;400;500;700;800;900&display=swap" rel="stylesheet">
-    <link rel="apple-touch-icon" href="<?= base_url($logo) ?>">
-    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url($logo) ?>">
+    <link rel="apple-touch-icon" href="<?= base_url(session('logo')) ?>">
+    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url(session('logo')) ?>">
     <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
     <style>
         body {
@@ -39,7 +33,7 @@ if (file_exists($logo['link'])) {
             justify-content: space-between;
             align-items: center;
             margin-bottom: 10px;
-            border-bottom: 3px solid <?= $colour['value'] ?>;
+            border-bottom: 3px solid <?= session('colour')['value'] ?>;
             /* Dark Green Border */
             padding-bottom: 10px;
         }
@@ -55,16 +49,16 @@ if (file_exists($logo['link'])) {
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            color: <?= $colour['value'] ?>;
+            color: <?= session('colour')['value'] ?>;
         }
 
         .student-info {
             margin-bottom: 5px;
-            background-color: <?= $colour['link'] ?>;
+            background-color: <?= session('colour')['link'] ?>;
             /* Light Green Tint */
             padding: 15px;
-            border-right: 5px solid <?= $colour['value'] ?>;
-            border-left: 5px solid <?= $colour['value'] ?>;
+            border-right: 5px solid <?= session('colour')['value'] ?>;
+            border-left: 5px solid <?= session('colour')['value'] ?>;
             border-radius: 4px;
         }
 
@@ -85,7 +79,7 @@ if (file_exists($logo['link'])) {
 
         /* Dark Green Header Styling */
         th {
-            background-color: <?= $colour['value'] ?>;
+            background-color: <?= session('colour')['value'] ?>;
             color: white;
             font-weight: bold;
         }
@@ -129,18 +123,18 @@ if (file_exists($logo['link'])) {
         <div id="printArea" style="direction: <?= service('request')->getLocale() != 'ar' ? 'ltr' : 'rtl' ?>; width: 100%;">
             <div class="header-container">
                 <div class="institution-details">
-                    <h4 style="color: <?= $colour['value'] ?>;"><?= $markaz['value_ar'] ?><br>
-                        <span><?= $postabox['value_ar'] ?></span>
-                        <span><?= $location['value_ar'] ?></span>
+                    <h4 style="color: <?= session('colour')['value'] ?>;"><?= session('markaz')['value_ar'] ?><br>
+                        <span><?= session('postabox')['value_ar'] ?></span>
+                        <span><?= session('location')['value_ar'] ?></span>
                     </h4>
                 </div>
                 <div class="logo-box">
-                    <img alt="logo" src="<?= base_url($logo) ?>" height="90px">
+                    <img alt="logo" src="<?= base_url(session('logo')) ?>" height="90px">
                 </div>
                 <div class="contact-info" dir="ltr">
-                    <h4 style="color: <?= $colour['value'] ?>;"><?= $markaz['value'] ?><br>
-                        <span><?= $postabox['value'] ?></span>
-                        <span><?= $location['value'] ?></span>
+                    <h4 style="color: <?= session('colour')['value'] ?>;"><?= session('markaz')['value'] ?><br>
+                        <span><?= session('postabox')['value'] ?></span>
+                        <span><?= session('location')['value'] ?></span>
                     </h4>
                 </div>
             </div>
@@ -151,7 +145,7 @@ if (file_exists($logo['link'])) {
                     <?php else : ?>
                         <?= $student['name_ar'] ?> <?= $student['mname_ar'] ?> <?= $student['lname_ar'] ?>
                     <?php endif ?> |
-                    <span style="color: <?= $colour['value'] ?>; text-align: right">
+                    <span style="color: <?= session('colour')['value'] ?>; text-align: right">
                         <?= lang('app.academicProgress') ?>:
                         <?php if (session('lang') != 'ar') : ?>
                             <?= $class['name'] ?>

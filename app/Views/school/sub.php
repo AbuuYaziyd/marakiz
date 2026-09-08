@@ -1,4 +1,4 @@
-<?= $this->extend('layouts/main') ?>
+<!-- <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
 <div class="row">
     <div id="recent-transactions" class="col-md-12">
@@ -89,4 +89,4 @@
         });
     });
 </script>
-<?= $this->endSection() ?>
+<?= $this->endSection() ?> -->

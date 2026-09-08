@@ -1,9 +1,3 @@
-<?php if (file_exists($logo['link'])) {
-$logo = $logo['link'];
-} else {
-$logo = 'app-assets/images/logo/logo.png';
-}
-?>
 <?= $this->extend('layouts/auth') ?>
 
 <?= $this->section('content') ?>
@@ -16,10 +10,10 @@ $logo = 'app-assets/images/logo/logo.png';
                     <div class="card-header border-0">
                         <div class="card-title text-center">
                             <div>
-                                <a href="<?= base_url() ?>"><img src="<?= base_url($logo) ?>" alt="logo" height="180px"></a>
+                                <a href="<?= base_url() ?>"><img src="<?= base_url(session('logo')) ?>" alt="logo" height="180px"></a>
                             </div>
                         </div>
-                        <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2"><span><?= session('lang') != 'ar' ? $markaz['value'] : $markaz['value_ar'] ?></span>
+                        <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2"><span><?= session('lang') != 'ar' ? session('markaz')['value'] : session('markaz')['value_ar'] ?></span>
                         </h6>
                     </div>
                     <div class="card-body text-center">
@@ -31,7 +25,7 @@ $logo = 'app-assets/images/logo/logo.png';
                     </div>
                     <div class="card-footer">
                         <div class="text-center">
-                            <div class="text-center"><a href="<?= base_url() ?>" class="btn btn-sm btn-outline-purple round"><?= session('lang') != 'ar' ? $markaz['value'] : $markaz['value_ar'] ?> | <?= session('lang') != 'ar' ? $location['value'] : $location['value_ar'] ?></a></div>
+                            <div class="text-center"><a href="<?= base_url() ?>" class="btn btn-sm btn-outline-purple round"><?= session('lang') != 'ar' ? session('markaz')['value'] : session('markaz')['value_ar'] ?> | <?= session('lang') != 'ar' ? session('location')['value'] : session('location')['value_ar'] ?></a></div>
                         </div>
                     </div>
                 </div>
