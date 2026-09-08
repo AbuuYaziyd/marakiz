@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Setting;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\IncomingRequest;
@@ -54,11 +55,28 @@ abstract class BaseController extends Controller
         // Preload any models, libraries, etc, here.
         $session = \Config\Services::session();
         $language = \Config\Services::language();
+        $set = new Setting();
+
         $language->setLocale($session->lang);
+        $markaz = $set->where('name', 'name')->first();
+        $colour = $set->where('name', 'colour')->first();
+        $location = $set->where('name', 'location')->first();
+        $lg = $set->where('name', 'logo')->first()['link'];
+
+        if (file_exists($lg)) {
+            $logo = $lg;
+        } else {
+            $logo = 'app-assets/images/logo/logo.png';
+        }
 
         if (session('lang') == null) {
             session()->set('lang', 'ar');
         }
+
+        session()->set('markaz', $markaz);
+        session()->set('location', $location);
+        session()->set('colour', $colour);
+        session()->set('logo', $logo);
 
         // E.g.: $this->session = service('session');
     }

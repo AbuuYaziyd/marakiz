@@ -104,7 +104,7 @@ if (file_exists($lg)) {
     <div class="main-content">
         <div class="id-card-container">
             <div class="flex justify-center mb-4">
-                <!-- <img src="<?= base_url($logo) ?>" height="70px" alt="<?= lang('app.appName') ?>" class="h-12 w-auto object-contain"> -->
+                <!-- <img src="<?= base_url($logo) ?>" height="70px" alt="logo" class="h-12 w-auto object-contain"> -->
             </div>
             <h1 class="h3 fw-bold text-dark mb-4"><?= $title ?></h1>
 
