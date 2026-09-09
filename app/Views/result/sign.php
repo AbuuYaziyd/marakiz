@@ -100,12 +100,12 @@
                 </div>
             </div>
 
-            <img src="<?= base_url('app-assets/images/logo/logo.png') ?>" alt="logo" height="150" />
+            <img src="<?= base_url(session('logo')) ?>" alt="logo" height="150" />
 
             <div class="header-section right">
                 <div class="school-info">
-                    <span dir="rtl"><b><?= lang('app.appName') ?></b></span><br>
-                    <span dir="rtl"><b><?= lang('app.location') ?></b></span><br>
+                    <span dir="rtl"><b><?= session('lang') != 'ar' ? session('markaz')['value'] : session('markaz')['value_ar'] ?></b></span><br>
+                    <span dir="rtl"><b><?= session('lang') != 'ar' ? session('location')['value'] : session('location')['value_ar'] ?></b></span><br>
                     <span dir="rtl">اسم الاختبار: <b><?= $subject['name_ar'] ?></b></span><br>
                     <span dir="rtl">عدد الطلاب: <b><?= count($students) ?></b></span><br>
                 </div>
