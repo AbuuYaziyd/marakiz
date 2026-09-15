@@ -24,8 +24,6 @@
                                     <th><?= lang('app.name') ?></th>
                                     <th><?= lang('app.taqdir') ?></th>
                                     <th><?= lang('app.taqdir') ?></th>
-                                    <th><?= lang('app.city') ?></th>
-                                    <th><?= lang('app.city') ?></th>
                                     <th><?= lang('app.dob') ?></th>
                                     <th><?= lang('app.dob') ?></th>
                                 </tr>
@@ -43,8 +41,6 @@
                                         <td><?= $user['name'] ?> <?= $user['mname'] ?> <?= $user['lname'] ?></td>
                                         <td><?= $khr->grade(round($us['gpa']))['name'] ?></td>
                                         <td><?= $khr->grade(round($us['gpa']))['name_ar'] ?></td>
-                                        <td><?= $khr->city($user['city_id'])['name_ar'] ?></td>
-                                        <td><?= $khr->city($user['city_id'])['name'] ?></td>
                                         <td><?= $hjr->strToHijri($user['dob'], "d F Y", 'ar') ?>هـ</td>
                                         <td><?= $user['dob'] ?></td>
                                     </tr>
