@@ -9,7 +9,7 @@ return [
     'ourLocation' => 'موقعنا',
     'address' => 'عنوان',
     'app' => 'معهد',
-    'appName' => 'معهد دار الإسلامي',
+    'appName' => 'معهد الإسلامي',
     'ourOffice' => 'موقعنا',
     'emailUs' => 'تواصل معنا',
     'callUs' => 'اتصل بنا',
