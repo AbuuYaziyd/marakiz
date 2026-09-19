@@ -24,7 +24,7 @@ $routes->post('change/password/(:num)', 'AuthController::change/$1', ['filter' =
 $routes->get('logout', 'AuthController::logout');
 $routes->get('recover', 'AuthController::recover');
 $routes->post('password', 'AuthController::password');
-$routes->get('reset/(:num)', 'AuthController::reset/$1', ['filter' => 'auth']);
+$routes->get('reset/(:num)', 'AuthController::reset/$1', ['filter' => 'teacher']);
 
 /*
  * --------------------------------------------------------------------
@@ -57,10 +57,10 @@ $routes->group('web', function ($routes) {
  * --------------------------------------------------------------------
  */
 $routes->group('user', function ($routes) {
-    $routes->get('/', 'UserController::index', ['filter' => 'auth', 'as' => 'user']);
+    $routes->get('/', 'UserController::index', ['filter' => 'auth']);
     $routes->get('profile/(:num)', 'UserController::profile/$1', ['filter' => 'auth']);
-    $routes->get('show/(:num)', 'UserController::show/$1', ['filter' => 'auth', 'as' => 'user.show']);
-    $routes->post('update', 'UserController::update/$1', ['filter' => 'auth', 'as' => 'user.update']);
+    $routes->get('show/(:num)', 'UserController::show/$1', ['filter' => 'auth']);
+    $routes->post('update', 'UserController::update/$1', ['filter' => 'auth']);
     // $routes->post('image', 'UserController::image', ['filter' => 'admin');
     // $routes->get('delete-image/(:num)', 'UserController::deleteImage/$1', ['filter' => 'admin']);
 });
@@ -271,7 +271,7 @@ $routes->group('period', function ($routes) {
 
 /*
  * --------------------------------------------------------------------
- * Routes Groups class Academy Routings
+ * Routes Groups Timetable Routings
  * --------------------------------------------------------------------
  */
 $routes->group('timetable', function ($routes) {
