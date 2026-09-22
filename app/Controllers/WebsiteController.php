@@ -15,6 +15,20 @@ class WebsiteController extends BaseController
 
         $set = new Setting();
 
+        $weekend = $set->where('name', 'weekend')->first();
+        
+        // dd(!$weekend);
+        if (!$weekend) {
+            $dt = [
+                'name' => 'weekend',
+                'value' => 'Sat',
+                'value_ar' => 'Sun',
+            ];
+
+            $set->save($dt);
+
+            return redirect()->to('web');
+        }
         $data['title'] = lang('app.website');
         $data['name'] = $set->where('name', 'name')->first();
         $data['email'] = $set->where('name', 'email')->first();
@@ -25,7 +39,7 @@ class WebsiteController extends BaseController
         $data['taalim'] = $set->where('name', 'taalim')->first();
         $data['logo'] = $set->where('name', 'logo')->first();
         $data['colour'] = $set->where('name', 'colour')->first();
-        $data['weekend'] = $set->where('name', 'weekend')->first();
+        $data['weekend'] = $weekend;
         $data['register'] = $set->where('name', 'register')->first();
         $data['mauqii'] = $set->where('name', 'register')->first();
         // dd($data);
