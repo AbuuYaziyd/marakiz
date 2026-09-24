@@ -155,8 +155,8 @@ $period = $prd->findAll();
                                         <td>
                                             <div class="btn-group btn-block">
                                                 <?php if ($teacher['phone'] != null) : ?>
-                                                    <a href="tel:+255<?= $teacher['phone'] ?>" class="btn btn-sm round btn-primary"><i class="ft ft-phone-call"></i></a>
-                                                    <a href="https://wa.me/255<?= $teacher['phone'] ?>" class="btn btn-sm round btn-success"><i class="la la-whatsapp"></i></a>
+                                                    <a href="tel:+<?= $teacher['phone'] ?>" class="btn btn-sm round btn-primary"><i class="ft ft-phone-call"></i></a>
+                                                    <a href="https://wa.me/<?= $teacher['phone'] ?>" class="btn btn-sm round btn-success"><i class="la la-whatsapp"></i></a>
                                                 <?php else : ?>
                                                     <span class="btn btn-sm round btn-outline-primary"><i class="ft ft-phone-call"></i></span>
                                                     <span class="btn btn-sm round btn-outline-success"><i class="la la-whatsapp"></i></span>
