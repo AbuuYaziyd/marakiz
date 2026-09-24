@@ -426,4 +426,7 @@ return [
     'waiting' => 'Inasubiri',
     'notReady' => 'Haijawa Tayari',
     'certVerification' => 'Uhakiki wa Shahada',
+
+    // Documentation
+    'documentation' => 'Namna ya Matumizi',
 ];

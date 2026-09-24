@@ -191,5 +191,24 @@
             </div>
         </a>
     </div>
+    <div class="col-xl-3 col-md-6 col-12">
+        <a href="<?= base_url('docs') ?>">
+            <div class="card pull-up">
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="media d-flex">
+                            <div class="media-body text-left">
+                                <h6 class="text-muted"><?= lang('app.' . session('role')) ?></h6>
+                                <h3><b><?= lang('app.documentation') ?></b></h3>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="ft-play-circle pink font-large-3 float-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
 </div>
 <hr>
