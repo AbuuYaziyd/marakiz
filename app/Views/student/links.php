@@ -77,7 +77,7 @@
             </div>
         </a>
     </div>
-    <div class="col-xs-6 col-md-3">
+    <!-- <div class="col-xs-6 col-md-3">
         <a href="<?= base_url('fee/student/' . $stu['id']) ?>">
             <div class="card pull-up">
                 <div class="card-content">
@@ -95,7 +95,7 @@
                 </div>
             </div>
         </a>
-    </div>
+    </div> -->
     <div class="col-xs-6 col-md-3">
         <a href="<?= base_url('result/student/' . $stu['id']) ?>">
             <div class="card pull-up">

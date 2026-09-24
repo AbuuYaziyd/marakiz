@@ -83,7 +83,7 @@
     <div class="main-content">
         <div class="id-card-container">
             <div class="flex justify-center mb-4">
-                <!-- <img src="<?= base_url($logo) ?>" height="70px" alt="logo" class="h-12 w-auto object-contain"> -->
+                <!-- <img src="<?= base_url(session('logo')) ?>" height="70px" alt="logo" class="h-12 w-auto object-contain"> -->
             </div>
             <h1 class="h3 fw-bold text-dark mb-4"><?= $title ?></h1>
 
@@ -107,7 +107,7 @@
                 <a href="<?= base_url('student/page/' . $user['id']) ?>" target="_blank"><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=<?= base_url('student/page/' . $user['id']) ?>" alt="QR Code" class="qr-code"></a>
             </div>
 
-            <p class="text-muted small mt-3"><?= session('lang') != 'ar' ? $markaz['value'] : $markaz['value_ar'] ?> | <?= session('lang') != 'ar' ? $location['value'] : $location['value_ar'] ?></p>
+            <p class="text-muted small mt-3"><?= session('lang') != 'ar' ? session('markaz')['value'] : session('markaz')['value_ar'] ?> | <?= session('lang') != 'ar' ? session('location')['value'] : session('location')['value_ar'] ?></p>
         </div>
     </div>
 
