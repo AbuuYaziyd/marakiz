@@ -328,11 +328,11 @@ $routes->group('result', function ($routes) {
 $routes->group('gpa', function ($routes) {
     $routes->get('class/(:segment)/(:num)/(:num)', 'GpaController::class/$1/$2/$3', ['filter' => 'admin']);
     $routes->get('kashf/(:num)/(:num)', 'GpaController::kashf/$1/$2', ['filter' => 'auth']);
+    $routes->get('all/(:num)/(:num)', 'GpaController::all/$1/$2', ['filter' => 'auth']);
     $routes->get('report/(:segment)/(:num)/(:num)', 'GpaController::report/$1/$2/$3', ['filter' => 'auth']);
     $routes->post('edit', 'GpaController::edit', ['filter' => 'teacher']);
     $routes->post('gpa', 'GpaController::gpa', ['filter' => 'teacher']);
     // $routes->get('make/(:num)', 'GpaController::make/$1', ['filter' => 'admin']);
-    $routes->get('all/(:num)/(:num)', 'GpaController::all/$1/$2', ['filter' => 'auth']);
     $routes->get('view/(:num)/(:num)', 'GpaController::view/$1/$2', ['filter' => 'auth']);
     $routes->get('progress/(:num)', 'GpaController::progress/$1', ['filter' => 'auth']);
     $routes->get('search/(:any)', 'GpaController::search/$1', ['filter' => 'auth']);
