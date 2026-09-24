@@ -242,7 +242,7 @@ if (session('lang') != 'ar') {
             </div>
             <div>
                 <a href="<?= base_url('gpa/search/' . $gpas['link']) ?>">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=<?= urlencode(base_url('gpa/search/' . $gpas['link'])) ?>" title="<?= $student['username'] ?>" class="float-right m-3" />
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=<?= urlencode(base_url('gpa/search/' . $gpas['link'])) ?>" title="<?= $student['username'] ?>" class="float-right m-3" />
                 </a>
 
             </div>
