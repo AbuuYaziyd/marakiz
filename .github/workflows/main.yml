@@ -66,10 +66,10 @@ jobs:
           server-dir: /maahadkengeja.rf.gd/htdocs/
 
       # # Target 6
-      # - name: Deploy to Directory 6
-      #   uses: SamKirkland/FTP-Deploy-Action@4.3.3
-      #   with:
-      #     server: ${{ secrets.FTP_SERVER }}
-      #     username: ${{ secrets.FTP_USERNAME_2 }}
-      #     password: ${{ secrets.FTP_PASSWORD_2 }}
-      #     server-dir: /marakiz.rf.gd/htdocs/
+      - name: Deploy to Directory 6
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME_2 }}
+          password: ${{ secrets.FTP_PASSWORD_2 }}
+          server-dir: /marakiz.rf.gd/htdocs/
