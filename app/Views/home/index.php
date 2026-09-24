@@ -26,7 +26,7 @@
                     <div class="card-footer">
                         <div class="text-center">
                             <div class="text-center">
-                                <a href="https://marakiz.rf.gd" class="btn btn-sm btn-outline-purple round"><?= session('lang') != 'ar' ? session('markaz')['value'] : session('markaz')['value_ar'] ?> | <?= session('lang') != 'ar' ? session('location')['value'] : session('location')['value_ar'] ?></a>
+                                <a href="<?= base_url('docs') ?>" class="btn btn-sm btn-outline-purple round"><?= session('lang') != 'ar' ? session('markaz')['value'] : session('markaz')['value_ar'] ?> | <?= session('lang') != 'ar' ? session('location')['value'] : session('location')['value_ar'] ?></a>
                             </div>
                         </div>
                     </div>

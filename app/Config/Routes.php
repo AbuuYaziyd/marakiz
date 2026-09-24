@@ -51,6 +51,14 @@ $routes->group('web', function ($routes) {
     $routes->post('signature', 'WebsiteController::signature', ['filter' => 'admin']);
 });
 
+/*
+ * --------------------------------------------------------------------
+ * Routes Groups Documentation Routings
+ * --------------------------------------------------------------------
+ */
+$routes->group('docs', function ($routes) {
+    $routes->get('/', 'DocsController::index');
+});
 
 /*
  * --------------------------------------------------------------------

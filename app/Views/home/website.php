@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="loading" lang="<?= session('lang') ?>" data-textdirection="<?= session('lang') != 'ar' ? 'ltr' : 'rtl' ?>">
+<html lang="<?= session('lang') ?>" dir="<?= session('lang') != 'ar' ? 'ltr' : 'rtl' ?>">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,6 +15,7 @@
     <link rel="apple-touch-icon" href="<?= base_url(session('logo')) ?>">
     <link rel="shortcut icon" type="image/x-icon" href="<?= base_url(session('logo')) ?>">
     <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="<?=  base_url('assets/css/style' . (session('lang') != 'ar' ? '' : '-rtl') . '.css')?>">
     <?= $this->renderSection('styles') ?>
     <script src="https://kit.fontawesome.com/ea9d69aa5c.js" crossorigin="anonymous"></script>
     <style>
@@ -77,7 +78,7 @@
                     <li><a href="#campus-life"><?= lang('app.academic') ?></a></li>
                     <li><a href="#about"><?= lang('app.about') ?></a></li>
                     <li><a href="#contact" class="cta-link"><?= lang('app.contactUs') ?></a></li>
-                    <li><a href="<?= base_url('login') ?>" class="cta-link"> <?= lang('app.login') ?> <i class="fa-solid fa-user"></i></a></li>
+                    <li><a href="<?= base_url('login') ?>" class="cta-link"> <?= lang('app.login') ?></a></li>
                 </ul>
             </nav>
         </div>
