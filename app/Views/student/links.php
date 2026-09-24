@@ -10,7 +10,7 @@
                                 <h3><b><?= lang('app.profile') ?></b></h3>
                             </div>
                             <div class="align-self-center">
-                                <i class="icon-user warning font-large-2 float-right"></i>
+                                <i class="icon-user teal font-large-2 float-right"></i>
                             </div>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                                 <h3><b><?= lang('app.attendances') ?></b></h3>
                             </div>
                             <div class="align-self-center">
-                                <i class="ft ft-check-circle amber font-large-2 float-right"></i>
+                                <i class="ft-check-circle amber font-large-2 float-right"></i>
                             </div>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                                 <h3><b><?= lang('app.id') ?></b></h3>
                             </div>
                             <div class="align-self-center">
-                                <i class="ft ft-user primary font-large-2 float-right"></i>
+                                <i class="ft-user primary font-large-2 float-right"></i>
                             </div>
                         </div>
                     </div>
@@ -107,7 +107,7 @@
                                 <h3><b><?= lang('app.results') ?></b></h3>
                             </div>
                             <div class="align-self-center">
-                                <i class="ft ft-bar-chart-2 purple font-large-2 float-right"></i>
+                                <i class="ft-bar-chart-2 purple font-large-2 float-right"></i>
                             </div>
                         </div>
                     </div>
@@ -128,7 +128,7 @@
                                         <h3><b><?= lang('app.room') ?> | <?= $rm['value'] ?></b></h3>
                                     </div>
                                     <div class="align-self-center">
-                                        <i class="ft ft-airplay pink font-large-2 float-right"></i>
+                                        <i class="ft-airplay pink font-large-2 float-right"></i>
                                     </div>
                                 </div>
                             </div>

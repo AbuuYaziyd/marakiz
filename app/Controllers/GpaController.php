@@ -64,6 +64,23 @@ class GpaController extends BaseController
         return view('gpa/kashf', $data);
     }
 
+    public function all($id, $sch_id)
+    {
+        $gpa = new Gpa();
+        $set = new Setting();
+        $usr = new User();
+
+        $data['title'] = lang('app.academicProgress');
+        $data['gpa'] = $gpa;
+        $data['student'] = $usr->find($id);
+        $data['mudir'] = $set->where('name', 'mudir')->first();
+        $data['taalim'] = $set->where('name', 'taalim')->first();
+        $data['gpas'] =  $gpa->where(['student_id' => $id, 'school_id' => $sch_id])->findAll();
+        // dd($data);
+
+        return view('gpa/all', $data);
+    }
+
     public function report($exam, $id, $fasl)
     {
         // dd($fasl, $id, $exam);

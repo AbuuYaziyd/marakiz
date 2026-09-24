@@ -104,7 +104,7 @@
             </div>
 
             <div class="d-flex justify-content-center mb-4">
-                <a href="<?= base_url('student/page/' . $user['id']) ?>" target="_blank"><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=<?= base_url('student/page/' . $user['id']) ?>" alt="QR Code" class="qr-code"></a> 
+                <a href="<?= base_url('student/page/' . $user['id']) ?>" target="_blank"><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=<?= base_url('student/page/' . $user['id']) ?>" alt="QR Code" class="qr-code"></a>
             </div>
 
             <p class="text-muted small mt-3"><?= session('lang') != 'ar' ? session('markaz')['value'] : session('markaz')['value_ar'] ?> | <?= session('lang') != 'ar' ? session('location')['value'] : session('location')['value_ar'] ?></p>
