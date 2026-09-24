@@ -426,4 +426,7 @@ return [
     'waiting' => 'Waiting',
     'notReady' => 'Not Ready',
     'certVerification' => 'Certificate Verification',
+
+    // Documentation
+    'documentation' => 'How to Use',
 ];

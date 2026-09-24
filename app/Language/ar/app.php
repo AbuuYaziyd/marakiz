@@ -426,4 +426,7 @@ return [
     'waiting' => 'في انتظار',
     'notReady' => 'غير جاهز',
     'certVerification' => 'توثيق الشهادة',
+
+    // Documentation
+    'documentation' => 'كيفية الاستخدام',
 ];
