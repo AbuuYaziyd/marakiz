@@ -56,7 +56,7 @@
                     <div class="card-footer text-center">
                         <?php if ($ok) : ?>
                             <?php if (session('role') != 'admin') : ?>
-                                <a href="<?= base_url('gpa/all/' . $stu['id']) ?>" target="_blank" class="btn btn-teal btn-lg btn-block round"><i class="ft ft-download"></i> | <?= lang('app.academicProgress') ?></a>
+                                <a href="<?= base_url('gpa/all/' . $stu['id'] . '/' . $sc['id']) ?>" target="_blank" class="btn btn-teal btn-lg btn-block round"><i class="ft ft-download"></i> | <?= lang('app.academicProgress') ?></a>
                             <?php else : ?>
                                 <a href="<?= base_url('gpa/progress/' . $stu['id']) ?>" target="_blank" class="btn btn-teal btn-lg btn-block round"><i class="ft ft-download"></i> | <?= lang('app.academicProgress') ?></a>
                             <?php endif ?>
