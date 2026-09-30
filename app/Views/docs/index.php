@@ -16,7 +16,7 @@
             </div>
             <?php if (session('isLoggedIn')) : ?>
                 <div class="card-body">
-                    <p><b>Ukurasa wa Mwanafunzi</b> <span class="badge badge-danger">3</span></p>
+                    <p><b>Ukurasa wa Mwanafunzi</b> <span class="badge badge-danger">5</span></p>
                     <a href="https://youtube.com/shorts/Rt6mEs4weXs" class="btn btn-warning mb-1" target="_blank">Mwanzo</a>
                     <a href="https://youtu.be/BdVLrxR886w" class="btn btn-warning mb-1" target="_blank">Kuhariri Data na Maelezo ya Mtumiaji</a>
                     <a href="https://youtu.be/wEpAlGHEhDg" class="btn btn-warning mb-1" target="_blank">Mahudhurio na Bitwaka</a>
