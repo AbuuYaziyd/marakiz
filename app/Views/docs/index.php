@@ -16,7 +16,7 @@
             </div>
             <?php if (session('isLoggedIn')) : ?>
                 <div class="card-body">
-                    <p><b>Ukurasa wa Mwanafunzi</b> <span class="badge badge-danger">3</span></p>
+                    <p><b>Ukurasa wa Mwanafunzi</b> <span class="badge badge-danger">5</span></p>
                     <a href="https://youtube.com/shorts/Rt6mEs4weXs" class="btn btn-warning mb-1" target="_blank">Mwanzo</a>
                     <a href="https://youtu.be/BdVLrxR886w" class="btn btn-warning mb-1" target="_blank">Kuhariri Data na Maelezo ya Mtumiaji</a>
                     <a href="https://youtu.be/wEpAlGHEhDg" class="btn btn-warning mb-1" target="_blank">Mahudhurio na Bitwaka</a>
@@ -27,23 +27,23 @@
             <?php endif ?>
             <?php if (session('role') == 'teacher' || session('role') == 'admin') : ?>
                 <div class="card-body">
-                    <p><b>Ukurasa wa Mwanafunzi</b> <span class="badge badge-danger">3</span></p>
-                    <a href="https://youtube.com/shorts/Rt6mEs4weXs" class="btn btn-teal mb-1" target="_blank">Mwanzo</a>
+                    <p><b>Ukurasa wa Mwalimu</b> <span class="badge badge-danger">3</span></p>
+                    <!-- <a href="https://youtube.com/shorts/Rt6mEs4weXs" class="btn btn-teal mb-1" target="_blank">Mwanzo</a>
                     <a href="https://youtu.be/BdVLrxR886w" class="btn btn-teal mb-1" target="_blank">Kuhariri Data na Maelezo ya Mtumiaji</a>
                     <a href="https://youtu.be/wEpAlGHEhDg" class="btn btn-teal mb-1" target="_blank">Mahudhurio na Bitwaka</a>
                     <a href="https://youtu.be/EAZ_DXmAcI0" class="btn btn-teal mb-1" target="_blank">Matokeo</a>
-                    <a href="https://youtu.be/kP8NbmassHs" class="btn btn-teal mb-1" target="_blank">Mengineyo</a>
+                    <a href="https://youtu.be/kP8NbmassHs" class="btn btn-teal mb-1" target="_blank">Mengineyo</a> -->
                     <span class="btn btn-outline-teal mb-1">...</span>
                 </div>
             <?php endif ?>
             <?php if (session('role') == 'admin') : ?>
                 <div class="card-body">
-                    <p><b>Ukurasa wa Mwanafunzi</b> <span class="badge badge-danger">3</span></p>
-                    <a href="https://youtube.com/shorts/Rt6mEs4weXs" class="btn btn-danger mb-1" target="_blank">Mwanzo</a>
+                    <p><b>Ukurasa wa Admin</b> <span class="badge badge-danger">3</span></p>
+                    <!-- <a href="https://youtube.com/shorts/Rt6mEs4weXs" class="btn btn-danger mb-1" target="_blank">Mwanzo</a>
                     <a href="https://youtu.be/BdVLrxR886w" class="btn btn-danger mb-1" target="_blank">Kuhariri Data na Maelezo ya Mtumiaji</a>
                     <a href="https://youtu.be/wEpAlGHEhDg" class="btn btn-danger mb-1" target="_blank">Mahudhurio na Bitwaka</a>
                     <a href="https://youtu.be/EAZ_DXmAcI0" class="btn btn-danger mb-1" target="_blank">Matokeo</a>
-                    <a href="https://youtu.be/kP8NbmassHs" class="btn btn-danger mb-1" target="_blank">Mengineyo</a>
+                    <a href="https://youtu.be/kP8NbmassHs" class="btn btn-danger mb-1" target="_blank">Mengineyo</a> -->
                     <span class="btn btn-outline-danger mb-1">...</span>
                 </div>
             <?php endif ?>
