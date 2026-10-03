@@ -35,12 +35,12 @@
             <?php endif ?>
             <?php if (session('role') == 'admin') : ?>
                 <div class="card-body">
-                    <p><b>Ukurasa wa Admin</b> <span class="badge badge-danger">3</span></p>
+                    <p><b>Ukurasa wa Admin</b> <span class="badge badge-danger">6</span></p>
                     <a href="https://youtu.be/csUKbTvln_M" class="btn btn-danger mb-1" target="_blank">Wanafunzi</a>
                     <a href="https://youtu.be/HfH5gy61fDA" class="btn btn-danger mb-1" target="_blank">Walimu</a>
                     <a href="https://youtu.be/5qQhYI6DDfs" class="btn btn-danger mb-1" target="_blank">Matumizi, Mahudhurio na Jedwali</a>
-                    <a href="https://youtu.be/EAZ_DXmAcI0" class="btn btn-danger mb-1" target="_blank">Matokeo</a>
-                    <a href="https://youtu.be/kP8NbmassHs" class="btn btn-danger mb-1" target="_blank">Mengineyo</a>
+                    <a href="https://youtu.be/oJJot3yxVyQ" class="btn btn-danger mb-1" target="_blank">Matokeo</a>
+                    <a href="https://youtu.be/4GJpKb9mnzo" class="btn btn-danger mb-1" target="_blank">Settings</a>
                     <span class="btn btn-outline-danger mb-1">...</span>
                 </div>
             <?php endif ?>
