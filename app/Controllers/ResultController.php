@@ -146,7 +146,7 @@ class ResultController extends BaseController
         $male = $usr->where(['fn' => 'student', 'sex' => 'M', 'level' => $c])->orderBy('name_ar', 'asc')->findAll();
         $female = $usr->where(['fn' => 'student', 'sex' => 'F', 'level' => $c])->orderBy('name_ar', 'asc')->findAll();
         $check = $res->where(['course_id' => $c, 'subject_id' => $s, 'school_id' => $sc, 'year_id' => $y])->first();
-        // dd($check, $students);
+        // dd($check, $male, $female);
 
         if ($check == null) {
             return redirect()->back()->with('type', 'error')->with('text', lang('app.studentNotFound'))->with('title', lang('app.sorry'));
@@ -165,13 +165,7 @@ class ResultController extends BaseController
         // dd($data);
 
         // dd($check[$exam . '_status']);
-        if ($check[$exam . '_status'] == null) {
-            dd('show');
-            return redirect()->back()->with('type', 'error')->with('text', lang('app.studentNotFound'))->with('title', lang('app.sorry'));
-            // } elseif ($check['course_status'] == 'gpa') {
-            //     // dd('mark');
-            //     return redirect()->to('result/course/show/' . $c . '/' . $y);
-        } elseif ($check[$exam . '_status'] != 'done') {
+        if ($check[$exam . '_status'] != 'done') {
             // dd('add');
             return view('result/marks', $data);
         }

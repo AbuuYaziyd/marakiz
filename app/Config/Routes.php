@@ -251,17 +251,17 @@ $routes->group('subject', function ($routes) {
  */
 $routes->group('attendance', function ($routes) {
     $routes->get('/', 'AttendanceController::index', ['filter' => 'auth']);
-    $routes->post('create', 'AttendanceController::create', ['filter' => 'auth']);
-    $routes->post('update', 'AttendanceController::update', ['filter' => 'auth']);
+    $routes->post('create', 'AttendanceController::create', ['filter' => 'teacher']);
+    $routes->post('update', 'AttendanceController::update', ['filter' => 'teacher']);
     $routes->get('student/(:num)', 'AttendanceController::student/$1', ['filter' => 'auth']);
     $routes->post('date', 'AttendanceController::date', ['filter' => 'auth']);
     $routes->get('data/(:num)/(:num)', 'AttendanceController::data/$1/$2', ['filter' => 'auth']);
-    $routes->get('course/(:segment)/(:num)', 'AttendanceController::course/$1/$2', ['filter' => 'admin']);
+    $routes->get('course/(:segment)/(:num)', 'AttendanceController::course/$1/$2', ['filter' => 'teacher']);
     $routes->get('appeal/(:num)', 'AttendanceController::appeal/$1', ['filter' => 'auth']);
     $routes->post('appeal', 'AttendanceController::submitAppeal', ['filter' => 'auth']);
-    $routes->get('reply/(:num)', 'AttendanceController::reply/$1', ['filter' => 'auth']);
-    $routes->get('dismiss/(:num)', 'AttendanceController::dismiss/$1', ['filter' => 'auth']);
-    $routes->get('delete/(:num)', 'AttendanceController::delete/$1', ['filter' => 'auth']);
+    $routes->get('reply/(:num)', 'AttendanceController::reply/$1', ['filter' => 'teacher']);
+    $routes->get('dismiss/(:num)', 'AttendanceController::dismiss/$1', ['filter' => 'teacher']);
+    $routes->get('delete/(:num)', 'AttendanceController::delete/$1', ['filter' => 'teacher']);
 });
 
 /*
