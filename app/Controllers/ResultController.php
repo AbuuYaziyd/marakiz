@@ -526,7 +526,7 @@ class ResultController extends BaseController
         $data['title'] = lang('app.results');
         $data['crs'] = $crs;
         $data['subjects'] = $sub->where('head_id', $teacher_id)->findAll();
-        // dd($data);
+        dd($data);
 
         return view('result/teacher', $data);
     }
