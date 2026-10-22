@@ -48,13 +48,13 @@ jobs:
           server-dir: /ikhlas.rf.gd/htdocs/
 
       # Target 4
-      - name: Deploy to Directory 4
-        uses: SamKirkland/FTP-Deploy-Action@4.3.3
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME_2 }}
-          password: ${{ secrets.FTP_PASSWORD_2 }}
-          server-dir: /markazomar.rf.gd/htdocs/
+      # - name: Deploy to Directory 4
+      #   uses: SamKirkland/FTP-Deploy-Action@4.3.3
+      #   with:
+      #     server: ${{ secrets.FTP_SERVER }}
+      #     username: ${{ secrets.FTP_USERNAME_2 }}
+      #     password: ${{ secrets.FTP_PASSWORD_2 }}
+      #     server-dir: /markazomar.rf.gd/htdocs/
 
       # Target 5
       - name: Deploy to Directory 5
