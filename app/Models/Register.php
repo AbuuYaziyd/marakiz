@@ -13,9 +13,12 @@ class Register extends Model
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'fname',
+        'name',
         'mname',
         'lname',
+        'name_ar',
+        'mname_ar',
+        'lname_ar',
         'email',
         'phone',
         'sex',
@@ -23,13 +26,7 @@ class Register extends Model
         'address',
         'nationality',
         'city_id',
-        'quran',
-        'lugha',
-        'nahw',
-        'swarf',
-        'fiqh',
-        'other',
-        'image',
+        'level',
     ];
 
     protected bool $allowEmptyInserts = false;

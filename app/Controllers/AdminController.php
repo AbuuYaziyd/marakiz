@@ -3,8 +3,10 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Libraries\Hijri;
 use App\Models\ActivityLog;
 use App\Models\Attendance;
+use App\Models\City;
 use App\Models\Course;
 use App\Models\Fee;
 use App\Models\FeeType;
@@ -43,34 +45,39 @@ class AdminController extends BaseController
     public function registration()
     {
         $reg = new Register();
+        $crs = new Course();
 
         $data['title'] = lang('app.newStudents');
         $data['users'] = $reg->findAll();
+        $data['crs'] = $crs;
         // dd($data);
 
         return view('admin/registration', $data);
     }
 
-    // public function showReg($id)
-    // {
-    //     helper('form');
+    public function showReg($id)
+    {
+        helper('form');
 
-    //     $reg = new Register();
-    //     $crs = new Course();
-    //     $usr = new User();
-    //     $typ = new FeeType();
+        $reg = new Register();
+        $crs = new Course();
+        $cty = new City();
+        $hjr = new Hijri();
 
-    //     $register = $reg->find($id);
-    //     $data['title'] = lang('app.newStudents');
-    //     $data['course'] = $crs->findAll();
-    //     $data['register'] = $register;
-    //     $data['user'] = $usr->where('email', $register['email'])->first();
-    //     $data['fee'] = $typ->find(1);
-    //     $data['maombi'] = env('maombi');
-    //     // dd($data);
+        $register = $reg->find($id);
+        $course = $crs->find($register['level']);
 
-    //     return view('admin/user-registered', $data);
-    // }
+        $data['title'] = lang('app.newStudents');
+        $data['user'] = $register;
+        $data['courses'] = $crs->findAll();
+        $data['city'] = $cty->find($register['city_id']);
+        $data['course'] = $course;
+        $data['hjr'] = $hjr;
+        $data['school'] = $crs->school($course['school_id']);
+        // dd($data);
+
+        return view('admin/user-registered', $data);
+    }
 
     // public function regDelete($id)
     // {
