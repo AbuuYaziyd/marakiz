@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\ActivityLog;
+use App\Models\Course;
 use App\Models\User;
 
 class AuthController extends BaseController
@@ -241,5 +242,116 @@ class AuthController extends BaseController
         $act->addActivity($id, 'Reset User Password - By Admin', 'Task was Performed by: ' . session('name') . ', email: ' . session('email') . ', username: ' . session('username') . '!');
 
         return redirect()->back()->with('toast', 'success')->with('text', lang('app.passchanged') . ' ' . lang('app.useLast'))->with('title', lang('app.done'));
+    }
+
+    public function eregister()
+    {
+        helper('form');
+
+        $crs = new Course();
+
+        $data['title'] = lang('app.addNewStudent');
+        $data['course'] = $crs->findAll();
+        $data['crs'] = $crs;
+        // dd($data);
+
+        return view('auth/eregister', $data);
+    }
+
+    public function register()
+    {
+        // dd($this->request->getVar());
+
+        helper('form');
+
+        $input = $this->validate(
+            [   //Rules
+                'name' => 'required|min_length[3]',
+                'mname' => 'required|min_length[3]',
+                'lname' => 'required|min_length[3]',
+                'name_ar' => 'required|min_length[3]',
+                'mname_ar' => 'required|min_length[3]',
+                'lname_ar' => 'required|min_length[3]',
+                'dob' => 'required',
+            ],
+            [   // Errors
+                'name' =>
+                [
+                    'required' => lang('error.required'),
+                    'min_length' => lang('error.min_length'),
+                ],
+                'mname' =>
+                [
+                    'required' => lang('error.required'),
+                    'min_length' => lang('error.min_length'),
+                ],
+                'lname' =>
+                [
+                    'required' => lang('error.required'),
+                    'min_length' => lang('error.min_length'),
+                ],
+                'name_ar' => [
+                    'required' => lang('error.required'),
+                ],
+                'mname_ar' =>
+                [
+                    'required' => lang('error.required'),
+                    'min_length' => lang('error.min_length'),
+                ],
+                'lname_ar' =>
+                [
+                    'required' => lang('error.required'),
+                    'min_length' => lang('error.min_length'),
+                ],
+                'dob' => [
+                    'required' => lang('error.required'),
+                ],
+            ]
+        );
+
+        // dd($input);
+        if (!$input) {
+            $crs = new Course();
+
+            $data['title'] = lang('app.register');
+            $data['course'] = $crs->findAll();
+            $data['crs'] = $crs;
+            $data['validation'] = $this->validator;
+            // dd($data);
+
+            return view('auth/eregister', $data);
+        } else {
+
+            $usr = new User();
+            $act = new ActivityLog();
+
+            $username = $usr->studentID();
+            $email = $this->request->getVar('email');
+            $name = str_replace(' ', '', $this->request->getVar('name'));
+            $mname = str_replace(' ', '', $this->request->getVar('mname'));
+            $lname = str_replace(' ', '', $this->request->getVar('lname'));
+
+            $data = [
+                'name'      => $name,
+                'mname'     => $mname,
+                'lname'     => $lname,
+                'name_ar'   => $this->request->getVar('name_ar'),
+                'mname_ar'  => $this->request->getVar('mname_ar'),
+                'lname_ar'  => $this->request->getVar('lname_ar'),
+                'phone'     => $this->request->getVar('phone'),
+                'dob'       => $this->request->getVar('dob'),
+                'level'     => $this->request->getVar('level'),
+                'sex'       => $this->request->getVar('sex'),
+                'email'     => ($email != '' ? $email : $username . '@gmail.com'),
+            ];
+            dd($data);
+
+            $usr->save($data);
+            $insert_id = $usr->getInsertID();
+
+            $act->addActivity(session('id'), 'Register New User - Authentication', 'User was Registered by: ' . session('name') . ', email: ' . session('email') . ', username: ' . session('malaf') . '!');
+
+            return redirect()->to('student/page/' . $insert_id)->with('type', 'success')->with('text', lang('app.successfully') . lang('app.useLast'))->with('title', lang('app.done'));
+        }
     }
 }

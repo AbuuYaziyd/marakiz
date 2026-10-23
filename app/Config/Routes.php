@@ -25,6 +25,8 @@ $routes->get('logout', 'AuthController::logout');
 $routes->get('recover', 'AuthController::recover');
 $routes->post('password', 'AuthController::password');
 $routes->get('reset/(:num)', 'AuthController::reset/$1', ['filter' => 'teacher']);
+$routes->get('eregister', 'AuthController::eregister');
+$routes->post('register', 'AuthController::register');
 
 /*
  * --------------------------------------------------------------------
