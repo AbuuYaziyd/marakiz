@@ -8,12 +8,9 @@ use App\Models\ActivityLog;
 use App\Models\Attendance;
 use App\Models\City;
 use App\Models\Course;
-use App\Models\Fee;
-use App\Models\FeeType;
 use App\Models\Register;
 use App\Models\Setting;
 use App\Models\User;
-use App\Models\Year;
 
 class AdminController extends BaseController
 {
