@@ -143,7 +143,9 @@
             </strong>
         </div>
         <div class="qr-wrapper">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=<?= urlencode(base_url('eregister')) ?>" title="<?= $title ?>" />
+            <a href="<?= base_url('eregister') ?>">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=<?= urlencode(base_url('eregister')) ?>" title="<?= $title ?>" />
+            </a>
         </div>
     </div>
 </body>

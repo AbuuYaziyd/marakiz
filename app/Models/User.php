@@ -132,4 +132,42 @@ class User extends Model
         $ct = new City();
         return $ct->find($id);
     }
+
+    function generatePassword()
+    {
+        $lowercase = str_split('abcdefghijklmnopqrstuvwxyz');
+        $uppercase = str_split('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+        $numbers   = str_split('0123456789');
+        $special   = str_split('!@#$%^&*()-_=+[]{}|;:,.<>?');
+
+        // Inline helper to securely pull and remove an item from any array pool
+        $pull = function (array &$pool) {
+            return array_splice($pool, random_int(0, count($pool) - 1), 1)[0];
+        };
+
+        // --- ZONE 1: 4 Unique Letters (Guarantees 1 lower, 1 upper, then 2 random letters) ---
+        $letters = [$pull($lowercase), $pull($uppercase)];
+        $letterPool = array_merge($lowercase, $uppercase);
+        while (count($letters) < 4) {
+            $letters[] = $pull($letterPool);
+        }
+
+        // --- ZONE 2: 4 Unique Numbers + 1 Symbol ---
+        $mix = [$pull($special)];
+        while (count($mix) < 5) {
+            $mix[] = $pull($numbers);
+        }
+
+        // Securely shuffle both zones internally using Fisher-Yates
+        foreach ([&$letters, &$mix] as &$zone) {
+            for ($i = count($zone) - 1; $i > 0; $i--) {
+                $j = random_int(0, $i);
+                [$zone[$i], $zone[$j]] = [$zone[$j], $zone[$i]];
+            }
+        }
+
+        $password = implode('', array_merge($letters, $mix));
+
+        return $password;
+    }
 }

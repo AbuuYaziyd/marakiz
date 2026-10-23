@@ -12,7 +12,7 @@
                                 <a href="<?= base_url() ?>"><img src="<?= base_url(session('logo')) ?>" alt="logo" height="180px"></a>
                             </div>
                         </div>
-                        <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2"><span><?= lang('app.register') ?></span>
+                        <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2"><span><?= lang('app.register') ?> - <?= session('lang') != 'ar' ? session('markaz')['value'] : session('markaz')['value_ar'] ?></span>
                         </h6>
                     </div>
                     <div class="card-content">
@@ -21,46 +21,85 @@
                             <?= form_open('register') ?>
                             <div class="row">
                                 <fieldset class="col-md-4 mb-1">
-                                    <label><?= lang('app.fname') ?> <span class="danger">*</span> :</label>
+                                    <label><?= lang('app.fname') ?> <span class="danger">*</span></label>
                                     <?php if ($validation->getError('name')) : ?>
                                         <span class="badge badge-danger"> <?= $errors = $validation->getError('name') ?></span>
                                     <?php endif ?>
                                     <input type="text" class="form-control" name="name" placeholder="<?= lang('app.fname') ?>">
                                 </fieldset>
                                 <fieldset class="col-md-4 mb-1">
-                                    <label><?= lang('app.mname') ?> <span class="danger">*</span> :</label>
+                                    <label><?= lang('app.mname') ?> <span class="danger">*</span></label>
                                     <?php if ($validation->getError('mname')) : ?>
                                         <span class="badge badge-danger"> <?= $errors = $validation->getError('mname') ?></span>
                                     <?php endif ?>
                                     <input type="text" class="form-control" name="mname" placeholder="<?= lang('app.mname') ?>">
                                 </fieldset>
                                 <fieldset class="col-md-4 mb-1">
-                                    <label><?= lang('app.lname') ?> <span class="danger">*</span> :</label>
+                                    <label><?= lang('app.lname') ?> <span class="danger">*</span></label>
                                     <?php if ($validation->getError('lname')) : ?>
                                         <span class="badge badge-danger"> <?= $errors = $validation->getError('lname') ?></span>
                                     <?php endif ?>
                                     <input type="text" class="form-control" name="lname" placeholder="<?= lang('app.lname') ?>">
                                 </fieldset>
                                 <fieldset class="col-md-4 mb-1">
-                                    <label><?= lang('app.fname_ar') ?> <span class="danger">*</span> :</label>
+                                    <label><?= lang('app.fname_ar') ?> <span class="danger">*</span></label>
                                     <?php if ($validation->getError('name_ar')) : ?>
                                         <span class="badge badge-danger"> <?= $errors = $validation->getError('name_ar') ?></span>
                                     <?php endif ?>
                                     <input type="text" class="form-control" name="name_ar" placeholder="<?= lang('app.fname_ar') ?>">
                                 </fieldset>
                                 <fieldset class="col-md-4 mb-1">
-                                    <label><?= lang('app.mname_ar') ?> <span class="danger">*</span> :</label>
+                                    <label><?= lang('app.mname_ar') ?> <span class="danger">*</span></label>
                                     <?php if ($validation->getError('mname_ar')) : ?>
                                         <span class="badge badge-danger"> <?= $errors = $validation->getError('mname_ar') ?></span>
                                     <?php endif ?>
                                     <input type="text" class="form-control" name="mname_ar" placeholder="<?= lang('app.mname_ar') ?>">
                                 </fieldset>
                                 <fieldset class="col-md-4 mb-1">
-                                    <label><?= lang('app.lname_ar') ?> <span class="danger">*</span> :</label>
+                                    <label><?= lang('app.lname_ar') ?> <span class="danger">*</span></label>
                                     <?php if ($validation->getError('lname_ar')) : ?>
                                         <span class="badge badge-danger"> <?= $errors = $validation->getError('lname_ar') ?></span>
                                     <?php endif ?>
                                     <input type="text" class="form-control" name="lname_ar" placeholder="<?= lang('app.lname_ar') ?>">
+                                </fieldset>
+                                <fieldset class="col-md-4 mb-1">
+                                    <label><?= lang('app.nationality') ?><span class="danger">*</span></label>
+                                    <?php if ($validation->getError('nationality')) : ?>
+                                        <span class="badge badge-danger"> <?= $errors = $validation->getError('nationality') ?></span>
+                                    <?php endif ?>
+                                    <select name="nationality" class="custom-select">
+                                        <?php foreach ($countries as $dt) : ?>
+                                            <option value="<?= $dt['code'] ?>" <?= $dt['code'] == 'TZ' ? 'selected' : '' ?>>
+                                                <?php if (session('lang') != 'ar') : ?>
+                                                    <?= $dt['nationality'] ?>
+                                                <?php else : ?>
+                                                    <?= $dt['nationality_ar'] ?>
+                                                <?php endif ?>
+                                            </option>
+                                        <?php endforeach ?>
+                                    </select>
+                                </fieldset>
+                                <fieldset class="col-md-4 mb-1">
+                                    <label><?= lang('app.city') ?><span class="danger">*</span></label>
+                                    <?php if ($validation->getError('city_id')) : ?>
+                                        <span class="badge badge-danger"> <?= $errors = $validation->getError('city_id') ?></span>
+                                    <?php endif ?>
+                                    <select name="city_id" class="custom-select">
+                                        <option selected disabled><?= lang('app.choose') ?></option>
+                                        <?php foreach ($cities as $dt) : ?>
+                                            <option value="<?= $dt['id'] ?>">
+                                                <?php if (session('lang') != 'ar') : ?>
+                                                    <?= $dt['name'] ?>
+                                                <?php else : ?>
+                                                    <?= $dt['name_ar'] ?>
+                                                <?php endif ?>
+                                            </option>
+                                        <?php endforeach ?>
+                                    </select>
+                                </fieldset>
+                                <fieldset class="col-md-4 mb-1">
+                                    <label><?= lang('app.address') ?><span class="danger">*</span></label>
+                                    <input type="text" class="form-control" name="address" placeholder="Ilala - Buguruni">
                                 </fieldset>
                                 <fieldset class="col-md-4 mb-1">
                                     <label><?= lang('app.dob') ?><span class="danger">*</span></label>
@@ -78,7 +117,7 @@
                                                 <?php if (session('lang') != 'ar') : ?>
                                                     <?= $crs->school($dt['school_id'])['name'] ?> - <?= $dt['name'] ?>
                                                 <?php else : ?>
-                                                    <?= $dt['name_ar'] ?>
+                                                    <?= $crs->school($dt['school_id'])['name_ar'] ?> - <?= $dt['name_ar'] ?>
                                                 <?php endif ?>
                                             </option>
                                         <?php endforeach ?>
@@ -99,7 +138,7 @@
                                     </div>
                                 </fieldset>
                                 <fieldset class="col-md-4 mb-1">
-                                    <label><?= lang('app.phone') ?></label>
+                                    <label><?= lang('app.phone') ?> (<?= lang('app.whatsapp') ?>)<span class="danger">*</span></label>
                                     <input type="number" class="form-control" name="phone" placeholder="255683123456">
                                 </fieldset>
                                 <fieldset class="col-md-8 mb-1">

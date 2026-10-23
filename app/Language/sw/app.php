@@ -35,6 +35,7 @@ return [
     // Admission
     'admission' => 'Usaili',
     'nationality' => 'Uraia',
+    'city' => 'Mji',
     'opinion' => 'Maoni',
     'userData' => 'Data za Mtumiaji',
 
@@ -118,6 +119,7 @@ return [
     'status' => 'Hali',
     'successfully' => 'Kazi imetimia kikamilifu',
     'unsuccessfully' => 'Kazi Haikutimia!',
+    'regQR' => 'QR Code - Usajili',
 
     // Academic
     'academic' => 'Taaluma',

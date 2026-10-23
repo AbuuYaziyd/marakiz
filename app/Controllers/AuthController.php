@@ -4,7 +4,10 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\ActivityLog;
+use App\Models\City;
+use App\Models\Country;
 use App\Models\Course;
+use App\Models\Register;
 use App\Models\User;
 
 class AuthController extends BaseController
@@ -259,9 +262,13 @@ class AuthController extends BaseController
         helper('form');
 
         $crs = new Course();
+        $cty = new City();
+        $nat = new Country();
 
         $data['title'] = lang('app.addNewStudent');
         $data['course'] = $crs->findAll();
+        $data['cities'] = $cty->findAll();
+        $data['countries'] = $nat->findAll();
         $data['crs'] = $crs;
         // dd($data);
 
@@ -283,6 +290,7 @@ class AuthController extends BaseController
                 'mname_ar' => 'required|min_length[3]',
                 'lname_ar' => 'required|min_length[3]',
                 'dob' => 'required',
+                'city_id' => 'required',
             ],
             [   // Errors
                 'name' =>
@@ -316,15 +324,20 @@ class AuthController extends BaseController
                 'dob' => [
                     'required' => lang('error.required'),
                 ],
+                'city_id' => [
+                    'required' => lang('error.required'),
+                ],
             ]
         );
 
         // dd($input);
         if (!$input) {
             $crs = new Course();
+            $cty = new City();
 
             $data['title'] = lang('app.register');
             $data['course'] = $crs->findAll();
+            $data['cities'] = $cty->findAll();
             $data['crs'] = $crs;
             $data['validation'] = $this->validator;
             // dd($data);
@@ -332,36 +345,35 @@ class AuthController extends BaseController
             return view('auth/eregister', $data);
         } else {
 
-            $usr = new User();
-            $act = new ActivityLog();
+            $reg = new Register();
 
-            $username = $usr->studentID();
             $email = $this->request->getVar('email');
             $name = str_replace(' ', '', $this->request->getVar('name'));
             $mname = str_replace(' ', '', $this->request->getVar('mname'));
             $lname = str_replace(' ', '', $this->request->getVar('lname'));
+            $time = $name . $lname . time();
 
             $data = [
-                'name'      => $name,
-                'mname'     => $mname,
-                'lname'     => $lname,
-                'name_ar'   => $this->request->getVar('name_ar'),
-                'mname_ar'  => $this->request->getVar('mname_ar'),
-                'lname_ar'  => $this->request->getVar('lname_ar'),
-                'phone'     => $this->request->getVar('phone'),
-                'dob'       => $this->request->getVar('dob'),
-                'level'     => $this->request->getVar('level'),
-                'sex'       => $this->request->getVar('sex'),
-                'email'     => ($email != '' ? $email : $username . '@gmail.com'),
+                'name'          => strtoupper($name),
+                'mname'         => strtoupper($mname),
+                'lname'         => strtoupper($lname),
+                'name_ar'       => $this->request->getVar('name_ar'),
+                'mname_ar'      => $this->request->getVar('mname_ar'),
+                'lname_ar'      => $this->request->getVar('lname_ar'),
+                'phone'         => $this->request->getVar('phone'),
+                'dob'           => $this->request->getVar('dob'),
+                'level'         => $this->request->getVar('level'),
+                'sex'           => $this->request->getVar('sex'),
+                'address'       => $this->request->getVar('address'),
+                'city_id'       => $this->request->getVar('city_id'),
+                'nationality'   => $this->request->getVar('nationality'),
+                'email'         => ($email != '' ? $email : $time . '@gmail.com'),
             ];
-            dd($data);
+            // dd($data);
 
-            $usr->save($data);
-            $insert_id = $usr->getInsertID();
+            $reg->save($data);
 
-            $act->addActivity(session('id'), 'Register New User - Authentication', 'User was Registered by: ' . session('name') . ', email: ' . session('email') . ', username: ' . session('malaf') . '!');
-
-            return redirect()->to('student/page/' . $insert_id)->with('type', 'success')->with('text', lang('app.successfully') . lang('app.useLast'))->with('title', lang('app.done'));
+            return redirect()->to('/')->with('type', 'success')->with('text', lang('app.successfully'))->with('title', lang('app.done'));
         }
     }
 }

@@ -22,7 +22,7 @@ class Register extends Model
         'dob',
         'address',
         'nationality',
-        'quran_hifdh',
+        'city_id',
         'quran',
         'lugha',
         'nahw',

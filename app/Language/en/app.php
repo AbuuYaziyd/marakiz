@@ -35,6 +35,7 @@ return [
     // Admission
     'admission' => 'Admission',
     'nationality' => 'Nationality',
+    'city' => 'City',
     'opinion' => 'Feedback',
     'userData' => 'User Data',
 

@@ -35,6 +35,7 @@ return [
     // Admission
     'admission' => 'تقديم',
     'nationality' => 'الجنسية',
+    'city' => 'المدينة',
     'opinion' => 'آراء',
     'userData' => 'معلومات الشخصي',
 
