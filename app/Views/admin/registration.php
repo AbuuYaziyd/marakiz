@@ -6,7 +6,10 @@
         <div id="recent-sales" class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3><b><?= $title ?></b></h3>
+                    <h3>
+                        <b><?= $title ?></b>
+                        <a href="<?= base_url('regqr') ?>" class="btn btn-outline-black round pull-right"><?= lang('app.regQR') ?></a>
+                    </h3>
                 </div>
                 <div class="card-content mt-1 m-2">
                     <div class="table-responsive">

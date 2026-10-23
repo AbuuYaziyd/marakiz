@@ -118,6 +118,7 @@ return [
     'status' => 'الحال',
     'successfully' => 'تم العملية بنجاح',
     'unsuccessfully' => 'فشلة العملية',
+    'regQR' => 'رمز المسح - للتسجيل',
 
     // Academic
     'academic' => 'التعليـــــــــــم',

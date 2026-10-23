@@ -118,6 +118,7 @@ return [
     'status' => 'Status',
     'successfully' => 'Operation completed successfully',
     'unsuccessfully' => 'Operation failed!',
+    'regQR' => 'Registration - QR Code',
 
     // Academic
     'academic' => 'Academics',

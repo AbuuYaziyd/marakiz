@@ -244,6 +244,16 @@ class AuthController extends BaseController
         return redirect()->back()->with('toast', 'success')->with('text', lang('app.passchanged') . ' ' . lang('app.useLast'))->with('title', lang('app.done'));
     }
 
+    public function regqr()
+    {
+        helper('form');
+
+        $data['title'] = lang('app.regQR');
+        // dd($data);
+
+        return view('auth/regqr', $data);
+    }
+
     public function eregister()
     {
         helper('form');
