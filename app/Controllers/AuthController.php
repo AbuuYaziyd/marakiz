@@ -234,17 +234,19 @@ class AuthController extends BaseController
         $usr = new User();
         $act = new ActivityLog();
 
-        $user = $usr->find($id);
-        $lname = str_replace(' ', '', $user['lname']);
-        // dd($user);
+        $password = $usr->generatePassword();
+        // dd($password);
 
-        $data = ['password' => password_hash(strtoupper($lname), PASSWORD_DEFAULT),];
+        $data = [
+            'password' => password_hash($password, PASSWORD_DEFAULT),
+            'generated_password' => $password,
+        ];
 
         $usr->update($id, $data);
 
         $act->addActivity($id, 'Reset User Password - By Admin', 'Task was Performed by: ' . session('name') . ', email: ' . session('email') . ', username: ' . session('username') . '!');
 
-        return redirect()->back()->with('toast', 'success')->with('text', lang('app.passchanged') . ' ' . lang('app.useLast'))->with('title', lang('app.done'));
+        return redirect()->back()->with('toast', 'success')->with('text', lang('app.passchanged'))->with('title', lang('app.done'));
     }
 
     public function regqr()
