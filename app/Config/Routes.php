@@ -25,6 +25,9 @@ $routes->get('logout', 'AuthController::logout');
 $routes->get('recover', 'AuthController::recover');
 $routes->post('password', 'AuthController::password');
 $routes->get('reset/(:num)', 'AuthController::reset/$1', ['filter' => 'teacher']);
+$routes->get('regqr', 'AuthController::regqr');
+$routes->get('eregister', 'AuthController::eregister');
+$routes->post('register', 'AuthController::register');
 
 /*
  * --------------------------------------------------------------------
@@ -83,7 +86,7 @@ $routes->group('admin', function ($routes) {
     $routes->get('/', 'AdminController::index', ['filter' => 'admin']);
     $routes->get('setting', 'AdminController::setting', ['filter' => 'admin']);
     $routes->get('registration', 'AdminController::registration', ['filter' => 'admin']);
-    // $routes->get('show-user-register/(:num)', 'AdminController::showReg/$1', ['filter' => 'admin']);
+    $routes->get('show-registered/(:num)', 'AdminController::showReg/$1', ['filter' => 'admin']);
     // $routes->get('register-delete/(:num)', 'AdminController::regDelete/$1', ['filter' => 'admin']);
     // $routes->post('register', 'AdminController::register', ['filter' => 'admin']);
     // $routes->post('malipo', 'AdminController::malipo', ['filter' => 'admin']);

@@ -35,6 +35,7 @@ return [
     // Admission
     'admission' => 'تقديم',
     'nationality' => 'الجنسية',
+    'city' => 'المدينة',
     'opinion' => 'آراء',
     'userData' => 'معلومات الشخصي',
 
@@ -118,6 +119,7 @@ return [
     'status' => 'الحال',
     'successfully' => 'تم العملية بنجاح',
     'unsuccessfully' => 'فشلة العملية',
+    'regQR' => 'رمز المسح - للتسجيل',
 
     // Academic
     'academic' => 'التعليـــــــــــم',

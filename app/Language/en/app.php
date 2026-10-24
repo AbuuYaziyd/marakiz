@@ -35,6 +35,7 @@ return [
     // Admission
     'admission' => 'Admission',
     'nationality' => 'Nationality',
+    'city' => 'City',
     'opinion' => 'Feedback',
     'userData' => 'User Data',
 
@@ -118,6 +119,7 @@ return [
     'status' => 'Status',
     'successfully' => 'Operation completed successfully',
     'unsuccessfully' => 'Operation failed!',
+    'regQR' => 'Registration - QR Code',
 
     // Academic
     'academic' => 'Academics',

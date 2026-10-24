@@ -4,6 +4,10 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\ActivityLog;
+use App\Models\City;
+use App\Models\Country;
+use App\Models\Course;
+use App\Models\Register;
 use App\Models\User;
 
 class AuthController extends BaseController
@@ -241,5 +245,135 @@ class AuthController extends BaseController
         $act->addActivity($id, 'Reset User Password - By Admin', 'Task was Performed by: ' . session('name') . ', email: ' . session('email') . ', username: ' . session('username') . '!');
 
         return redirect()->back()->with('toast', 'success')->with('text', lang('app.passchanged') . ' ' . lang('app.useLast'))->with('title', lang('app.done'));
+    }
+
+    public function regqr()
+    {
+        helper('form');
+
+        $data['title'] = lang('app.regQR');
+        // dd($data);
+
+        return view('auth/regqr', $data);
+    }
+
+    public function eregister()
+    {
+        helper('form');
+
+        $crs = new Course();
+        $cty = new City();
+        $nat = new Country();
+
+        $data['title'] = lang('app.addNewStudent');
+        $data['course'] = $crs->findAll();
+        $data['cities'] = $cty->findAll();
+        $data['countries'] = $nat->findAll();
+        $data['crs'] = $crs;
+        // dd($data);
+
+        return view('auth/eregister', $data);
+    }
+
+    public function register()
+    {
+        // dd($this->request->getVar());
+
+        helper('form');
+
+        $input = $this->validate(
+            [   //Rules
+                'name' => 'required|min_length[3]',
+                'mname' => 'required|min_length[3]',
+                'lname' => 'required|min_length[3]',
+                'name_ar' => 'required|min_length[3]',
+                'mname_ar' => 'required|min_length[3]',
+                'lname_ar' => 'required|min_length[3]',
+                'dob' => 'required',
+                'city_id' => 'required',
+            ],
+            [   // Errors
+                'name' =>
+                [
+                    'required' => lang('error.required'),
+                    'min_length' => lang('error.min_length'),
+                ],
+                'mname' =>
+                [
+                    'required' => lang('error.required'),
+                    'min_length' => lang('error.min_length'),
+                ],
+                'lname' =>
+                [
+                    'required' => lang('error.required'),
+                    'min_length' => lang('error.min_length'),
+                ],
+                'name_ar' => [
+                    'required' => lang('error.required'),
+                ],
+                'mname_ar' =>
+                [
+                    'required' => lang('error.required'),
+                    'min_length' => lang('error.min_length'),
+                ],
+                'lname_ar' =>
+                [
+                    'required' => lang('error.required'),
+                    'min_length' => lang('error.min_length'),
+                ],
+                'dob' => [
+                    'required' => lang('error.required'),
+                ],
+                'city_id' => [
+                    'required' => lang('error.required'),
+                ],
+            ]
+        );
+
+        // dd($input);
+        if (!$input) {
+            $crs = new Course();
+            $cty = new City();
+
+            $data['title'] = lang('app.register');
+            $data['course'] = $crs->findAll();
+            $data['cities'] = $cty->findAll();
+            $data['crs'] = $crs;
+            $data['validation'] = $this->validator;
+            // dd($data);
+
+            return view('auth/eregister', $data);
+        } else {
+
+            $reg = new Register();
+
+            $email = $this->request->getVar('email');
+            $name = str_replace(' ', '', $this->request->getVar('name'));
+            $mname = str_replace(' ', '', $this->request->getVar('mname'));
+            $lname = str_replace(' ', '', $this->request->getVar('lname'));
+            $time = $name . $lname . time();
+
+            $data = [
+                'name'          => strtoupper($name),
+                'mname'         => strtoupper($mname),
+                'lname'         => strtoupper($lname),
+                'name_ar'       => $this->request->getVar('name_ar'),
+                'mname_ar'      => $this->request->getVar('mname_ar'),
+                'lname_ar'      => $this->request->getVar('lname_ar'),
+                'phone'         => $this->request->getVar('phone'),
+                'dob'           => $this->request->getVar('dob'),
+                'level'         => $this->request->getVar('level'),
+                'sex'           => $this->request->getVar('sex'),
+                'address'       => $this->request->getVar('address'),
+                'city_id'       => $this->request->getVar('city_id'),
+                'nationality'   => $this->request->getVar('nationality'),
+                'email'         => ($email != '' ? $email : $time . '@gmail.com'),
+            ];
+            // dd($data);
+
+            $reg->save($data);
+
+            return redirect()->to('/')->with('type', 'success')->with('text', lang('app.successfully'))->with('title', lang('app.done'));
+        }
     }
 }
