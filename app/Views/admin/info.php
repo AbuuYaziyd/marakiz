@@ -26,7 +26,7 @@ $ujumbe = htmlspecialchars('
 
 اسم المستخدم: ' . $user['username'] . ' %0A
 البريد الإلكتروني: ' . $user['email'] . ' %0A
-كلمة المرور: ' . strtoupper($user['lname']) . ' %0A%0A
+كلمة المرور: ' . ($user['generated_password'] ?? strtoupper($user['lname'])) . ' %0A%0A
 
 الرابط: ' . env('app.baseURL') . ' %0A%0A
 بارك الله فيكم!
@@ -37,7 +37,7 @@ Assalaamu Alaikum warahmatullahi Wabarakaatuh! %0A%0A
 Karibu Ndugu: ' . $user['name'] . ' '  . $user['mname'] . ' '  . $user['lname'] . ', Katika website yetu. %0A%0A
 Namba ya Usajili: ' . $user['username'] . ' %0A
 Email: ' . $user['email'] . ' %0A
-Nenosiri: ' . strtoupper($user['lname']) . '%0A%0A
+Nenosiri: ' . ($user['generated_password'] ?? strtoupper($user['lname'])) . '%0A%0A
 Wavuti: ' . env('app.baseURL') . '
 %0A%0A
 Baarakallahu Fiykum!');

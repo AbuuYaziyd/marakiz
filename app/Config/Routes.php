@@ -88,7 +88,7 @@ $routes->group('admin', function ($routes) {
     $routes->get('registration', 'AdminController::registration', ['filter' => 'admin']);
     $routes->get('show-registered/(:num)', 'AdminController::showReg/$1', ['filter' => 'admin']);
     // $routes->get('register-delete/(:num)', 'AdminController::regDelete/$1', ['filter' => 'admin']);
-    // $routes->post('register', 'AdminController::register', ['filter' => 'admin']);
+    $routes->post('admit', 'AdminController::admit', ['filter' => 'admin']);
     // $routes->post('malipo', 'AdminController::malipo', ['filter' => 'admin']);
     $routes->get('rooms', 'AdminController::rooms', ['filter' => 'admin']);
     $routes->post('room', 'AdminController::room', ['filter' => 'admin']);
