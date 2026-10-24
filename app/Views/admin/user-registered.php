@@ -87,7 +87,7 @@ $age = $now->diff($date);
                 <hr>
                 <div class="card-content">
                     <div class="card-body">
-                        <!-- DATA -->
+                        <span class="btn btn-block btn-lg btn-primary" id="admit"><?= lang('app.admitStudent') ?></span>
                     </div>
                 </div>
             </div>
@@ -95,8 +95,30 @@ $age = $now->diff($date);
     </div>
 </div>
 
+<?= form_open('admin/admit', ['id' => 'admitForm']) ?>
+<input type="hidden" name="id" value="<?= $user['id'] ?>">
+</form>
+
 
 <script>
+    $('#admit').on('click', function(e) {
+        e.preventDefault();
+        url = $(this).attr('href');
+        Swal.fire({
+            title: '<?= lang('app.sure') ?>',
+            text: '<?= lang('app.admitStudent') ?>',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '<?= lang('app.yes') ?>',
+            cancelButtonText: '<?= lang('app.no') ?>',
+        }).then(function(result) {
+            if (result.value) {
+                document.getElementById('admitForm').submit();
+            }
+        })
+    });
     $('.delete').on('click', function(e) {
         e.preventDefault();
         url = $(this).attr('href');

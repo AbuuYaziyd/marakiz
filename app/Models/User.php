@@ -39,6 +39,7 @@ class User extends Model
         'twitter',
         'insta',
         'facebook',
+        'generated_password',
     ];
 
     protected bool $allowEmptyInserts = false;

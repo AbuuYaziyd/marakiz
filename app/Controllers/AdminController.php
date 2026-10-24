@@ -90,42 +90,50 @@ class AdminController extends BaseController
     //     return redirect()->to('admin/registration')->with('type', 'success')->with('text', lang('app.successfully'))->with('title', lang('app.done'));
     // }
 
-    // public function register()
-    // {
-    //     // dd($this->request->getVar());
+    public function admit()
+    {
+        // dd($this->request->getVar());
 
-    //     $reg = new Register();
-    //     $usr = new User();
-    //     $act = new ActivityLog();
+        $reg = new Register();
+        $usr = new User();
+        $act = new ActivityLog();
 
-    //     $level = $this->request->getVar('level');
-    //     $dt = $reg->find($this->request->getVar('id'));
-    //     // dd($dt, $level);
+        $id = $this->request->getVar('id');
+        $user = $reg->find($this->request->getVar('id'));
+        $password = $usr->generatePassword();
+        // dd($id, $user, $password);
 
-    //     $newUser = [
-    //         'password'      => password_hash(strtoupper($dt['lname']), PASSWORD_DEFAULT),
-    //         'nationality'   => $dt['nationality'],
-    //         'username'      => $usr->studentID(),
-    //         'address'       => strtoupper($dt['address']),
-    //         'name'          => strtoupper($dt['fname']),
-    //         'mname'         => strtoupper($dt['mname']),
-    //         'lname'         => strtoupper($dt['lname']),
-    //         'email'         => strtolower($dt['email']),
-    //         'phone'         => $dt['phone'],
-    //         'sex'           => $dt['sex'],
-    //         'dob'           => $dt['dob'],
-    //         'role'          => 'student',
-    //         'fn'            => 'student',
-    //         'level'         => $level,
-    //     ];
-    //     // dd($newUser);
+        $newUser = [
+            'password'              => password_hash(strtoupper($password), PASSWORD_DEFAULT),
+            'nationality'           => $user['nationality'],
+            'username'              => $usr->studentID(),
+            'address'               => strtoupper($user['address']),
+            'name'                  => strtoupper($user['name']),
+            'mname'                 => strtoupper($user['mname']),
+            'lname'                 => strtoupper($user['lname']),
+            'name_ar'               => strtoupper($user['name_ar']),
+            'mname_ar'              => strtoupper($user['mname_ar']),
+            'lname_ar'              => strtoupper($user['lname_ar']),
+            'email'                 => strtolower($user['email']),
+            'phone'                 => $user['phone'],
+            'sex'                   => $user['sex'],
+            'dob'                   => $user['dob'],
+            'role'                  => 'student',
+            'fn'                    => 'student',
+            'level'                 => $user['level'],
+            'generated_password'    => $password,
+        ];
+        // dd($newUser);
 
-    //     $usr->insert($newUser);
+        $usr->insert($newUser);
+        $insert_id = $usr->getInsertID();
 
-    //     $act->addActivity(session('id'), 'Register new Student to System: ', 'Task was Performed by: ' . session('name') . ', email: ' . session('email') . ', username: ' . session('username') . '!');
+        $reg->delete($id);
 
-    //     return redirect()->back()->with('type', 'success')->with('text', lang('app.successfully'))->with('title', lang('app.done'));
-    // }
+        $act->addActivity(session('id'), 'Register new Student to System: ', 'Task was Performed by: ' . session('name') . ', email: ' . session('email') . ', username: ' . session('username') . '!');
+
+        return redirect()->to('student/page/' . $insert_id)->with('type', 'success')->with('text', lang('app.successfully'))->with('title', lang('app.done'));
+    }
 
     // public function malipo()
     // {

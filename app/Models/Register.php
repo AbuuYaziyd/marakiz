@@ -27,6 +27,9 @@ class Register extends Model
         'nationality',
         'city_id',
         'level',
+        'interview',
+        'status',
+        'info',
     ];
 
     protected bool $allowEmptyInserts = false;
